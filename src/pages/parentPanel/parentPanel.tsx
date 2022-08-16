@@ -7,7 +7,7 @@ import { AlignType } from 'rc-table/lib/interface';
 // !!!
 import "antd/dist/antd.css";
 import "./parentPanel.css";
-import metamaskGif from './metamask.gif';
+import metamaskGif from '../../assets/images/metamask.gif';
 import { addSyntheticLeadingComment } from 'typescript';
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -157,7 +157,7 @@ const ParentPanel = () => {
             mode="inline"
             defaultSelectedKeys={['']}
             defaultOpenKeys={['']}
-            style={{background:"#2A2E30", height:"60%", width:"100.5%"}}
+            style={{background:"#2A2E30", height:"72.2%", width:"100.5%"}}
             items={items2}>
             </Menu>
             <h1 style={{color: "snow", textAlign: 'center'}}>Bekleyen işlemler</h1>
