@@ -33,8 +33,29 @@
     
   }
 
+  .send-money-container{
+    padding-left: 60%;
+    padding-right: 10%;
+    padding-top: 20%;
+    
+  }
+
   .send-money{
     background: rgba(255, 235, 183, 0.8);
+  }
+
+  .centering{
+    display: flex;
+    align-items: center;
+    justify-content: center
+  }
+
+  .center-the-button {
+    margin-top:1cm;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
   }
 
   
