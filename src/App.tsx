@@ -1,24 +1,38 @@
 import React from 'react';
-import logo from './logo.svg';
+import { useState } from 'react';
+import { ethers } from "ethers";
 import './App.css';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+import HomePage from './pages/home/homePage';
+import LogInPage from './pages/login/loginPage';
+import ChildPage from './pages/child/childPage';
+import AdminPanel from './pages/admin/adminPage';
+import { Button, Image } from 'antd';
+import ErrorPage from './pages/error/errorPage';
 
-function App() {
+
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    
+    <div className='main'>
+      
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<HomePage />} />
+          <Route path='/login' element={<LogInPage />} />
+          <Route path='/child' element={<ChildPage />} />
+          <Route path='/error' element={<ErrorPage />} />
+          <Route path='/admin' element={<AdminPanel />} />
+        </Routes>
+      </BrowserRouter>
+
+      
+
     </div>
   );
 }
