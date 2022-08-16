@@ -13,6 +13,7 @@ import ChildPage from './pages/child/childPage';
 import AdminPanel from './pages/admin/adminPage';
 import { Button, Image } from 'antd';
 import ErrorPage from './pages/error/errorPage';
+import ParentPanel from './pages/parentPanel/parentPanel';
 
 
 
@@ -28,6 +29,7 @@ const App = () => {
           <Route path='/child' element={<ChildPage />} />
           <Route path='/error' element={<ErrorPage />} />
           <Route path='/admin' element={<AdminPanel />} />
+          <Route path='/parent' element={<ParentPanel />} />
         </Routes>
       </BrowserRouter>
 
