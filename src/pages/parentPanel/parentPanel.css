@@ -22,7 +22,7 @@
   }
 
   .table{
-    padding-top: 20vh;
+    padding-top: 3vh;
   }
 
   .table-col{
@@ -34,9 +34,9 @@
   }
 
   .send-money-container{
-    padding-left: 60%;
+    padding-left: 50%;
     padding-right: 10%;
-    padding-top: 20%;
+    padding-top: 10%;
     
   }
 
@@ -51,7 +51,7 @@
   }
 
   .center-the-button {
-    margin-top:1cm;
+    margin-top:2cm;
     top: 50%;
     left: 50%;
     -ms-transform: translate(-50%, -50%);

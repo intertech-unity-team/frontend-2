@@ -169,12 +169,14 @@ const ParentPanel = () => {
               <b className='centering'><i>Wallet Balance</i></b>
                 <i className='centering'>0x64AEB48</i>
                 <div className='send-money'>
-                  <p className='centering'>ETH ICON</p>
+                  <h1 className='centering'>ETH ICON</h1>
+                  <br/>
                   <b><i>Bakiye: 100 ETH</i></b>
                   <br/>
                   <b><i>AvailableBakiye: </i></b> 263 Milyar USD
+                  <br/>
                   <Button type="primary" className='center-the-button' shape="circle" icon={<SendOutlined />} size="large"/>
-          </div>
+                </div>
             <br/>
             
 
