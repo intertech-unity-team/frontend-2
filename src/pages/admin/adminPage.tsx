@@ -1,9 +1,7 @@
 import { Content, Header } from "antd/lib/layout/layout";
 import './style.css';
-import teamLogo from './team-logo.png';
 import { Space, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import metamaskGif from './metamask.gif';
 
 
 interface DataType {
@@ -79,14 +77,6 @@ const AdminPanel = () => {
     return (
         <div className="main">
             <Header className="header" style={{background: '#2A2E30', height: 85}}>
-            
-              <div className="logo">
-                <img className="team-logo" src={teamLogo} width="80" height="80"></img>
-              </div>
-
-              <div className="logo-gif">
-                <img className="metamask-gif" src={metamaskGif} width="80" height="70"></img>
-              </div>
 
               <div className="header-text">
                 <h2 style={{color: '#fff'}}>Admin Panel</h2>

@@ -22,7 +22,7 @@ const ErrorPage = () => {
             </header>
 
             <header className='button'>
-                <Button className='go-back' type='primary' shape='round' onClick={getHomePage}>Anasayfaya Geri Dön</Button>
+                <Button className='go-back' type='primary' shape='round' onClick={getHomePage} style={{margin: 'center'}}>Anasayfaya Geri Dön</Button>
             </header>
             
         </div>
