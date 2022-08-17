@@ -1,45 +1,58 @@
 import React from 'react';
-import { NotificationOutlined, UserOutlined, PaperClipOutlined, SendOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import { LinkOutlined, UserOutlined, TeamOutlined, SendOutlined, CloseCircleOutlined, SolutionOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Breadcrumb, Layout, Menu } from 'antd';
 import { Table, Card, Button } from "antd";
 import { AlignType } from 'rc-table/lib/interface';
+
 // !!!
 import "antd/dist/antd.css";
 import "./parentPanel.css";
 import metamaskGif from '../../assets/images/metamask.gif';
 import { addSyntheticLeadingComment } from 'typescript';
+import ProfilePage from '../profile/profile';
 
 const { Header, Content, Footer, Sider } = Layout;
 
 
-const menuItems = ["Profil","Çocuk","Contractlarım","Sweet Bonanza"]
+type MenuItem = Required<MenuProps>['items'][number];
 
-const items1: MenuProps['items'] = ['1', '2', '3', '4'].map(key => ({
+function getItem(
+  label: React.ReactNode,
+  key?: React.Key | null,
+  icon?: React.ReactNode,
+  children?: MenuItem[],
+): MenuItem {
+  return {
     key,
-    label: `nav ${key}`,
-  }));
+    icon,
+    children,
+    label,
+  } as MenuItem;
+}
 
-  const items2: MenuProps['items'] = [UserOutlined, UserOutlined, PaperClipOutlined, PaperClipOutlined].map(
-    (icon, index) => {
-      const key = String(index + 1);
-
-      return {
-        style: {color:"white"},
-        key: `sub${key}`,
-        icon: React.createElement(icon),
-        label: `${menuItems[index]}`,
-
-        children: new Array(4).fill(null).map((_, j) => {
-          const subKey = index * 4 + j + 1;
-          return {
-            key: subKey,
-            label: `option${subKey}`,
-          };
-        }),
-      };
-    },
-  );
+const items: MenuItem[] = [
+  getItem(
+    <a href="/profile" rel="noopener noreferrer" style={{color:"white"}}>
+      Profil
+    </a>
+    , '1', <UserOutlined />),
+  getItem('Çocuklar', '2', <TeamOutlined />),
+  getItem(
+      <a href="/parent" rel="noopener noreferrer" style={{color:"white"}}>
+      İşlemler
+      </a>
+    , 'sub1', <SolutionOutlined />, [
+    getItem(
+      <a href="/parent" rel="noopener noreferrer">
+      Kripto Varlık Gönder
+      </a>, '3'),
+    getItem(
+      <a href="/parent" rel="noopener noreferrer">
+      Gönderim İptali
+      </a>, '4'),
+  ]),
+];
 
 
 const ParentPanel = () => {
@@ -154,11 +167,10 @@ const ParentPanel = () => {
       <Layout className="site-layout-background" style={{ padding: '0px 0' }}>
         <Sider style={{background:"#2A2E30"}} width={200}>
           <Menu
-            mode="inline"
             defaultSelectedKeys={['']}
             defaultOpenKeys={['']}
-            style={{background:"#2A2E30", height:"72.2%", width:"100.5%"}}
-            items={items2}>
+            style={{background:"#2A2E30", height:"72.2%", width:"100.5%", color:"white"}}
+            items={items}>
             </Menu>
             <h1 style={{color: "snow", textAlign: 'center'}}>Bekleyen işlemler</h1>
             <img src={metamaskGif} alt="Metamask gif" width="100%" height="175"></img>

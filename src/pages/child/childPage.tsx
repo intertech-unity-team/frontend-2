@@ -1,7 +1,7 @@
 const ChildPage = () => {
     return (
         <div>
-            <p>Admin Panel</p>
+            <p>Child Page</p>
         </div>
     );
 };
