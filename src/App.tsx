@@ -27,7 +27,7 @@ const App = () => {
           <Route path='/' element={<HomePage />} />
           <Route path='/login' element={<LogInPage />} />
           <Route path='/child' element={<ChildPage />} />
-          <Route path='/error' element={<ErrorPage />} />
+          <Route path='*' element={<ErrorPage />} />
           <Route path='/admin' element={<AdminPanel />} />
           <Route path='/parent' element={<ParentPanel />} />
         </Routes>
