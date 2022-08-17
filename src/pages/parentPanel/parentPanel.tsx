@@ -19,6 +19,7 @@ const { Header, Content, Footer, Sider } = Layout;
 
 type MenuItem = Required<MenuProps>['items'][number];
 
+
 function getItem(
   label: React.ReactNode,
   key?: React.Key | null,
@@ -155,11 +156,19 @@ const ParentPanel = () => {
     },
     {
       className: "table-col",
-      title: 'İptal',
+      title: 'Kısmi İptal',
+      dataIndex: 'cancel-partial',
+      key: 'cancel-partial',
+      align: 'center' as AlignType
+    },
+    {
+      className: "table-col",
+      title: 'Tam İptal',
       dataIndex: 'cancel',
       key: 'cancel',
       align: 'center' as AlignType
-    }
+    },
+    
   ];
 
 
@@ -172,11 +181,11 @@ const ParentPanel = () => {
             <Menu
               defaultSelectedKeys={['']}
               defaultOpenKeys={['']}
-              style={{background:"#2A2E30", height:"48%", width:"100.5%", color:"white"}}
+              style={{background:"#2A2E30", height:"49.3vh", width:"100.5%", color:"white"}}
               items={items}>
               </Menu>
               <h1 style={{color: "snow", textAlign: 'center'}}>Bekleyen işlemler</h1>
-              <img src={metamaskGif} alt="Metamask gif" width="100%" height="30%"></img>
+              <img src={metamaskGif} alt="Metamask gif" width="100%" height="175px"></img>
           </Sider>
           <Content style={{ padding: '0 0px', minHeight: 280}}>
             <div className='send-money-container'>

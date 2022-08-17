@@ -1,7 +1,7 @@
 import React from 'react';
 import { TeamOutlined , UserOutlined, SolutionOutlined, SendOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { Breadcrumb, Layout, Menu } from 'antd';
+import { Breadcrumb, Layout, Menu, Descriptions } from 'antd';
 import { Form, Input, Button } from "antd";
 import { AlignType } from 'rc-table/lib/interface';
 import { useState } from 'react';
@@ -97,7 +97,7 @@ const ProfilePage: React.FC = () => {
             <Menu
               defaultSelectedKeys={['']}
               defaultOpenKeys={['']}
-              style={{background:"#2A2E30", height:"72.2%", width:"100.5%", color:"white"}}
+              style={{background:"#2A2E30", height:"49.3vh", width:"100.5%", color:"white"}}
               items={items}>
               </Menu>
               <h1 style={{color: "snow", textAlign: 'center'}}>Bekleyen işlemler</h1>
@@ -106,36 +106,17 @@ const ProfilePage: React.FC = () => {
 
           <Content style={{ padding: '0 0px', minHeight: 280}}>
               <div className='form-container'>
-                  <Form
-                      {...formItemLayout}
-                      layout={formLayout}
-                      form={form}
-                      initialValues={{ layout: formLayout }}
-                      onValuesChange={onFormLayoutChange}
-                      >
-                      
-                      <Form.Item label="Ad">
-                          <Input placeholder="Ad Giriniz" onChange={ (event) => setFormName(event.target.value)}/>
-                      </Form.Item>
-                      <Form.Item label="Soyad">
-                          <Input placeholder="Soyad Giriniz" onChange={ (event) => setFormSurname(event.target.value)}/>
-                      </Form.Item>
-                      <Form.Item label="Doğum Tarihi">
-                          <Input placeholder="Doğum Tarihi" value="17/08/2001" />
-                      </Form.Item>
-                      <Form.Item label="Wallet ID">
-                          <Input value="0xABCDEF123456" />
-                      </Form.Item>
-                      <Form.Item {...buttonItemLayout}>
-                          <Button type="primary"
-                                  className='center-the-button'
-                                  size='large'
-                                  // Butonun yapmasını istediğiniz şeyi onClick'e koyabiliriz
-                                  onClick={() => console.log(formName, formSurname)}>
-                            Güncelle
-                            </Button>
-                      </Form.Item>
-                  </Form>
+              <Descriptions
+                style={{paddingLeft:"50px"}}
+                title="Profil Detayları"
+                bordered
+                column={{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }}
+              >
+                <Descriptions.Item label="Ad">Gabriel</Descriptions.Item>
+                <Descriptions.Item label="Soyad">Jesus</Descriptions.Item>
+                <Descriptions.Item label="Doğum Tarihi">19/09/1998</Descriptions.Item>
+                <Descriptions.Item label="Wallet ID">0xABCDEF123456</Descriptions.Item>
+              </Descriptions>
               </div>
           </Content>
 
