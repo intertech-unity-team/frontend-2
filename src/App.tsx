@@ -14,6 +14,7 @@ import AdminPanel from './pages/admin/adminPage';
 import { Button, Image } from 'antd';
 import ErrorPage from './pages/error/errorPage';
 import ParentPanel from './pages/parentPanel/parentPanel';
+import ProfilePage from './pages/profile/profile';
 
 
 
@@ -30,6 +31,8 @@ const App = () => {
           <Route path='*' element={<ErrorPage />} />
           <Route path='/admin' element={<AdminPanel />} />
           <Route path='/parent' element={<ParentPanel />} />
+          <Route path='/profile' element={<ProfilePage />} />
+
         </Routes>
       </BrowserRouter>
 

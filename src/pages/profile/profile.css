@@ -40,6 +40,10 @@
     
   }
 
+  .form-container{
+    padding-top: 15%;
+  }
+
   .send-money{
     background: rgba(255, 235, 183, 0.8);
   }
@@ -56,6 +60,10 @@
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+    background-color: rgba(42, 46, 48, 1);
+    border: 0;
+    border-radius: 20px;
+    
   }
 
   

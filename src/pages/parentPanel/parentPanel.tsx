@@ -1,12 +1,14 @@
 import React from 'react';
-import { NotificationOutlined, UserOutlined, PaperClipOutlined, SendOutlined } from '@ant-design/icons';
+import { NotificationOutlined, UserOutlined, PaperClipOutlined, SendOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Breadcrumb, Layout, Menu } from 'antd';
-import { Table, Card } from "antd";
+import { Table, Card, Button } from "antd";
+import { AlignType } from 'rc-table/lib/interface';
 // !!!
 import "antd/dist/antd.css";
 import "./parentPanel.css";
-import metamaskGif from './metamask.gif';
+import metamaskGif from '../../assets/images/metamask.gif';
+import { addSyntheticLeadingComment } from 'typescript';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -42,6 +44,8 @@ const items1: MenuProps['items'] = ['1', '2', '3', '4'].map(key => ({
 
 const ParentPanel = () => {
 
+  
+
   const dataSource = [
     {
       key: '1',
@@ -52,7 +56,7 @@ const ParentPanel = () => {
       date:'12.08.2022',
       address: '10 Downing Street',
       status: 'Askıda',
-      cancel: "x"
+      cancel: <Button type="primary" danger shape="circle" icon={<CloseCircleOutlined />} size="small" style={{background: "red", }} />
     },
     {
       key: '2',
@@ -63,7 +67,7 @@ const ParentPanel = () => {
       date:'12.08.2022',
       address: '10 Downing Street',
       status: 'Askıda',
-      cancel: "x"
+      cancel: <Button type="primary" danger shape="circle" icon={<CloseCircleOutlined />} size="small" style={{background: "red", }} />
     },
     {
       key: '3',
@@ -74,7 +78,7 @@ const ParentPanel = () => {
       date:'12.08.2022',
       address: '10 Downing Street',
       status: 'Askıda',
-      cancel: "x"
+      cancel: <Button type="primary" danger shape="circle" icon={<CloseCircleOutlined />} size="small" style={{background: "red", }} />
     },
     {
       key: '4',
@@ -85,7 +89,7 @@ const ParentPanel = () => {
       date:'12.08.2022',
       address: '10 Downing Street',
       status: 'Askıda',
-      cancel: "x"
+      cancel: <Button type="primary" danger shape="circle" icon={<CloseCircleOutlined />} size="small" style={{background: "red", }} />
     },
     
     
@@ -97,42 +101,49 @@ const ParentPanel = () => {
       title: 'Gönderici',
       dataIndex: 'sender',
       key: 'sender',
+      align: 'center' as AlignType
     },
     {
       className: "table-col",
       title: 'Alıcı',
       dataIndex: 'receiver',
       key: 'receiver',
+      align: 'center' as AlignType
     },
     {
       className: "table-col",
       title: 'Coin',
       dataIndex: 'coin',
       key: 'coin',
+      align: 'center' as AlignType
     },
     {
       className: "table-col",
       title: 'Miktar',
       dataIndex: 'amount',
       key: 'amount',
+      align: 'center' as AlignType
     },
     {
       className: "table-col",
       title: 'Tarih',
       dataIndex: 'date',
       key: 'date',
+      align: 'center' as AlignType
     },
     {
       className: "table-col",
       title: 'İşlem Durumu',
       dataIndex: 'status',
       key: 'status',
+      align: 'center' as AlignType
     },
     {
       className: "table-col",
-      title: '',
+      title: 'İptal',
       dataIndex: 'cancel',
-      key: 'cencel',
+      key: 'cancel',
+      align: 'center' as AlignType
     }
   ];
 
@@ -146,7 +157,7 @@ const ParentPanel = () => {
             mode="inline"
             defaultSelectedKeys={['']}
             defaultOpenKeys={['']}
-            style={{background:"#2A2E30", height:"60%", width:"100.5%"}}
+            style={{background:"#2A2E30", height:"72.2%", width:"100.5%"}}
             items={items2}>
             </Menu>
             <h1 style={{color: "snow", textAlign: 'center'}}>Bekleyen işlemler</h1>
@@ -154,17 +165,20 @@ const ParentPanel = () => {
         </Sider>
 
         <Content style={{ padding: '0 0px', minHeight: 280}}>
-        <b><i>Wallet Balance</i></b>
+          <div className='send-money-container'>
+              <b className='centering'><i>Wallet Balance</i></b>
+                <i className='centering'>0x64AEB48</i>
+                <div className='send-money'>
+                  <h1 className='centering'>ETH ICON</h1>
+                  <br/>
+                  <b><i>Bakiye: 100 ETH</i></b>
+                  <br/>
+                  <b><i>AvailableBakiye: </i></b> 263 Milyar USD
+                  <br/>
+                  <Button type="primary" className='center-the-button' shape="circle" icon={<SendOutlined />} size="large"/>
+                </div>
             <br/>
-          <i>0x64AEB48</i>
-          <div className='send-money'>
-            ETH ICON
-            <br/>
-            <b><i>Bakiye: 100 ETH</i></b>
-            <br/>
-            <b><i>AvailableBakiye: </i></b> 263 Milyar USD
-            <br/>
-            <SendOutlined/>
+            
 
           </div>
             
