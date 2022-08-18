@@ -15,10 +15,30 @@ import { Button, Image } from 'antd';
 import ErrorPage from './pages/error/errorPage';
 import ParentPanel from './pages/parentPanel/parentPanel';
 import ProfilePage from './pages/profile/profile';
+import { PATENT_ABI, PATENT_ADDRESS } from './constants/MyProject';
+
+// Videodan alınan kod
 
 
 
 const App = () => {
+
+  const createApplication = async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    await provider.send("eth_requestAccounts", []);
+  
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
+    
+    const deneme = contract.getParent();
+    await deneme.wait();
+  
+    console.log(deneme);
+  
+  }
+
+  createApplication();
+
   return (
     
     <div className='main'>
