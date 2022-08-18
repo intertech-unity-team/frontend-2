@@ -15,6 +15,7 @@ import { Button, Image } from 'antd';
 import ErrorPage from './pages/error/errorPage';
 import ParentPanel from './pages/parentPanel/parentPanel';
 import ProfilePage from './pages/profile/profile';
+import ChildAddPage from './pages/child-add/childAddPage';
 import { PATENT_ABI, PATENT_ADDRESS } from './constants/MyProject';
 
 // Videodan alınan kod
@@ -52,6 +53,7 @@ const App = () => {
           <Route path='/admin' element={<AdminPanel />} />
           <Route path='/parent' element={<ParentPanel />} />
           <Route path='/profile' element={<ProfilePage />} />
+          <Route path='/child-add' element={<ChildAddPage />} />
 
         </Routes>
       </BrowserRouter>

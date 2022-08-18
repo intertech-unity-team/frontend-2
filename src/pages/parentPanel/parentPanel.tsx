@@ -40,7 +40,10 @@ const items: MenuItem[] = [
       Profil
     </a>
     , '1', <UserOutlined />),
-  getItem('Çocuklar', '2', <TeamOutlined />),
+    getItem(
+      <a href="/child-add" rel="noopener noreferrer" style={{color:"white"}}>
+      Çocuklar
+      </a>, '2', <TeamOutlined />),
   getItem(
       <a href="/parent" rel="noopener noreferrer" style={{color:"white"}}>
       İşlemler
