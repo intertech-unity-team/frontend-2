@@ -71,10 +71,7 @@ const data: DataType[] = [
 
 const AdminPanel = () => {
 
-    
-
-
-
+  
     return (
         <div className="main">
             <Header className="header" style={{background: '#2A2E30', height: 85}}>
@@ -90,11 +87,7 @@ const AdminPanel = () => {
               
 
               <div className="site-layout-background" style={{background: '#D6D6D2' ,padding: 24, minHeight: 636 }}>
-                <h2 className="total-balance" style={{textAlign: 'center', minHeight: 180,background: '#2A2E30',color: '#fff'}}>
-                  Toplam Varlık <br /> <br />
-                  300 ETH <br /> <br />
-                  577.065 $
-                </h2>
+                
                 <Table className="arayuz" columns={columns} dataSource={data} />
 
               </div>
