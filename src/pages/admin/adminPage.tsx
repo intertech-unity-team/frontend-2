@@ -1,14 +1,18 @@
 import { Content, Header } from "antd/lib/layout/layout";
 import './style.css';
-import { Space, Table, Tag } from 'antd';
+import { Space, Table, Tag, Button } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
+
+
+
+
+
 
 
 interface DataType {
     key: string;
     name: string;
     age: number;
-    wealth: string;
     loginDate: string;
 }
 
@@ -25,21 +29,16 @@ const columns: ColumnsType<DataType> = [
       key: 'age',
     },
     {
-      title: 'Varlık',
-      dataIndex: 'wealth',
-      key: 'wealth',
-    },
-    {
       title: 'Kayıt Tarihi',
       key: 'loginDate',
       dataIndex: 'loginDate',
     },
     {
-        title: 'İşlemler',
+        title: 'Düzenle',
         key: 'action',
           render: (_, record) => (
             <Space size="middle">
-              <a>Sil {record.name}</a>
+              <Button>Düzenle</Button>
               
             </Space>
           ),
@@ -51,22 +50,19 @@ const data: DataType[] = [
       key: '1',
       name: 'Isim Soyisim',
       age: 0,
-      wealth: '500 ETH',
-      loginDate: '16/08/2022',
+      loginDate: '01/01/0001',
     },
     {
       key: '2',
       name: 'İsim Soyisim',
       age: 0,
-      wealth: '500 ETH',
-      loginDate: '16/08/2022',
+      loginDate: '01/01/0001',
     },
     {
       key: '3',
       name: 'İsim Soyisim',
       age: 0,
-      wealth: '500 ETH',
-      loginDate: '16/08/2022',
+      loginDate: '01/01/0001',
     },
 ];
   
@@ -74,6 +70,11 @@ const data: DataType[] = [
 
 
 const AdminPanel = () => {
+
+    
+
+
+
     return (
         <div className="main">
             <Header className="header" style={{background: '#2A2E30', height: 85}}>
