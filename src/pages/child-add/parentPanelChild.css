@@ -1,0 +1,41 @@
+.float-container {
+    padding: 20px;
+}
+
+.float-child-left {
+    width: 45%;
+    float: left;
+    padding: 45px;
+    background-color: blanchedalmond;
+    border-radius: 50px;
+}
+.float-child-right {
+    width: 45%;
+    float: left;
+    padding: 45px;
+    background-color: blanchedalmond;
+    border-radius: 50px;
+}
+
+.float-child-middle {
+    width: 5%;
+    float: left;
+    padding: 45px;
+    background-color: transparent;
+    border-radius: 50px;
+}
+
+.btn-update{
+    border-radius: 30px;
+    
+}
+.btn-delete{
+    border-radius: 30px;
+
+}
+.label-style{
+    text-align: center;
+}
+.centering{
+
+  }
