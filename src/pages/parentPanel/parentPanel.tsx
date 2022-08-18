@@ -10,6 +10,7 @@ import "antd/dist/antd.css";
 import "./parentPanel.css";
 import metamaskGif from '../../assets/images/metamask.gif';
 import logo from '../../assets/img/logo.png';
+import ethLogo from '../../assets/img/eth_logo.png';
 import backgroundImg from '../../assets/img/background-image.jpg';
 import { addSyntheticLeadingComment } from 'typescript';
 import ProfilePage from '../profile/profile';
@@ -69,7 +70,7 @@ const ParentPanel = () => {
     {
       key: '1',
       sender: 'Mike',
-      coin: 'eth',
+      coin: <img src={ethLogo} alt="Logo" width="31%" height="31px"></img>,
       receiver: '0xABCDEF',
       amount: '2.1',
       date:'12.08.2022',
@@ -80,7 +81,7 @@ const ParentPanel = () => {
     {
       key: '2',
       sender: 'John',
-      coin: 'eth',
+      coin: <img src={ethLogo} alt="Logo" width="31%" height="31px"></img>,
       receiver: '0xABCDEF',
       amount: '2.1',
       date:'12.08.2022',
@@ -91,7 +92,7 @@ const ParentPanel = () => {
     {
       key: '3',
       sender: 'Kevin',
-      coin: 'eth',
+      coin: <img src={ethLogo} alt="Logo" width="31%" height="31px"></img>,
       receiver: '0xABCDEF',
       amount: '2.1',
       date:'12.08.2022',
@@ -102,7 +103,7 @@ const ParentPanel = () => {
     {
       key: '4',
       sender: 'Atilla',
-      coin: 'eth',
+      coin: <img src={ethLogo} alt="Logo" width="31%" height="31px"></img>,
       receiver: '0xABCDEF',
       amount: '2.1',
       date:'12.08.2022',
@@ -184,22 +185,24 @@ const ParentPanel = () => {
             <Menu
               defaultSelectedKeys={['']}
               defaultOpenKeys={['']}
-              style={{background:"#2A2E30", height:"49.3vh", width:"100.5%", color:"white"}}
+              style={{background:"#2A2E30", height:"32vh", width:"100.5%", color:"white"}}
               items={items}>
               </Menu>
+              <br/>
+              <br/>
+              <br/>
               <h1 style={{color: "snow", textAlign: 'center'}}>Bekleyen işlemler</h1>
-              <img src={metamaskGif} alt="Metamask gif" width="100%" height="175px"></img>
+              
           </Sider>
           <Content style={{ padding: '0 0px', minHeight: 280}}>
             <div className='send-money-container'>
                 <b className='centering'><i>Wallet Balance</i></b>
                   <i className='centering'>0x64AEB48</i>
                   <div className='send-money'>
-                    <h1 className='centering'>ETH ICON</h1>
+                    <div>
+                      <img alt="eth logo" src={ethLogo} style={{textAlign:"center"}}></img>
+                    </div>
                     <br/>
-                    <b><i>Bakiye: 100 ETH</i></b>
-                    <br/>
-                    <b><i>AvailableBakiye: </i></b> 263 Milyar USD
                     <br/>
                     <Button type="primary" className='center-the-button' shape="circle" icon={<SendOutlined />} size="large"/>
                   </div>
