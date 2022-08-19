@@ -2,12 +2,14 @@ import React from 'react';
 import { LinkOutlined, UserOutlined, TeamOutlined, SendOutlined, CloseCircleOutlined, SolutionOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Breadcrumb, Layout, Menu } from 'antd';
-import { Table, Card, Button } from "antd";
+import { Button } from "antd";
 import { AlignType } from 'rc-table/lib/interface';
+import Input from 'antd/lib/input/Input';
 
 // !!!
 import "antd/dist/antd.css";
-import "./parentPanel.css";
+import "./style.css";
+import metamaskGif from '../../assets/images/metamask.gif';
 import logo from '../../assets/img/logo.png';
 import ethLogo from '../../assets/img/eth_logo.png';
 import backgroundImg from '../../assets/img/background-image.jpg';
@@ -67,7 +69,7 @@ const items: MenuItem[] = [
 ];
 
 
-const ParentPanel = () => {
+const ParentWithdrawPage = () => {
 
   
 
@@ -190,37 +192,44 @@ const ParentPanel = () => {
             <Menu
               defaultSelectedKeys={['']}
               defaultOpenKeys={['']}
-              style={{background:"#2A2E30", height:"32vh", width:"100.5%", color:"white"}}
+              style={{background:"#2A2E30", height:"62.6vh", width:"100.5%", color:"white"}}
               items={items}>
               </Menu>
-              <br/>
-              <br/>
-              <br/>
-              <h1 style={{color: "snow", textAlign: 'center'}}>Bekleyen işlemler</h1>
+              
               
           </Sider>
           <Content style={{ padding: '0 0px', minHeight: 280}}>
             <div className='send-money-container'>
-                <b className='centering'><i>Wallet Balance</i></b>
-                  <i className='centering'>0x64AEB48</i>
+                <b className='centering'><i>Para Çek</i></b>
                   <div className='send-money'>
-                    <div>
-                      <img alt="eth logo" src={ethLogo} style={{textAlign:"center"}}></img>
+                    <div className='toplam-para-text'>
+                      <b>Çekilebilecek Miktar</b>
+                    </div>
+                    
+                    <div className='toplam-para-input'>
+                      <Input className='toplam-para' placeholder='Toplam Para' size='middle' />
+                    </div>
+
+                    <div className='input-text'>
+                      <b>Çekilecek Miktar</b>
+                    </div>
+
+                    <div className='input'>
+                      <Input className='para-girisi' placeholder="Çekmek İstenilen Miktar" size='middle'/>
                     </div>
                     <br/>
                     <br/>
-                    <Button type="primary" className='center-the-button' shape="circle" icon={<SendOutlined />} size="large"/>
+                    
+                    
+                    <Button type="primary" className='center-the-button' shape="round" size="large">
+                        Para Çek
+                    </Button>
                   </div>
               <br/>
             </div>
               
             
-            <Table 
-            dataSource={dataSource} 
-            columns={columns} 
-            className="table" 
-            rowClassName="table-row" 
-            bordered/>
+            
           </Content>
 
         </Layout>
@@ -231,4 +240,4 @@ const ParentPanel = () => {
     );
 };
 
-export default ParentPanel;
+export default ParentWithdrawPage;

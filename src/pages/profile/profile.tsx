@@ -57,6 +57,10 @@ const items: MenuItem[] = [
       <a href="/parent" rel="noopener noreferrer">
       Gönderim İptali
       </a>, '4'),
+    getItem(
+      <a href="/parent-withdraw" rel="noopener noreferrer">
+      Para Çek
+      </a>, '4'),
   ]),
 ];
 
