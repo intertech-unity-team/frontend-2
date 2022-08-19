@@ -51,10 +51,9 @@ const ChildPage = () => {
             <Menu
               defaultSelectedKeys={['']}
               defaultOpenKeys={['']}
-              style={{background:"#2A2E30", height:"49.3vh", width:"100.5%", color:"white"}}
+              style={{background:"#2A2E30", height:"69.3vh", width:"100.5%", color:"white"}}
               items={items}>
               </Menu>
-              <img src={metamaskGif} alt="Metamask gif" width="100%" height="175"></img>
           </Sider>
 
           <Content style={{ padding: '0 0px', minHeight: 280}}>

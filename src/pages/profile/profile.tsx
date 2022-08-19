@@ -106,7 +106,7 @@ const ProfilePage: React.FC = () => {
           <Content style={{ padding: '0 0px', minHeight: 280}}>
               <div className='form-container'>
               <Descriptions
-                style={{paddingLeft:"50px"}}
+                style={{padding:"10vh"}}
                 title="Profil Detayları"
                 bordered
                 column={{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }}
