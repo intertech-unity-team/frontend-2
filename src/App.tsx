@@ -17,6 +17,7 @@ import ParentPanel from './pages/parentPanel/parentPanel';
 import ProfilePage from './pages/profile/profile';
 import ChildAddPage from './pages/child-add/childAddPage';
 import ChildProfilePage from './pages/child-profile/childProfile';
+import ParentWithdrawPage from './pages/parent-withdraw-page/parentWithdraw';
 import { PATENT_ABI, PATENT_ADDRESS } from './constants/MyProject';
 
 // Videodan alınan kod
@@ -55,6 +56,7 @@ const App = () => {
           <Route path='/profile' element={<ProfilePage />} />
           <Route path='/child-add' element={<ChildAddPage />} />
           <Route path='/child-profile' element={<ChildProfilePage />} />
+          <Route path='/parent-withdraw' element={<ParentWithdrawPage />} />
 
         </Routes>
       </BrowserRouter>
