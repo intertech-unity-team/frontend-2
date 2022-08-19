@@ -133,7 +133,7 @@ const ParentPanelChildPage: React.FC = () => {
           <Content style={{ padding: '0 50px 0', minHeight: 280}}>
             <div className="float-container">
               <div className='float-child-left'>
-                <h1>Çocuk Bilgilerini Güncelle</h1>
+                <h1 style={{textAlign:"center", fontSize:"28px"}}>Çocuk Bilgilerini Güncelle</h1>
                 <br/>
                 <p>Çocuk Seç</p>
                 <Dropdown overlay={menu}>
@@ -156,18 +156,15 @@ const ParentPanelChildPage: React.FC = () => {
                     <Form.Item label="Çocuğun Doğum Tarihi">
                         <Input placeholder="GG/AA/YYYY" />
                     </Form.Item>
-                    <Button type="primary" className='btn-update'>Çocuk Bilgilerini Güncelle</Button>
-                    <Button type="primary" danger className='btn-delete'>Çocuğu Sil</Button>
+                    <div style={{textAlign:"center"}}>
+                      <Button type="primary" className='btn-update'>Çocuk Bilgilerini Güncelle</Button>
+                      <Button type="primary" danger className='btn-delete'>Çocuğu Sil</Button>
+                    </div>
                 </Form>
               </div>
               <div className='float-child-middle'></div>
               <div className='float-child-right'>
-              <h1>Yeni Çocuk Ekle</h1>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
+              <h1 style={{textAlign:"center", paddingBottom:"11.5vh", fontSize:"28px"}}>Yeni Çocuk Ekle</h1>
                 <Form layout='vertical' >
                 <Form.Item label="Çocuk İsmi">
                     <Input placeholder="İsim giriniz" />
@@ -178,7 +175,9 @@ const ParentPanelChildPage: React.FC = () => {
                     <Form.Item label="Çocuğun Doğum Tarihi">
                         <Input placeholder="GG/AA/YYYY" />
                     </Form.Item>
-                    <Button type="primary" className='btn-update'>Çocuk Ekle</Button>
+                    <div style={{textAlign:"center"}}>
+                      <Button type="primary" className='btn-update'>Çocuk Ekle</Button>
+                    </div>
                 
                     </Form>
                 </div>
