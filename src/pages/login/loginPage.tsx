@@ -17,6 +17,7 @@ const LogInPage: React.FC = () => (
     <Content style={{ padding: '0 50px', backgroundImage:`url(${backgroundImg})`}}>
       <div className="site-layout-content" style={{padding:"10vh 30vw 0vh 30vw"}}>
         <div className='login-container'>
+            <br/>
             <h1 style={{textAlign:"center", paddingBottom:"10vh", fontSize:"48px"}}>KAYIT OL</h1>
             <Form layout='vertical' style={{width:"75%", marginLeft:"auto", marginRight:"auto"}}>
                 <Form.Item label="Adınız">
@@ -29,7 +30,7 @@ const LogInPage: React.FC = () => (
                         <Input placeholder="Wallet ID'nizi buraya yapıştırın" />
                     </Form.Item>
                     <div style={{textAlign:"center"}}>
-                    <Button type="primary" className='btn-login' size='large'>Kaydol</Button>
+                    <Button type="primary" className='btn-login' size='large' shape="round" style={{backgroundColor:"rgba(60, 60, 60, 1)"}}>Kaydol</Button>
                     </div>
                 </Form>
               </div>

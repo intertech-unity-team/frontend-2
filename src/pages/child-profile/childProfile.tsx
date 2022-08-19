@@ -57,7 +57,7 @@ const ChildProfilePage = () => {
             <Menu
               defaultSelectedKeys={['']}
               defaultOpenKeys={['']}
-              style={{background:"#2A2E30", height:"62.6vh", width:"100.5%", color:"white"}}
+              style={{background:"#2A2E30", height:"71.2vh", width:"100.5%", color:"white"}}
               items={items}>
               </Menu>
           </Sider>

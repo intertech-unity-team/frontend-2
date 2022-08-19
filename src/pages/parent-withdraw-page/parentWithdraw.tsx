@@ -4,7 +4,7 @@ import type { MenuProps } from 'antd';
 import { Breadcrumb, Layout, Menu } from 'antd';
 import { Button } from "antd";
 import { AlignType } from 'rc-table/lib/interface';
-import Input from 'antd/lib/input/Input';
+import { Input, InputNumber } from 'antd/lib';
 
 // !!!
 import "antd/dist/antd.css";
@@ -192,7 +192,7 @@ const ParentWithdrawPage = () => {
             <Menu
               defaultSelectedKeys={['']}
               defaultOpenKeys={['']}
-              style={{background:"#2A2E30", height:"62.6vh", width:"100.5%", color:"white"}}
+              style={{background:"#2A2E30", height:"71.2vh", width:"100.5%", color:"white"}}
               items={items}>
               </Menu>
               
@@ -203,11 +203,11 @@ const ParentWithdrawPage = () => {
                 <b className='centering'><i>Para Çek</i></b>
                   <div className='send-money'>
                     <div className='toplam-para-text'>
-                      <b>Çekilebilecek Miktar</b>
+                      <b>Çekilebilecek Toplam Miktar</b>
                     </div>
                     
                     <div className='toplam-para-input'>
-                      <Input className='toplam-para' placeholder='Toplam Para' size='middle' />
+                      <InputNumber className='toplam-para' placeholder='Toplam Para' size='middle' />
                     </div>
 
                     <div className='input-text'>
@@ -215,7 +215,7 @@ const ParentWithdrawPage = () => {
                     </div>
 
                     <div className='input'>
-                      <Input className='para-girisi' placeholder="Çekmek İstenilen Miktar" size='middle'/>
+                      <InputNumber className='para-girisi' placeholder="Çekmek İstenilen Miktar" size='middle'/>
                     </div>
                     <br/>
                     <br/>
