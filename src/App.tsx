@@ -16,6 +16,7 @@ import ErrorPage from './pages/error/errorPage';
 import ParentPanel from './pages/parentPanel/parentPanel';
 import ProfilePage from './pages/profile/profile';
 import ChildAddPage from './pages/child-add/childAddPage';
+import ChildProfilePage from './pages/child-profile/childProfile';
 import { PATENT_ABI, PATENT_ADDRESS } from './constants/MyProject';
 
 // Videodan alınan kod
@@ -37,7 +38,7 @@ const App = () => {
   
   }
 
-  createApplication();
+  //createApplication();
 
   return (
     
@@ -53,6 +54,7 @@ const App = () => {
           <Route path='/parent' element={<ParentPanel />} />
           <Route path='/profile' element={<ProfilePage />} />
           <Route path='/child-add' element={<ChildAddPage />} />
+          <Route path='/child-profile' element={<ChildProfilePage />} />
 
         </Routes>
       </BrowserRouter>
