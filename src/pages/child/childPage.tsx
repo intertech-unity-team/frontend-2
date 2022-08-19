@@ -2,7 +2,7 @@ import React from 'react';
 import { UserOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Layout, Menu } from 'antd';
-import { Button, Input } from "antd";
+import { Button, Input, InputNumber } from "antd";
 
 
 // !!!
@@ -10,9 +10,6 @@ import "antd/dist/antd.css";
 import "./child.css";
 import logo from '../../assets/img/logo.png';
 import backgroundImg from '../../assets/img/background-image.jpg';
-
-
-
 
 
 
@@ -60,10 +57,9 @@ const ChildPage = () => {
             <Menu
               defaultSelectedKeys={['']}
               defaultOpenKeys={['']}
-              style={{background:"#2A2E30", height:"49.3vh", width:"100.5%", color:"white"}}
+              style={{background:"#2A2E30", height:"71.2vh", width:"100.5%", color:"white"}}
               items={items}>
               </Menu>
-              <img src={metamaskGif} alt="Metamask gif" width="100%" height="175"></img>
           </Sider>
           <Content style={{ padding: '0 0px', minHeight: 280}}>
             <div className='send-money-container'>
@@ -76,7 +72,7 @@ const ChildPage = () => {
                     </div>
                     
                     <div className='toplam-para-input'>
-                      <Input className='toplam-para' placeholder='Toplam Para' size='middle' />
+                      <InputNumber className='toplam-para' placeholder='Toplam Para' size='middle' />
                     </div>
 
                     <div className='input-text'>
@@ -84,7 +80,7 @@ const ChildPage = () => {
                     </div>
 
                     <div className='input'>
-                      <Input className='para-girisi' placeholder="Çekmek İstenilen Miktar" size='middle'/>
+                      <InputNumber className='para-girisi' placeholder="Çekmek İstenilen Miktar" size='middle'/>
                     </div>
                     <br/>
                     <br/>
