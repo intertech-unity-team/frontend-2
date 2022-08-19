@@ -31,14 +31,13 @@ const App = () => {
     const signer = provider.getSigner();
     const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
     
-    const deneme = contract.getParent();
-    await deneme.wait();
+    const deneme = await contract.getParent();
   
     console.log(deneme);
   
   }
 
-  //createApplication();
+  createApplication();
 
   return (
     
