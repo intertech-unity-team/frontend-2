@@ -11,7 +11,7 @@ import HomePage from './pages/home/homePage';
 import LogInPage from './pages/login/loginPage';
 import ChildPage from './pages/child/childPage';
 import AdminPanel from './pages/admin/adminPage';
-import { Button, Image } from 'antd';
+import { Button } from 'antd';
 import ErrorPage from './pages/error/errorPage';
 import ParentPanel from './pages/parentPanel/parentPanel';
 import ProfilePage from './pages/profile/profile';
@@ -33,18 +33,18 @@ const App = () => {
     const signer = provider.getSigner();
     const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
     
-    const deneme = await contract.getParent();
+    const deneme = await contract.addChild("ayşe","öztürk", "0xE086BE6D51137948c7E1F45a4994BC041a711E56", 10000);
   
     console.log(deneme);
   
   }
 
-  createApplication();
+  // createApplication();
 
   return (
     
     <div className='main'>
-      
+
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<HomePage />} />
@@ -57,11 +57,8 @@ const App = () => {
           <Route path='/child-add' element={<ChildAddPage />} />
           <Route path='/child-profile' element={<ChildProfilePage />} />
           <Route path='/parent-withdraw' element={<ParentWithdrawPage />} />
-
         </Routes>
       </BrowserRouter>
-
-      
 
     </div>
   );

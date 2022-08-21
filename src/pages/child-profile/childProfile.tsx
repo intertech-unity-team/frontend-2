@@ -3,7 +3,7 @@ import type { MenuProps } from 'antd';
 import { Layout, Menu, Descriptions } from 'antd';
 import { Form } from "antd";
 import { AlignType } from 'rc-table/lib/interface';
-import { LinkOutlined, UserOutlined, TeamOutlined, SendOutlined, CloseCircleOutlined, SolutionOutlined } from '@ant-design/icons';
+import {  UserOutlined, MenuFoldOutlined } from '@ant-design/icons';
 
 
 // !!!
@@ -36,7 +36,7 @@ const items: MenuItem[] = [
     getItem(
         <a href="/child" rel="noopener noreferrer" style={{color:"white"}}>
         Ana Sayfa
-        </a>, '2'),
+        </a>, '2', <MenuFoldOutlined/>),
     getItem(
       <a href="/child-profile" rel="noopener noreferrer" style={{color:"white"}}>
         Profil
