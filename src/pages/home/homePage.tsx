@@ -7,6 +7,7 @@ import arkaplan2 from '../../assets/img/f8f1df.png'
 import hero from '../../assets/img/hero_black.png'
 import { Button, Layout, Space } from 'antd';
 import { AndroidOutlined, AppleOutlined, GithubOutlined, InstagramOutlined, LinkedinOutlined, RedditOutlined, TwitterOutlined, YoutubeOutlined } from "@ant-design/icons";
+import connectButtonOnClick from "../../components/metamask-auth";
 
 
 function linkedinIcon() {
