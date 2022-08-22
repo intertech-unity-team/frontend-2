@@ -9,12 +9,12 @@ import { ethers } from 'ethers';
 
 const { Header, Content } = Layout;
 
-async function getParentPage(pName:string, pSurname:string) {
+async function getParentPage(pName:string, pSurname:string, pWalletID: string) {
 
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
   const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
-  //const addP = await contract.addParent(pName,pSurname, "0xF9ecDb67535d2c7e74521B63e9dCA085b71Fdccc");
+  const addP = await contract.addParent(pName,pSurname, pWalletID);
   //console.log(addP);
   const getAllP = await contract.getAllParents();
   console.log(getAllP);
@@ -30,10 +30,9 @@ async function getParentPage(pName:string, pSurname:string) {
 var walletID = "0xABCDEF";
 const LogInPage: React.FC = () => {
 
-  const [walletIDHook, setWalletID] = useState("");
-
   const [parentName, setParentName] = useState("");
   const [parentSurname, setParentSurname] = useState("");
+  const [parentWalletID, setWalletID] = useState("");
 
   return(
     <Layout className="layout">
@@ -57,10 +56,11 @@ const LogInPage: React.FC = () => {
                                 onChange={e => setParentSurname(e.target.value)}/>
                       </Form.Item>
                       <Form.Item label="Wallet ID">
-                          <Input />
+                          <Input placeholder='Wallet Id giriniz.'
+                                 onChange={e => setWalletID(e.target.value)}/>
                       </Form.Item>
                       <div style={{textAlign:"center"}}>
-                      <Button onClick={() => getParentPage(parentName, parentSurname)} type="primary" className='btn-login' size='large' shape="round" style={{backgroundColor:"rgba(60, 60, 60, 1)"}}>Kaydol</Button>
+                      <Button onClick={() => getParentPage(parentName, parentSurname, parentWalletID)} type="primary" className='btn-login' size='large' shape="round" style={{backgroundColor:"rgba(60, 60, 60, 1)"}}>Kaydol</Button>
                       </div>
                   </Form>
                 </div>
