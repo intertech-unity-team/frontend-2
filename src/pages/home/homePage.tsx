@@ -11,11 +11,14 @@ import connectButtonOnClick from "../../components/metamask-auth";
 import { ethers } from "ethers";
 import { PATENT_ABI, PATENT_ADDRESS } from "../../constants/MyProject";
 
-const createMetamaskConnection = async () => {
+
+export const createMetamaskConnection = async () => {
   //window.location.href="http://localhost:3000/login";
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   await provider.send("eth_requestAccounts", []);
-  console.log(provider);
+  //const walletIDFounder = await provider.send("eth_requestAccounts", []);
+
+  //console.log(walletIDFounder[0]);
 
   const signer = provider.getSigner();
   const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
@@ -23,6 +26,7 @@ const createMetamaskConnection = async () => {
   const deneme = await contract.addChild("ayşe","öztürk", "0xE086BE6D51137948c7E1F45a4994BC041a711E56", 10000);
 
   console.log(deneme);
+  //return await walletIDFounder[0].toString();
 
 }
 
@@ -49,6 +53,7 @@ function getLoginPage() {
 
 
 const HomePage = () => {
+
   return ( 
       <div>
           <Header className='baslik' style= {{background: "#2A2E30", width:"100%"}}>  

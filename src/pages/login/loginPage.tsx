@@ -1,51 +1,75 @@
 import './loginPage.css';
 import { Layout, Menu, Form, Input, Button } from 'antd';
-import React from 'react';
+import React, { useState } from 'react';
 import backgroundImg from '../../assets/img/background-image.jpg';
 import metamaskLogo from '../../assets/img/metamask_logo.png';
 import teamLogo from '../../assets/img/logo.png';
+import { PATENT_ABI, PATENT_ADDRESS } from '../../constants/MyProject';
+import { ethers } from 'ethers';
 
 const { Header, Content } = Layout;
 
-function getParentPage() {
-  window.location.href="http://localhost:3000/parent"
-}
+async function getParentPage(pName:string, pSurname:string) {
 
-var walletID = "0xABCDEF";
-const LogInPage: React.FC = () => (
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const signer = provider.getSigner();
+  const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
+  //const addP = await contract.addParent(pName,pSurname, "0xF9ecDb67535d2c7e74521B63e9dCA085b71Fdccc");
+  //console.log(addP);
+  const getAllP = await contract.getAllParents();
+  console.log(getAllP);
 
   
-  <Layout className="layout">
-    <Header style={{backgroundColor:"rgba(42, 46, 48, 1)", display:"flex"}}>
-    <img src={teamLogo} alt="Unity Logo" width="65px" height="100%" style={{marginRight:"88vw", display:"flex", float:"left"}}/>
-    <img src={metamaskLogo} alt="Metamask Logo" width="65px" height="100%" style={{display:"flex"}}/>
-    
-    </Header>
-    <Content style={{ padding: '0 50px', backgroundImage:`url(${backgroundImg})`}}>
-      <div className="site-layout-content" style={{padding:"10vh 30vw 0vh 30vw"}}>
-        <div className='login-container'>
-            <br/>
-            <h1 style={{textAlign:"center", paddingBottom:"10vh", fontSize:"48px"}}>KAYIT OL</h1>
-            <Form layout='vertical' style={{width:"75%", marginLeft:"auto", marginRight:"auto"}}>
-                <Form.Item label="Adınız">
-                    <Input placeholder="Adınızı giriniz" />
-                    </Form.Item>
-                    <Form.Item label="Soyadınız">
-                        <Input placeholder="Soyadınızı giriniz" />
-                    </Form.Item>
-                    <Form.Item label="Wallet ID">
-                        <Input value={walletID} />
-                    </Form.Item>
-                    <div style={{textAlign:"center"}}>
-                    <Button onClick={getParentPage} type="primary" className='btn-login' size='large' shape="round" style={{backgroundColor:"rgba(60, 60, 60, 1)"}}>Kaydol</Button>
-                    </div>
-                </Form>
-              </div>
-      </div>
+
+  //window.location.href="http://localhost:3000/parent"
+
+}
+
+
+
+var walletID = "0xABCDEF";
+const LogInPage: React.FC = () => {
+
+  const [walletIDHook, setWalletID] = useState("");
+
+  const [parentName, setParentName] = useState("");
+  const [parentSurname, setParentSurname] = useState("");
+
+  return(
+    <Layout className="layout">
+      <Header style={{backgroundColor:"rgba(42, 46, 48, 1)", display:"flex"}}>
+      <img src={teamLogo} alt="Unity Logo" width="65px" height="100%" style={{marginRight:"88vw", display:"flex", float:"left"}}/>
+      <img src={metamaskLogo} alt="Metamask Logo" width="65px" height="100%" style={{display:"flex"}}/>
       
-    </Content>
-  </Layout>
-);
+      </Header>
+      <Content style={{ padding: '0 50px', backgroundImage:`url(${backgroundImg})`}}>
+        <div className="site-layout-content" style={{padding:"10vh 30vw 0vh 30vw"}}>
+          <div className='login-container'>
+              <br/>
+              <h1 style={{textAlign:"center", paddingBottom:"10vh", fontSize:"48px"}}>KAYIT OL</h1>
+              <Form layout='vertical' style={{width:"75%", marginLeft:"auto", marginRight:"auto"}}>
+                  <Form.Item label="Adınız">
+                      <Input placeholder="Adınızı giriniz"
+                              onChange={e => setParentName(e.target.value)} />
+                      </Form.Item>
+                      <Form.Item label="Soyadınız">
+                          <Input placeholder="Soyadınızı giriniz" 
+                                onChange={e => setParentSurname(e.target.value)}/>
+                      </Form.Item>
+                      <Form.Item label="Wallet ID">
+                          <Input />
+                      </Form.Item>
+                      <div style={{textAlign:"center"}}>
+                      <Button onClick={() => getParentPage(parentName, parentSurname)} type="primary" className='btn-login' size='large' shape="round" style={{backgroundColor:"rgba(60, 60, 60, 1)"}}>Kaydol</Button>
+                      </div>
+                  </Form>
+                </div>
+        </div>
+        
+      </Content>
+    </Layout>
+  );
+};
 
 
 export default LogInPage;
