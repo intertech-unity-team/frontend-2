@@ -9,6 +9,26 @@ import { Button, Layout, Space } from 'antd';
 import { AndroidOutlined, AppleOutlined, GithubOutlined, InstagramOutlined, LinkedinOutlined, RedditOutlined, TwitterOutlined, YoutubeOutlined } from "@ant-design/icons";
 
 
+function linkedinIcon() {
+  window.open("https://www.linkedin.com/company/intertech-information-technology-and-marketing-inc-/mycompany/verification/")
+}
+
+function instagramIcon() {
+  window.open("https://www.instagram.com/intertechteyasam/")
+}
+
+function twitterIcon() {
+  window.open("https://twitter.com/intertechIT")
+}
+
+function youtubeIcon() {
+  window.open("https://www.youtube.com/channel/UCXC8pcaXM5cSatFeqYbzxlg/featured")
+}
+
+function getLoginPage() {
+  window.location.href="http://localhost:3000/login"
+}
+
 
 const HomePage = () => {
   return ( 
@@ -25,7 +45,7 @@ const HomePage = () => {
               <div >
                  <img className="arkaplan" src={backgroundImg} style={{width:"100%"}} />
               <text className="yazi"  style={{color:"black", fontSize:35, bottom: 600, left:1200}}>Kripto Varlık Mirasının<h6></h6> En Kolay Yolu</text><br/>
-                <Button className='kayit' type="primary" style={{color:"white", fontSize:17, backgroundColor:"orange", borderRadius:5, paddingBlockEnd:32, bottom:570, left:"63%" }} >Metamask İle Kayıt Ol →</Button> <h1></h1>
+                <Button className='kayit' onClick={getLoginPage} type="primary" style={{color:"white", fontSize:17, backgroundColor:"orange", borderRadius:5, paddingBlockEnd:32, bottom:570, left:"63%" }} >Metamask İle Kayıt Ol →</Button> <h1></h1>
                 <Button className='giris' type="primary" style={{color:"white", fontSize:17, backgroundColor:"black", borderRadius:5, paddingBlockEnd:32, bottom:570, left:"63%" }} >Metamask İle Giriş Yap →</Button></div> 
                 <img className="arkaplan2" style={{bottom:225, width:"100%"}} src={arkaplan2}/> 
                 <text className="yazi2" style={{bottom:1020, left:"13%"}}><h3> METAMASK NEDİR?</h3> Buy, store, send and swap tokens<br/>
@@ -36,9 +56,9 @@ const HomePage = () => {
                 <text className="yazi4" style={{bottom:1350, left:"38%"}}> <h4>2023 yılında Kurtköy/Pendik’te kurulan girişimci topluluğu.</h4></text><br/><br/><br/><br/>
                 <text className="yazi5" style={{bottom:1300, left:"45%"}} ><h2>İletişim</h2> </text> 
                 <div className="icons" style={{bottom:1200, left:"10%", fontSize:30, display:"flex", justifyContent:"space-around", width:"78%"}}
-                    ><AppleOutlined /><AndroidOutlined /> <GithubOutlined /><TwitterOutlined /><YoutubeOutlined /><LinkedinOutlined /><InstagramOutlined /><RedditOutlined /></div>
+                    ><AppleOutlined /><AndroidOutlined /> <GithubOutlined /><TwitterOutlined onClick={twitterIcon} /><YoutubeOutlined onClick={youtubeIcon} /><LinkedinOutlined onClick={linkedinIcon} /><InstagramOutlined onClick={instagramIcon} /><RedditOutlined /></div>
             </Content>
           </div>
   );
-  };
+};
 export default HomePage;
