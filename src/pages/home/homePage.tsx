@@ -53,10 +53,10 @@ const HomePage = () => {
                 Available as a<br/>browser extension and as a mobile app,<br/> MetaMask equips you with a<br/> key vault, secure login, token wallet, and<br/>
                 token exchange—everything you need to<br/> manage your digital assets.<br/><br/> https://metamask.io/about/</text><br/>
                 <img className="hero" style={{bottom:1470, left:"53%"}} src={hero}/> 
-                <text className="yazi3" style={{bottom:1400, left:"44%"}} ><h2>Hakkımızda</h2> </text> 
-                <text className="yazi4" style={{bottom:1350, left:"38%"}}> <h4>2023 yılında Kurtköy/Pendik’te kurulan girişimci topluluğu.</h4></text><br/><br/><br/><br/>
-                <text className="yazi5" style={{bottom:1300, left:"45%"}} ><h2>İletişim</h2> </text> 
-                <div className="icons" style={{bottom:1200, left:"10%", fontSize:30, display:"flex", justifyContent:"space-around", width:"78%"}}
+                <text className="yazi3" style={{bottom:1400, textAlign:"center"}} ><h2>Hakkımızda</h2> </text> 
+                <text className="yazi4" style={{bottom:1350, textAlign:"center"}}> <h4>2023 yılında Kurtköy/Pendik’te kurulan girişimci topluluğu.</h4></text><br/><br/><br/><br/>
+                <text className="yazi5" style={{bottom:1300, textAlign:"center"}} ><h2>İletişim</h2> </text> 
+                <div className="icons" style={{bottom:1200, left:"25%", fontSize:30, display:"flex", justifyContent:"space-around", width:"50%"}}
                     ><AppleOutlined /><AndroidOutlined /> <GithubOutlined /><TwitterOutlined /><YoutubeOutlined /><LinkedinOutlined /><InstagramOutlined /><RedditOutlined /></div>
             </Content>
           </div>
