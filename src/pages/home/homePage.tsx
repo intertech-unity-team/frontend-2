@@ -8,7 +8,23 @@ import hero from '../../assets/img/hero_black.png'
 import { Button, Layout, Space } from 'antd';
 import { AndroidOutlined, AppleOutlined, GithubOutlined, InstagramOutlined, LinkedinOutlined, RedditOutlined, TwitterOutlined, YoutubeOutlined } from "@ant-design/icons";
 import connectButtonOnClick from "../../components/metamask-auth";
+import { ethers } from "ethers";
+import { PATENT_ABI, PATENT_ADDRESS } from "../../constants/MyProject";
 
+const createMetamaskConnection = async () => {
+  //window.location.href="http://localhost:3000/login";
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  await provider.send("eth_requestAccounts", []);
+  console.log(provider);
+
+  const signer = provider.getSigner();
+  const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
+  
+  const deneme = await contract.addChild("ayşe","öztürk", "0xE086BE6D51137948c7E1F45a4994BC041a711E56", 10000);
+
+  console.log(deneme);
+
+}
 
 function linkedinIcon() {
   window.open("https://www.linkedin.com/company/intertech-information-technology-and-marketing-inc-/mycompany/verification/")
@@ -27,7 +43,8 @@ function youtubeIcon() {
 }
 
 function getLoginPage() {
-  window.location.href="http://localhost:3000/login"
+  createMetamaskConnection();
+
 }
 
 

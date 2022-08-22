@@ -11,7 +11,9 @@ function getParentPage() {
   window.location.href="http://localhost:3000/parent"
 }
 
+var walletID = "0xABCDEF";
 const LogInPage: React.FC = () => (
+
   
   <Layout className="layout">
     <Header style={{backgroundColor:"rgba(42, 46, 48, 1)", display:"flex"}}>
@@ -32,7 +34,7 @@ const LogInPage: React.FC = () => (
                         <Input placeholder="Soyadınızı giriniz" />
                     </Form.Item>
                     <Form.Item label="Wallet ID">
-                        <Input placeholder="Wallet ID'nizi buraya yapıştırın" />
+                        <Input value={walletID} />
                     </Form.Item>
                     <div style={{textAlign:"center"}}>
                     <Button onClick={getParentPage} type="primary" className='btn-login' size='large' shape="round" style={{backgroundColor:"rgba(60, 60, 60, 1)"}}>Kaydol</Button>

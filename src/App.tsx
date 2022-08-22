@@ -39,7 +39,7 @@ const App = () => {
   
   }
 
-  createApplication();
+  //createApplication();
 
   return (
     
