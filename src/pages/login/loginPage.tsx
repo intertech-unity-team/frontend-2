@@ -7,7 +7,12 @@ import teamLogo from '../../assets/img/logo.png';
 
 const { Header, Content } = Layout;
 
+function getParentPage() {
+  window.location.href="http://localhost:3000/parent"
+}
+
 const LogInPage: React.FC = () => (
+  
   <Layout className="layout">
     <Header style={{backgroundColor:"rgba(42, 46, 48, 1)", display:"flex"}}>
     <img src={teamLogo} alt="Unity Logo" width="65px" height="100%" style={{marginRight:"88vw", display:"flex", float:"left"}}/>
@@ -30,7 +35,7 @@ const LogInPage: React.FC = () => (
                         <Input placeholder="Wallet ID'nizi buraya yapıştırın" />
                     </Form.Item>
                     <div style={{textAlign:"center"}}>
-                    <Button type="primary" className='btn-login' size='large' shape="round" style={{backgroundColor:"rgba(60, 60, 60, 1)"}}>Kaydol</Button>
+                    <Button onClick={getParentPage} type="primary" className='btn-login' size='large' shape="round" style={{backgroundColor:"rgba(60, 60, 60, 1)"}}>Kaydol</Button>
                     </div>
                 </Form>
               </div>
