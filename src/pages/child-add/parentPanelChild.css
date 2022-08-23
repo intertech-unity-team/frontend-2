@@ -15,14 +15,8 @@
     padding: 45px;
     background-color: blanchedalmond;
     border-radius: 50px;
-}
-
-.float-child-middle {
-    width: 5%;
-    float: left;
-    padding: 45px;
-    background-color: transparent;
-    border-radius: 50px;
+    margin-bottom: 100px;
+    margin-left: 5vw;
 }
 
 .btn-update{
@@ -36,6 +30,3 @@
 .label-style{
     text-align: center;
 }
-.centering{
-
-  }

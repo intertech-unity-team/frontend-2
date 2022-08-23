@@ -13,19 +13,19 @@ import { PATENT_ABI, PATENT_ADDRESS } from "../../constants/MyProject";
 
 
 export const createMetamaskConnection = async () => {
-  //window.location.href="http://localhost:3000/login";
+  window.location.href="http://localhost:3000/login";
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   await provider.send("eth_requestAccounts", []);
   //const walletIDFounder = await provider.send("eth_requestAccounts", []);
 
   //console.log(walletIDFounder[0]);
 
-  const signer = provider.getSigner();
-  const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
+  //const signer = provider.getSigner();
+  //const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
   
-  const deneme = await contract.addChild("ayşe","öztürk", "0xE086BE6D51137948c7E1F45a4994BC041a711E56", 10000);
+  //const deneme = await contract.addChild("ayşe","öztürk", "0xE086BE6D51137948c7E1F45a4994BC041a711E56", 10000);
 
-  console.log(deneme);
+  //console.log(deneme);
   //return await walletIDFounder[0].toString();
 
 }

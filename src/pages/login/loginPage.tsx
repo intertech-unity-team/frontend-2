@@ -6,6 +6,9 @@ import metamaskLogo from '../../assets/img/metamask_logo.png';
 import teamLogo from '../../assets/img/logo.png';
 import { PATENT_ABI, PATENT_ADDRESS } from '../../constants/MyProject';
 import { ethers } from 'ethers';
+import { Link } from 'react-router-dom';
+
+
 
 const { Header, Content } = Layout;
 
@@ -14,17 +17,20 @@ async function getParentPage(pName:string, pSurname:string, pWalletID: string) {
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
   const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
-  const addP = await contract.addParent(pName,pSurname, pWalletID);
+
+  // Parent hesabını seçip sonra aşağıyı çalıştırın
+
+  //const addP = await contract.addParent(pName,pSurname, pWalletID);
   //console.log(addP);
-  const getAllP = await contract.getAllParents();
-  console.log(getAllP);
 
+  // Owner rolündeyken aşağısı çalıştırılaablilir
+
+  //const getAllP = await contract.get_All_Parents();
+  //console.log(getAllP);
+
+  window.location.href="http://localhost:3000/parent";
   
-
-  //window.location.href="http://localhost:3000/parent"
-
 }
-
 
 
 var walletID = "0xABCDEF";
@@ -60,12 +66,13 @@ const LogInPage: React.FC = () => {
                                  onChange={e => setWalletID(e.target.value)}/>
                       </Form.Item>
                       <div style={{textAlign:"center"}}>
-                      <Button onClick={() => getParentPage(parentName, parentSurname, parentWalletID)} type="primary" className='btn-login' size='large' shape="round" style={{backgroundColor:"rgba(60, 60, 60, 1)"}}>Kaydol</Button>
+                      <Button
+                       onClick={() => getParentPage(parentName, parentSurname, parentWalletID)} type="primary" className='btn-login' size='large' shape="round" style={{backgroundColor:"rgba(60, 60, 60, 1)"}}>Kaydol
+                       </Button>
                       </div>
                   </Form>
                 </div>
         </div>
-        
       </Content>
     </Layout>
   );
