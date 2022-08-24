@@ -6,7 +6,6 @@ import metamaskLogo from '../../assets/img/metamask_logo.png';
 import teamLogo from '../../assets/img/logo.png';
 import { PATENT_ABI, PATENT_ADDRESS } from '../../constants/MyProject';
 import { ethers } from 'ethers';
-import { Link } from 'react-router-dom';
 
 
 
@@ -20,8 +19,8 @@ async function getParentPage(pName:string, pSurname:string, pWalletID: string) {
 
   // Parent hesabını seçip sonra aşağıyı çalıştırın
 
-  //const addP = await contract.addParent(pName,pSurname, pWalletID);
-  //console.log(addP);
+  const addP = await contract.addParent(pName,pSurname, pWalletID);
+  console.log(addP);
 
   // Owner rolündeyken aşağısı çalıştırılaablilir
 
@@ -62,12 +61,12 @@ const LogInPage: React.FC = () => {
                                 onChange={e => setParentSurname(e.target.value)}/>
                       </Form.Item>
                       <Form.Item label="Wallet ID">
-                          <Input placeholder='Wallet Id giriniz.'
-                                 onChange={e => setWalletID(e.target.value)}/>
+                          <Input disabled
+                                 value={window.ethereum.selectedAddress}/>
                       </Form.Item>
                       <div style={{textAlign:"center"}}>
                       <Button
-                       onClick={() => getParentPage(parentName, parentSurname, parentWalletID)} type="primary" className='btn-login' size='large' shape="round" style={{backgroundColor:"rgba(60, 60, 60, 1)"}}>Kaydol
+                       onClick={() => getParentPage(parentName, parentSurname, window.ethereum.selectedAddress)} type="primary" className='btn-login' size='large' shape="round" style={{backgroundColor:"rgba(60, 60, 60, 1)"}}>Kaydol
                        </Button>
                       </div>
                   </Form>

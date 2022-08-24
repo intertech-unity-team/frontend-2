@@ -35,11 +35,13 @@
 .send-money-container{
   padding-left: 50%;
   padding-right: 10%;
-  padding-top: 10%;
 }
 
 .send-money{
   background: rgba(255, 235, 183, 0.8);
+  margin-top: -12vh;
+  height: 20vh;
+  border-radius: 40px;
 }
 
 .centering{
@@ -49,8 +51,7 @@
 }
 
 .center-the-button {
-  margin-top:2cm;
-  top: 50%;
+  margin-top:8vh;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
