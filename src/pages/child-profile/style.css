@@ -1,68 +1,91 @@
 #components-layout-demo-top-side-2 .logo {
-    float: left;
-    width: 120px;
-    height: 31px;
-    margin: 16px 24px 16px 0;
-    background: rgba(255, 255, 255, 0);
-  }
+  float: left;
+  width: 120px;
+  height: 31px;
+  margin: 16px 24px 16px 0;
+  background: rgba(255, 255, 255, 0);
+}
+
+.ant-row-rtl #components-layout-demo-top-side-2 .logo {
+  float: right;
+  margin: 16px 0 16px 24px;
+}
+
+.site-layout-background {
+  background:rgba(214, 214, 210, 1);
+}
+
+.layout {
+  height:100vh;
+  width: 100vw;
+  background:rgba(214, 214, 210, 1);
+}
+
+.table{
+  padding-top: 3vh;
+}
+
+.table-col{
+  background: rgba(255, 235, 183, 0.8);
+}
+
+.table-row{
   
-  .ant-row-rtl #components-layout-demo-top-side-2 .logo {
-    float: right;
-    margin: 16px 0 16px 24px;
-  }
+}
+
+.send-money-container{
+  padding-left: 50%;
+  padding-right: 10%;
+  padding-top: 10%;
   
-  .site-layout-background {
-    background:rgba(214, 214, 210, 1);
-  }
+}
 
-  .layout {
-    height:100vh;
-    width: 100vw;
-    background:rgba(214, 214, 210, 1);
-  }
+.form-container{
+  
 
-  .table{
-    padding-top: 3vh;
-  }
+  margin-top: 6.5%;
+  padding-left: 12.7%;
+  
+}
 
-  .table-col{
-    background: rgba(255, 235, 183, 0.8);
-  }
+.send-money{
+  background: rgba(255, 235, 183, 0.8);
+}
 
-  .table-row{
-    
-  }
+.centering{
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
 
-  .send-money-container{
-    padding-left: 50%;
-    padding-right: 10%;
-    padding-top: 10%;
-    
-  }
+.center-the-button {
+  margin-top:2cm;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background-color: rgba(42, 46, 48, 1);
+  border: 0;
+  border-radius: 20px;
+  
+}
 
-  .form-container{
-    padding-top: 5%;
-  }
+.text {
+  color:#DADADA;
+  text-align: center;
+  margin-top: 12.5vh;
+  margin-right: 32vw;
+  
+}
 
-  .send-money{
-    background: rgba(255, 235, 183, 0.8);
-  }
+[title="Ad"] {
+  color: #DADADA !important;
+}
 
-  .centering{
-    display: flex;
-    align-items: center;
-    justify-content: center
-  }
+[title="Soyad"] {
+  color: #DADADA !important;
+}
 
-  .center-the-button {
-    margin-top:2cm;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    background-color: rgba(42, 46, 48, 1);
-    border: 0;
-    border-radius: 20px;
-    
-  }
-
+[title="Wallet ID"] {
+  color: #DADADA !important;
+}
