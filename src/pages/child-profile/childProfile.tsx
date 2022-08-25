@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { MenuProps } from 'antd';
 import { Layout, Menu, Descriptions } from 'antd';
 import { Form } from "antd";
 import { AlignType } from 'rc-table/lib/interface';
 import {  UserOutlined, MenuFoldOutlined } from '@ant-design/icons';
-
+import { ethers } from 'ethers';
 
 // !!!
 import "antd/dist/antd.css";
 import "./style.css";
 import backgroundImg from '../../assets/img/background-image.jpg';
 import logo from '../../assets/img/logo.png'
+import { PATENT_ABI, PATENT_ADDRESS } from '../../constants/MyProject';
 
 const { Header, Content, Footer, Sider } = Layout;
 type LayoutType = Parameters<typeof Form>[0]['layout'];
@@ -45,8 +46,32 @@ const items: MenuItem[] = [
   
 ];
 
+async function getChildInfo() {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const signer = provider.getSigner();
+  const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
+
+  // Parent hesabını seçip sonra aşağıyı çalıştırın
+
+  const getP = await contract.getChild();
+  return getP;
+}
+
 
 const ChildProfilePage = () => {
+
+  const [cName, setCName] = useState('');
+  const [cSurname, setCSurname] = useState('');
+  const [cWalletID, setCWalletID] = useState('');
+
+  let parentInfoPromise = getChildInfo().then(
+    function(result){
+      console.log(result);
+      setCName(result[0]);
+      setCSurname(result[1]);
+      setCWalletID(result[2]);
+    }
+  );
 
     return (
     <Layout className='layout' style={{backgroundImage:`url(${backgroundImg})`}}>
@@ -75,9 +100,9 @@ const ChildProfilePage = () => {
                 bordered
                 column={{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }}
               >
-                <Descriptions.Item label="Ad">Gabriel</Descriptions.Item>
-                <Descriptions.Item label="Soyad">Jesus</Descriptions.Item>
-                <Descriptions.Item label="Doğum Tarihi">19/09/1998</Descriptions.Item>
+                <Descriptions.Item label="Ad">{cName}</Descriptions.Item>
+                <Descriptions.Item label="Soyad">{cSurname}</Descriptions.Item>
+                <Descriptions.Item label="Wallet ID">{cWalletID}</Descriptions.Item>
               </Descriptions>
               </div>
           </Content>

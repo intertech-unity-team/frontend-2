@@ -13,7 +13,7 @@ import { PATENT_ABI, PATENT_ADDRESS } from "../../constants/MyProject";
 
 
 export const createMetamaskConnection = async () => {
-  window.location.href="http://localhost:3000/login";
+  window.location.href="http://localhost:3000/signin";
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   await provider.send("eth_requestAccounts", []);
   //const walletIDFounder = await provider.send("eth_requestAccounts", []);
@@ -46,8 +46,47 @@ function youtubeIcon() {
   window.open("https://www.youtube.com/channel/UCXC8pcaXM5cSatFeqYbzxlg/featured")
 }
 
-function getLoginPage() {
+function getSignInPage() {
   createMetamaskConnection();
+
+}
+
+const Role = {
+	Admin: 0,
+	Parent: 1,
+	Child: 2,
+	Unregistered: 3
+}
+
+const getProperPage = async () => {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  await provider.send("eth_requestAccounts", []);
+  let walletID = window.ethereum.selectedAddress;
+  console.log(walletID);
+
+  const signer = provider.getSigner();
+  const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
+
+  const getRole = await contract.getRole(walletID);
+
+  console.log(getRole == Role.Parent);
+
+  switch(getRole) {
+    case Role.Admin:
+      window.location.href="http://localhost:3000/admin";
+      break;
+    case Role.Parent:
+      window.location.href="http://localhost:3000/parent";
+      break;
+    case Role.Child:
+      window.location.href="http://localhost:3000/child";
+      break;
+    case Role.Unregistered:
+      window.location.href="http://localhost:3000/signin";
+        break;
+    default:
+      // code block
+  }
 
 }
 
@@ -68,8 +107,8 @@ const HomePage = () => {
               <div >
                  <img className="arkaplan" src={backgroundImg} style={{width:"100%"}} />
               <text className="yazi"  style={{color:"black", fontSize:35, bottom: 600, left:1200}}>Kripto Varlık Mirasının<h6></h6> En Kolay Yolu</text><br/>
-                <Button className='kayit' onClick={getLoginPage} type="primary" style={{color:"white", fontSize:17, backgroundColor:"orange", borderRadius:5, paddingBlockEnd:32, bottom:570, left:"63%" }} >Metamask İle Kayıt Ol →</Button> <h1></h1>
-                <Button className='giris' type="primary" style={{color:"white", fontSize:17, backgroundColor:"black", borderRadius:5, paddingBlockEnd:32, bottom:570, left:"63%" }} >Metamask İle Giriş Yap →</Button></div> 
+                <Button className='kayit' onClick={getSignInPage} type="primary" style={{color:"white", fontSize:17, backgroundColor:"orange", borderRadius:5, paddingBlockEnd:32, bottom:570, left:"63%" }} >Metamask İle Kayıt Ol →</Button> <h1></h1>
+                <Button className='giris' onClick={getProperPage} type="primary" style={{color:"white", fontSize:17, backgroundColor:"black", borderRadius:5, paddingBlockEnd:32, bottom:560, left:"63%" }} >Metamask İle Giriş Yap →</Button></div> 
                 <img className="arkaplan2" style={{bottom:225, width:"100%"}} src={arkaplan2}/> 
                 <text className="yazi2" style={{bottom:1020, left:"13%"}}><h3> METAMASK NEDİR?</h3> Buy, store, send and swap tokens<br/>
                 Available as a<br/>browser extension and as a mobile app,<br/> MetaMask equips you with a<br/> key vault, secure login, token wallet, and<br/>
