@@ -7,7 +7,7 @@ import { ethers } from "ethers";
 
 
 
-async function accountCheck() {
+export async function accountCheck() {
     if(!window.ethereum){
         window.location.href="https://metamask.io/download/"
     }

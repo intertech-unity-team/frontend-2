@@ -10,6 +10,7 @@ import { AndroidOutlined, AppleOutlined, GithubOutlined, InstagramOutlined, Link
 import connectButtonOnClick from "../../components/metamask-auth";
 import { ethers } from "ethers";
 import { PATENT_ABI, PATENT_ADDRESS } from "../../constants/MyProject";
+import { accountCheck } from "../../components/metamask-auth";
 
 
 export const createMetamaskConnection = async () => {
@@ -47,6 +48,7 @@ function youtubeIcon() {
 }
 
 function getSignInPage() {
+  accountCheck();
   createMetamaskConnection();
 
 }
@@ -59,6 +61,7 @@ const Role = {
 }
 
 const getProperPage = async () => {
+  accountCheck();
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   await provider.send("eth_requestAccounts", []);
   let walletID = window.ethereum.selectedAddress;
