@@ -7,7 +7,7 @@ import { AlignType } from 'rc-table/lib/interface';
 import { useState } from 'react';
 import { ethers } from 'ethers';
 import { PATENT_ABI, PATENT_ADDRESS } from '../../constants/MyProject';
-import { findTimeStampBtwTwoDates } from '../../services/services';
+import { findTimeStampBtwTwoDates, findTimeStampBtwTwoDatesv2 } from '../../services/services';
 
 // !!!
 import "antd/dist/antd.css";
@@ -54,19 +54,24 @@ async function handleAddChildBtn(childName:string, childSurname:string, childWal
   //const getAllC = await contract.get_All_Children();
   //console.log(getAllC);
   
-  
-  // getChilddan dönen şeyi tarihe döndürmemiz lazım
-  //dayjs.unix(timestamp).toDate();
-  //
+
   
 }
 
 
-async function handleUpdateChildBtn(){
-  // yeni eklendi
+async function handleUpdateChildBtn(newName:string, newSurname:string, childWalletID: string, newBDay:string){
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const signer = provider.getSigner();
+  const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
+
+  // Find timestamp
+  const timestamp = findTimeStampBtwTwoDatesv2(newBDay, "01-01-1970");
+  console.log(timestamp);
+
+  const updateChild = await contract.update_Child_with_ID(newName, newSurname, childWalletID, timestamp);
+
+  console.log(updateChild);
   
-
-
 
 }
 
@@ -92,35 +97,6 @@ async function getParentInfo() {
   const getP = await contract.getParent();
   return getP;
 }
-
-/*
-async function handleMenuUpdates(){
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
-  const signer = provider.getSigner();
-  const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
-
-
- 
-  let parentInfoPromise = getParentInfo().then(
-    async function(result){
-      console.log(result);
-
-      const getChild = await contract.get_Children_Of_Parent(result[2]);
-      // getChild is an array which includes the children of the current parent
-      console.log(getChild);
-
-      let childrenArray: any[] = [];
-      // add all children to array and display it
-      getChild.forEach((childArr: any[]) => {
-        let childName = childArr[0];
-        childrenArray.push(childName);
-      });
-      console.log(childrenArray);
-      
-    }
-  );
-}
-*/
 
 function getItem(
   label: React.ReactNode,
@@ -329,7 +305,7 @@ const ParentPanelChildPage: React.FC = () => {
                   </Form.Item>
                     <div style={{textAlign:"center"}}>
                       <Button type="primary" className='btn-update'
-                      onClick={handleUpdateChildBtn}
+                      onClick={() => handleUpdateChildBtn(updateChildNameInput, updateChildSurnameInput, updateChildWalletID, updateChildBDay)}
                       >Çocuk Bilgilerini Güncelle</Button>
                       <Button
                       onClick={() => handleDeleteChildBtn(updateChildWalletID)}

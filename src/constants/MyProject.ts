@@ -401,5 +401,33 @@ export const PATENT_ABI = [
     ],
     "stateMutability": "view",
     "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "new_name",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "new_surname",
+        "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "myAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "new_releaseTime",
+        "type": "uint256"
+      }
+    ],
+    "name": "update_Child_with_ID",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   }
 ];

@@ -1,4 +1,4 @@
-import './loginPage.css';
+import './signInPage.css';
 import { Layout, Menu, Form, Input, Button } from 'antd';
 import React, { useState } from 'react';
 import backgroundImg from '../../assets/img/kayit-ekran-background.png';
@@ -33,7 +33,7 @@ async function getParentPage(pName:string, pSurname:string, pWalletID: string) {
 
 
 var walletID = "0xABCDEF";
-const LogInPage: React.FC = () => {
+const SignInPage: React.FC = () => {
 
   const [parentName, setParentName] = useState("");
   const [parentSurname, setParentSurname] = useState("");
@@ -79,4 +79,4 @@ const LogInPage: React.FC = () => {
 };
 
 
-export default LogInPage;
+export default SignInPage;
