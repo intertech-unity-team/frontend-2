@@ -2,9 +2,66 @@ import { Content, Header } from "antd/lib/layout/layout";
 import './style.css';
 import { Space, Table, Tag, Button } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
+import { ethers } from "ethers";
+import { PATENT_ADDRESS, PATENT_ABI } from "../../constants/MyProject";
+
+import { DownOutlined, SmileOutlined } from '@ant-design/icons';
+import { Dropdown, Menu } from 'antd';
+const menu = (
+  <Menu
+    items={[
+      {
+        key: '1',
+        label: (
+          <p>birinci cocuk</p>
+        ),
+      },
+      {
+        key: '2',
+        label: (
+          <p>ikinci cocuk, wallet id: 0xabcdef</p>
+        ),
+      },
+      
+      
+    ]}
+  />
+);
+
+
+let allParentsName:string[]; 
+let allParentsSurname:string[]; 
+let allParentsWalletID:string[]; 
+
+allParentsName = [];
+allParentsWalletID = [];
+
+
+let allParentsArray:string[];
+allParentsArray = [];
 
 
 
+async function getAllOfParents() {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const signer = provider.getSigner();
+  const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
+  const allP = await contract.get_All_Parents();
+  console.log(allP[0][2]);
+  
+  while (allParentsName.length < allP.length) {
+    allParentsName.push(allP[0][0]);
+    
+  }
+  
+  console.log(allParentsName);
+  
+  
+}
+
+    
+
+getAllOfParents();
 
 
 
@@ -12,7 +69,6 @@ import type { ColumnsType } from 'antd/es/table';
 interface DataType {
     key: string;
     name: string;
-    age: number;
     loginDate: string;
 }
 
@@ -24,21 +80,23 @@ const columns: ColumnsType<DataType> = [
       render: text => <a>{text}</a>,
     },
     {
-      title: 'Yaş',
-      dataIndex: 'age',
-      key: 'age',
-    },
-    {
       title: 'Kayıt Tarihi',
       key: 'loginDate',
       dataIndex: 'loginDate',
     },
     {
-        title: 'Düzenle',
+        title: 'Cocuklar',
         key: 'action',
           render: (_, record) => (
             <Space size="middle">
-              <Button>Düzenle</Button>
+              <Dropdown overlay={menu}>
+    <a onClick={e => e.preventDefault()}>
+      <Space>
+        Cocuk Listesi
+        <DownOutlined />
+      </Space>
+    </a>
+  </Dropdown>
               
             </Space>
           ),
@@ -49,19 +107,16 @@ const data: DataType[] = [
     {
       key: '1',
       name: 'Isim Soyisim',
-      age: 0,
       loginDate: '01/01/0001',
     },
     {
       key: '2',
       name: 'İsim Soyisim',
-      age: 0,
       loginDate: '01/01/0001',
     },
     {
       key: '3',
       name: 'İsim Soyisim',
-      age: 0,
       loginDate: '01/01/0001',
     },
 ];

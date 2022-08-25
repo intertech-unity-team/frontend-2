@@ -1,10 +1,23 @@
 .login-container{
     width: 100%;
-    background-color: rgba(255, 235, 183, 0.75);
+    background-color: #2A2A3E;
     border-radius: 50px;
+    background: transparent;
 }
 
 .btn-login{
-    margin-top: 5vh;
+    margin-top: 1.5vh;
     margin-bottom: 5vh;
+}
+
+[title="Adınız"] {
+    color: #DADADA !important;
+}
+
+[title="Soyadınız"] {
+    color: #DADADA !important;
+}
+
+[title="Wallet ID"] {
+    color: #DADADA !important;
 }
