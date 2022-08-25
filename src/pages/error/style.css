@@ -1,27 +1,102 @@
+#components-layout-demo-top-side-2 .logo {
+    float: left;
+    width: 120px;
+    height: 31px;
+    margin: 16px 24px 16px 0;
+    background: rgba(255, 255, 255, 0);
+  }
+  
+  .ant-row-rtl #components-layout-demo-top-side-2 .logo {
+    float: right;
+    margin: 16px 0 16px 24px;
+  }
+  
+  .site-layout-background {
+    background:rgba(214, 214, 210, 1);
+  }
 
+  .layout {
+    height:100vh;
+    width: 100vw;
+    background:rgba(214, 214, 210, 1);
+  }
 
-.error-pic {
-    padding-top: 1px;
+  .table{
+    padding-top: 3vh;
+  }
+
+  .table-col{
+    background: rgba(255, 235, 183, 0.8);
+  }
+
+  .table-row{
+    
+  }
+
+  .send-money-container{
+    padding-left: 50%;
+    padding-right: 10%;
+    padding-top: 10%;
+    
+  }
+
+  .form-container{
+    
+    margin-top: 3.2%;
+    padding-left: 12%;
+    
+  }
+
+  .send-money{
+    background: rgba(255, 235, 183, 0.8);
+  }
+
+  .centering{
+    display: flex;
+    align-items: center;
+    justify-content: center
+  }
+
+  .center-the-button {
+    margin-top:2cm;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    background-color: rgba(42, 46, 48, 1);
+    border: 0;
+    border-radius: 20px;
+    
+  }
+
+  .text {
+    color:#DADADA;
     text-align: center;
+    margin-top: 1.1vh;
+    margin-right: 32vw;
+    
+  }
+  
+[title="Ad"] {
+    color: #DADADA !important;
 }
 
-.team-name {
-    padding-left: 35px;
-    padding-top: 35px; 
+[title="Soyad"] {
+    color: #DADADA !important;
 }
 
-.text {
-    padding-top: 80px;
-    text-align: center;
+[title="Wallet ID"] {
+    color: #DADADA !important;
 }
 
-.button {
-    text-align: center; 
+.dugme {
+  text-align: center;
+  margin-top: 40.6%;
 }
 
 .go-back {
-    background-color: #2A2E30;
-    border: 3px solid #2A2E30;
-    text-align: center;
+  background: transparent;
+  border-color: #fff;
+  color: #fff;
+  
 }
-

@@ -41,7 +41,10 @@
   }
 
   .form-container{
-    padding-top: 5%;
+    
+    margin-top: 3.2%;
+    padding-left: 12%;
+    
   }
 
   .send-money{
@@ -66,4 +69,22 @@
     
   }
 
+  .text {
+    color:#DADADA;
+    text-align: center;
+    margin-top: 1.1vh;
+    margin-right: 32vw;
+    
+  }
   
+[title="Ad"] {
+    color: #DADADA !important;
+}
+
+[title="Soyad"] {
+    color: #DADADA !important;
+}
+
+[title="Wallet ID"] {
+    color: #DADADA !important;
+}

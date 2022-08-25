@@ -1,5 +1,7 @@
-import { Button } from 'antd';
+import { Button, Layout } from 'antd';
 import './style.css';
+import backgroundImg from '../../assets/img/xd.png';
+import { Content } from 'antd/lib/layout/layout';
 
 function getHomePage() {
     window.location.href="http://localhost:3000/"
@@ -8,22 +10,25 @@ function getHomePage() {
 const ErrorPage = () => {
     return (
         <div className='main'>
+            <Layout className='layout' style={{backgroundImage:`url(${backgroundImg})`}}>
+                <Content style={{ padding: '0 0px' }}>
+                    <Layout className="site-layout-background" style={{ padding: '0px 0', backgroundImage:`url(${backgroundImg})` , backgroundPosition: 'center',
+                        backgroundSize: 'cover',
+                        backgroundRepeat: 'no-repeat',
+                        height: '100%',}}>
+                        <Content>
+                            <div className='dugme'>
+                            <Button className='go-back' type='default' shape='round' onClick={getHomePage} style={{margin: 'center'}}>Anasayfaya Geri Dön</Button>
 
-            <header className='team-name'>
-                <h1>UNITY</h1>
-            </header>
-
-            <header className='error-pic'>
-                <img src='https://i.ibb.co/M2qw7BL/error-Picture.jpg'></img>
-            </header>
-
-            <header className='text'>
-                <h1>Üzgünüz, sayfanız kaybolmuş olabilir.<br />(ya da paranız çalındı)</h1>
-            </header>
-
-            <header className='button'>
-                <Button className='go-back' type='primary' shape='round' onClick={getHomePage} style={{margin: 'center'}}>Anasayfaya Geri Dön</Button>
-            </header>
+                            </div>
+                        </Content>
+                    </Layout>
+                </Content>
+            </Layout>
+            
+            
+                
+            
             
         </div>
     );

@@ -11,7 +11,7 @@ import { ethers } from 'ethers';
 import "antd/dist/antd.css";
 import "./profile.css";
 import metamaskGif from '../../assets/images/metamask.gif';
-import backgroundImg from '../../assets/img/background-image.jpg';
+import backgroundImg from '../../assets/img/another-background.png';
 import logo from '../../assets/img/logo.png'
 import { addSyntheticLeadingComment } from 'typescript';
 import { PATENT_ABI, PATENT_ADDRESS } from '../../constants/MyProject';
@@ -122,7 +122,10 @@ const ProfilePage: React.FC = () => {
     return (
     <Layout className='layout' style={{backgroundImage:`url(${backgroundImg})`}}>
       <Content style={{ padding: '0 0px' }}>
-        <Layout className="site-layout-background" style={{ padding: '0px 0', backgroundImage:`url(${backgroundImg})`}}>
+        <Layout className="site-layout-background" style={{ padding: '0px 0', backgroundImage:`url(${backgroundImg})` , backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    height: '100%',}}>
           <Sider style={{background:"#2A2E30"}} width={200}>
           <img src={logo} alt="Logo" width="100%" height="200px"></img>
             <Menu
@@ -135,16 +138,18 @@ const ProfilePage: React.FC = () => {
           </Sider>
 
           <Content style={{ padding: '0 0px', minHeight: 280}}>
+              <h2 className='text'>Profilim Hos Geldiniz XXX</h2>
               <div className='form-container'>
               <Descriptions
-                style={{padding:"10vh", width:"100vw"}}
-                title="Profil Detayları"
+                style={{padding:"1vh", width:"31vw"}}
+                size='middle'
                 bordered
-                column={{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }}
+                column={1}
+                layout= 'vertical'
               >
-                <Descriptions.Item label="Ad">{pName}</Descriptions.Item>
-                <Descriptions.Item label="Soyad">{pSurname}</Descriptions.Item>
-                <Descriptions.Item label="Wallet ID">{pWalletID}</Descriptions.Item>
+                <Descriptions.Item label="Ad" contentStyle={{color:'#DADADA'}}>{pName}</Descriptions.Item>
+                <Descriptions.Item label="Soyad" contentStyle={{color:'#DADADA'}}>{pSurname}</Descriptions.Item>
+                <Descriptions.Item label="Wallet ID" contentStyle={{color:'#DADADA'}}>{pWalletID}</Descriptions.Item>
               </Descriptions>
               </div>
           </Content>
