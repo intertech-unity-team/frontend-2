@@ -1,22 +1,24 @@
 .float-container {
-    padding: 12.5vh;
+    padding: 5.5vh;
 }
-
-.float-child-left {
-    width: 45%;
-    float: left;
-    padding: 45px;
-    background-color: blanchedalmond;
-    border-radius: 50px;
+.mid-container {
+    position: fixed;
+    margin-left: 10vw;
+}
+.bottom-container {
+    position: fixed;
+    margin-left: 10vw;
 }
 .float-child-right {
-    width: 45%;
-    float: left;
-    background-color: blanchedalmond;
-    border-radius: 50px;
-    margin-bottom: 100px;
-    margin-left: 2vw;
-    background: transparent;    
+    text-align: center;
+    margin-left: 14vw;
+    margin-top: 5.8vh;
+}
+
+
+.btn {
+    margin-top: 17.5vh;
+    margin-left: 6.2vw;
 }
 
 .btn-update{

@@ -43,7 +43,7 @@ const items: MenuItem[] = [
     </a>
     , '1', <UserOutlined />),
   getItem(
-      <a href="/child-add" rel="noopener noreferrer" style={{color:"white"}}>
+      <a href="/child-view" rel="noopener noreferrer" style={{color:"white"}}>
       Çocuklar
       </a>, '2', <TeamOutlined />),
   getItem(
@@ -127,7 +127,7 @@ const ProfilePage: React.FC = () => {
     backgroundRepeat: 'no-repeat',
     height: '100%',}}>
           <Sider style={{background:"#2A2E30"}} width={200}>
-          <img src={logo} alt="Logo" width="100%" height="200px"></img>
+          <img src={logo} alt="Logo" width="150%" height="20%" style={{marginTop:'8vh'}}></img>
             <Menu
               defaultSelectedKeys={['']}
               defaultOpenKeys={['']}

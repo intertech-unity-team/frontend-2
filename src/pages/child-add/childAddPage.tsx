@@ -13,7 +13,7 @@ import { findTimeStampBtwTwoDates, findTimeStampBtwTwoDatesv2 } from '../../serv
 import "antd/dist/antd.css";
 import './parentPanelChild.css';
 import metamaskGif from '../../assets/images/metamask.gif';
-import backgroundImg from '../../assets/img/background-image.jpg';
+import backgroundImg from '../../assets/img/lol.png';
 import logo from '../../assets/img/logo.png'
 import { addSyntheticLeadingComment, JsxElement } from 'typescript';
 import moment from 'moment';
@@ -119,7 +119,7 @@ const items: MenuItem[] = [
     </a>
     , '1', <UserOutlined />),
   getItem(
-      <a href="/child-add" rel="noopener noreferrer" style={{color:"white"}}>
+      <a href="/child-view" rel="noopener noreferrer" style={{color:"white"}}>
       Çocuklar
       </a>, '2', <TeamOutlined />),
   getItem(
@@ -258,11 +258,17 @@ const ParentPanelChildPage: React.FC = () => {
     
 
     return (
-    <Layout className='layout' style={{backgroundImage:`url(${backgroundImg})`}}>
-      <Content style={{ padding: '0 0px' }}>
-        <Layout className="site-layout-background" style={{ padding: '0px 0', backgroundImage:`url(${backgroundImg})`}}>
+    <Layout className='layout' style={{backgroundImage:`url(${backgroundImg})`, backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    height: '100%', overflow: 'hidden', position: 'fixed'}}>
+      <Content style={{ padding: '0 0px' , overflow: 'hidden'}}>
+        <Layout className="site-layout-background" style={{ padding: '0px 0', backgroundImage:`url(${backgroundImg})` , backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    height: '100%', overflow: 'hidden'}}>
           <Sider style={{background:"#2A2E30"}} width={200}>
-          <img src={logo} alt="Logo" width="100%" height="200px"></img>
+          <img src={logo} alt="Logo" width="150%" height="25%"></img>
             <Menu
               defaultSelectedKeys={['']}
               defaultOpenKeys={['']}
@@ -271,8 +277,10 @@ const ParentPanelChildPage: React.FC = () => {
               </Menu>
           </Sider>
 
-          <Content style={{ padding: '0 50px 0', minHeight: 280}}>
+          <Content style={{ padding: '0 50px 0', minHeight: 280, overflow: 'hidden'}}>
+                        
             <div className="float-container">
+              {/* 
               <div className='float-child-left' style={{minWidth: screenWidth / 7}}>
                 <h1 style={{textAlign:"center", fontSize:"28px"}}>Çocuk Bilgilerini Güncelle</h1>
                 <br/>
@@ -312,15 +320,15 @@ const ParentPanelChildPage: React.FC = () => {
                        type="primary" danger className='btn-delete'>Çocuğu Sil</Button>
                     </div>
                 </Form>
-              </div>
+              </div> */}
 
-              <div className='float-child-right' style={{minWidth: screenWidth / 7}}>
-              <h1 style={{textAlign:"center", paddingBottom:"11.5vh", fontSize:"28px"}}>Yeni Çocuk Ekle</h1>
+              <div className='float-child-right' style={{minWidth: screenWidth / 7, overflow: 'hidden'}}>
+              <h1 style={{textAlign:"center", fontSize:"28px", overflow: 'hidden', paddingBottom: '7vh', color:'#DADADA'}}>Yeni Çocuk Ekle</h1>
                 <Form layout='vertical' >
                 <Form.Item label="Çocuk İsmi">
                     <Input placeholder="İsim giriniz" onChange={e => setAddChildNameInput(e.target.value)}/>
                     </Form.Item>
-                    <Form.Item label="Çocuk Soyadı">
+                    <Form.Item label="Çocuk Soyadı" >
                     <Input placeholder="Soyad giriniz" onChange={e => setAddChildSurnameInput(e.target.value)}/>
                   </Form.Item>
                     <Form.Item label="Çocuğun Wallet ID'si">

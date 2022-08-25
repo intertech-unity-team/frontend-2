@@ -41,7 +41,7 @@ const items: MenuItem[] = [
     </a>
     , '1', <UserOutlined />),
     getItem(
-      <a href="/child-add" rel="noopener noreferrer" style={{color:"white"}}>
+      <a href="/child-view" rel="noopener noreferrer" style={{color:"white"}}>
       Çocuklar
       </a>, '2', <TeamOutlined />),
   getItem(
