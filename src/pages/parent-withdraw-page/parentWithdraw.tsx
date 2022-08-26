@@ -8,7 +8,7 @@ import { Input, InputNumber } from 'antd/lib';
 
 // !!!
 import "antd/dist/antd.css";
-import "./style.css";
+import "./parentWithdrawStyle.css";
 import metamaskGif from '../../assets/images/metamask.gif';
 import logo from '../../assets/img/logo.png';
 import ethLogo from '../../assets/img/eth_logo.png';

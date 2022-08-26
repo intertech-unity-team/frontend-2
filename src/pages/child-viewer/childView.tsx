@@ -3,7 +3,7 @@ import './style.css';
 import { Button, DatePicker, Form, Input, Layout, Menu, MenuProps, Avatar, Card } from 'antd';
 import backgroundImg from '../../assets/img/lol.png';
 import logo from '../../assets/img/logo.png'
-import { TeamOutlined , UserOutlined, SolutionOutlined, DeleteFilled, EditFilled } from '@ant-design/icons';
+import { TeamOutlined , UserOutlined, SolutionOutlined, WarningFilled, EditFilled } from '@ant-design/icons';
 import { PATENT_ADDRESS, PATENT_ABI } from "../../constants/MyProject";
 import { ethers } from 'ethers';
 import { useNavigate } from "react-router-dom";
@@ -112,6 +112,7 @@ const ChildViewerPage: React.FC = () => {
   
 
   let avatarArray: React.ReactElement[] = [];
+  let childrenNotFound = <div></div>;
 
   function AvatarCardOnClickHandler(childArr:Array<string>){
     let x = parseInt(childArr[3]);
@@ -132,8 +133,17 @@ const ChildViewerPage: React.FC = () => {
       </Card>
       );
     }
-    
-  });
+      
+  }
+
+  );
+  if (avatarArray.length == 0){
+    childrenNotFound = <div style={{textAlign:"center"}}>
+      <WarningFilled style={{fontSize:"100px", marginBottom:"10vh", color:"rgb(237, 17, 35)"}}/>
+      <h1 style={{color:"snow"}}>Çocuk bulunamadı. Sağ üstteki çocuk ekle butonunu kullarak çocuklarınızı sisteme ekleyebilirsiniz.</h1>
+
+    </div>;
+  }
 
   
   return (
@@ -170,9 +180,8 @@ const ChildViewerPage: React.FC = () => {
               <Button className="btn" onClick={getChildAddPage} shape="round">Cocuk Ekle +</Button>
           </div>
           <div className="mid-container" style={{display:"flex",justifyContent:"space-around", width:"50%"}}>
-
+            {childrenNotFound}
             {avatarArray}
-
           </div>
         </Content>
 
