@@ -12,7 +12,6 @@ import { findTimeStampBtwTwoDates, findTimeStampBtwTwoDatesv2 } from '../../serv
 // !!!
 import "antd/dist/antd.css";
 import './parentPanelChild.css';
-import metamaskGif from '../../assets/images/metamask.gif';
 import backgroundImg from '../../assets/img/lol.png';
 import logo from '../../assets/img/logo.png'
 import { addSyntheticLeadingComment, JsxElement } from 'typescript';
@@ -254,9 +253,6 @@ const ParentPanelChildPage: React.FC = () => {
       );
 
 
-
-    
-
     return (
     <Layout className='layout' style={{backgroundImage:`url(${backgroundImg})`, backgroundPosition: 'center',
     backgroundSize: 'cover',
@@ -323,26 +319,26 @@ const ParentPanelChildPage: React.FC = () => {
               </div> */}
 
               <div className='float-child-right' style={{minWidth: screenWidth / 7, overflow: 'hidden'}}>
-              <h1 style={{textAlign:"center", fontSize:"28px", overflow: 'hidden', paddingBottom: '7vh', color:'#DADADA'}}>Yeni Çocuk Ekle</h1>
-                <Form layout='vertical' >
-                <Form.Item label="Çocuk İsmi">
-                    <Input placeholder="İsim giriniz" onChange={e => setAddChildNameInput(e.target.value)}/>
+                <h1 style={{textAlign:"center", fontSize:"28px", overflow: 'hidden', paddingBottom: '7vh', color:'#DADADA'}}>Yeni Çocuk Ekle</h1>
+                  <Form layout='vertical' >
+                  <Form.Item label="Çocuk İsmi">
+                      <Input placeholder="İsim giriniz" onChange={e => setAddChildNameInput(e.target.value)}/>
+                      </Form.Item>
+                      <Form.Item label="Çocuk Soyadı" >
+                      <Input placeholder="Soyad giriniz" onChange={e => setAddChildSurnameInput(e.target.value)}/>
                     </Form.Item>
-                    <Form.Item label="Çocuk Soyadı" >
-                    <Input placeholder="Soyad giriniz" onChange={e => setAddChildSurnameInput(e.target.value)}/>
-                  </Form.Item>
-                    <Form.Item label="Çocuğun Wallet ID'si">
-                        <Input placeholder="Wallet ID giriniz" onChange={e => setAddChildWalletID(e.target.value)}/>
-                    </Form.Item>
-                    <Form.Item label="Çocuğun Doğum Tarihi">
-                      <DatePicker format={'DD/MM/YYYY'} onChange={(_, dateString) => setCreateChildBDay(dateString)} placeholder="Tarih Seçiniz" style={{width:"100%"}}/>
-                    </Form.Item>
-                    <div style={{textAlign:"center"}}>
-                      <Button type="default"
-                      className='btn-update'
-                      onClick={() => handleAddChildBtn(addChildNameInput, addChildSurnameInput, addChildWalletID, createChildBDay)}
-                      >Çocuk Ekle
-                      </Button>
+                      <Form.Item label="Çocuğun Wallet ID'si">
+                          <Input placeholder="Wallet ID giriniz" onChange={e => setAddChildWalletID(e.target.value)}/>
+                      </Form.Item>
+                      <Form.Item label="Çocuğun Doğum Tarihi">
+                        <DatePicker format={'DD/MM/YYYY'} onChange={(_, dateString) => setCreateChildBDay(dateString)} placeholder="Tarih Seçiniz" style={{width:"100%"}}/>
+                      </Form.Item>
+                      <div style={{textAlign:"center"}}>
+                        <Button type="default"
+                        className='btn-update'
+                        onClick={() => handleAddChildBtn(addChildNameInput, addChildSurnameInput, addChildWalletID, createChildBDay)}
+                        >Çocuk Ekle
+                        </Button>
                     </div>
                 
                     </Form>

@@ -234,7 +234,7 @@ const ChildUpdatePage: React.FC = () => {
             <div className="float-container">
               
               <div className='float-child-right' style={{minWidth: screenWidth / 7}}>
-                <h1 style={{textAlign:"center", fontSize:"28px"}}>Çocuk Bilgilerini Güncelle</h1>
+                <h1 style={{textAlign:"center", fontSize:"28px", overflow: 'hidden' , color:'#DADADA'}}>Çocuk Bilgilerini Güncelle</h1>
                 <br/>
                 <Form layout='vertical'>
                   <Form.Item label="Çocuk Adı">
