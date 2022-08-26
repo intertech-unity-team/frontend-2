@@ -6,6 +6,7 @@ import logo from '../../assets/img/logo.png'
 import { TeamOutlined , UserOutlined, SolutionOutlined, SendOutlined, DownOutlined } from '@ant-design/icons';
 import { PATENT_ADDRESS, PATENT_ABI } from "../../constants/MyProject";
 import { ethers } from 'ethers';
+import { useNavigate } from "react-router-dom";
 
 const { Header, Footer, Sider, Content } = Layout;
 let screenWidth = window.screen.width;
@@ -75,6 +76,7 @@ const ChildViewerPage: React.FC = () => {
 
   const [childrenObjectsArray, setChildrenObjectsArray] = useState<Array<string>[]>([]);  
   const [childrenNamesStateArray, setChildrenNamesArray] = useState<string[]>([]);  
+  const navigate = useNavigate();
 
   let childrenNamesArray: string [] = [];
   
@@ -111,19 +113,24 @@ const ChildViewerPage: React.FC = () => {
 
   let avatarArray: React.ReactElement[] = [];
 
-  function avatarCardOnClickHandler(childArr:Array<string>){
-    console.log(childArr);
+  function AvatarCardOnClickHandler(childArr:Array<string>){
+    let x = parseInt(childArr[3]);
+    navigate('/child-update', { state: { name: childArr[0], surname: childArr[1], walletID: childArr[2], timestamp: x } } );
+
   };
 
   childrenObjectsArray.forEach(childArr => {
-    avatarArray.push(
-      <Card style={{textAlign:"center", backgroundColor:"transparent", borderColor:"transparent"}}
-      onClick={()=>avatarCardOnClickHandler(childArr)}>
-        <Avatar size={avatarSize} style={{marginBottom:"10%"}} icon={<UserOutlined /> } />
-        <br/>
-        <text style={{color:"#DADADA"}}>{childArr[0]}</text>
-    </Card>
-    );
+    if(childArr[2] != "0x0000000000000000000000000000000000000000"  ){
+      avatarArray.push(
+        <Card style={{textAlign:"center", backgroundColor:"transparent", borderColor:"transparent"}}
+        onClick={()=>AvatarCardOnClickHandler(childArr)}>
+          <Avatar size={avatarSize} style={{marginBottom:"10%"}} icon={<UserOutlined /> } />
+          <br/>
+          <text style={{color:"#DADADA"}}>{childArr[0]}</text>
+      </Card>
+      );
+    }
+    
   });
 
   
