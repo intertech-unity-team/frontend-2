@@ -9,7 +9,7 @@ import { Button, Input, InputNumber } from "antd";
 import "antd/dist/antd.css";
 import "./child.css";
 import logo from '../../assets/img/logo.png';
-import backgroundImg from '../../assets/img/background-image.jpg';
+import backgroundImg from '../../assets/img/mf.png';
 
 
 

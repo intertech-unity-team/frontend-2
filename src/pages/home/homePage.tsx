@@ -1,9 +1,8 @@
 import "./home.css";
-import backgroundImg from '../../assets/img/background-image.jpg';
+import backgroundImg from '../../assets/img/mf.png';
 import { Header, Content } from "antd/lib/layout/layout";
 import logo from '../../assets/img/logo.png'
-import meta from '../../assets/images/metamask.gif'
-import arkaplan2 from '../../assets/img/f8f1df.png'
+import meta from '../../assets/img/metamask_logo.png'
 import hero from '../../assets/img/hero_black.png'
 import { Button, Layout, Space } from 'antd';
 import { AndroidOutlined, AppleOutlined, GithubOutlined, InstagramOutlined, LinkedinOutlined, RedditOutlined, TwitterOutlined, YoutubeOutlined } from "@ant-design/icons";
@@ -97,33 +96,28 @@ const getProperPage = async () => {
 const HomePage = () => {
 
   return ( 
-      <div>
-          <Header className='baslik' style= {{background: "#2A2E30", width:"100%"}}>  
-          
-      <div><img className='logo' src={logo} alt="Logo" width="80px" height="70px"></img></div>
-
-          <Button className='hakkimizda' style={{color:"white", fontSize:20, top:10, marginLeft:"5vw"}} type="text">Hakkımızda </Button>
-          <Button className='iletisim' style={{color:"white", fontSize:20, top:10}} type="text">İletişim</Button>
-          <Button className='metamask' style={{color:"white", fontSize:20, top:10}} type="text">Metamask Nedir?</Button>
-            </Header> 
-            <Content >
-              <div >
-                 <img className="arkaplan" src={backgroundImg} style={{width:"100%"}} />
-              <text className="yazi"  style={{color:"black", fontSize:35, bottom: 600, left:1200}}>Kripto Varlık Mirasının<h6></h6> En Kolay Yolu</text><br/>
-                <Button className='kayit' onClick={getSignInPage} type="primary" style={{color:"white", fontSize:17, backgroundColor:"orange", borderRadius:5, paddingBlockEnd:32, bottom:570, left:"63%" }} >Metamask İle Kayıt Ol →</Button> <h1></h1>
-                <Button className='giris' onClick={getProperPage} type="primary" style={{color:"white", fontSize:17, backgroundColor:"black", borderRadius:5, paddingBlockEnd:32, bottom:560, left:"63%" }} >Metamask İle Giriş Yap →</Button></div> 
-                <img className="arkaplan2" style={{bottom:225, width:"100%"}} src={arkaplan2}/> 
-                <text className="yazi2" style={{bottom:1020, left:"13%"}}><h3> METAMASK NEDİR?</h3> Buy, store, send and swap tokens<br/>
-                Available as a<br/>browser extension and as a mobile app,<br/> MetaMask equips you with a<br/> key vault, secure login, token wallet, and<br/>
-                token exchange—everything you need to<br/> manage your digital assets.<br/><br/> https://metamask.io/about/</text><br/>
-                <img className="hero" style={{bottom:1470, left:"53%"}} src={hero}/> 
-                <text className="yazi3" style={{bottom:1400, textAlign:"center"}} ><h2>Hakkımızda</h2> </text> 
-                <text className="yazi4" style={{bottom:1350, textAlign:"center"}}> <h4>2023 yılında Kurtköy/Pendik’te kurulan girişimci topluluğu.</h4></text><br/><br/><br/><br/>
-                <text className="yazi5" style={{bottom:1300, textAlign:"center"}} ><h2>İletişim</h2> </text> 
-                <div className="icons" style={{bottom:1200, left:"25%", fontSize:30, display:"flex", justifyContent:"space-around", width:"50%"}}
-                    ><AppleOutlined /><AndroidOutlined /> <GithubOutlined /><TwitterOutlined /><YoutubeOutlined /><LinkedinOutlined /><InstagramOutlined /><RedditOutlined /></div>
-            </Content>
-          </div>
+      <div className="main-container">
+        <Layout>
+          <Content>
+            <Layout>
+              <Content>
+                <div>
+                  <img src={backgroundImg} style={{width:'100%', position:'relative'}}></img>
+                  <img src={meta} style={{position:'absolute', width:'5%',height: '10%', top:'3.5vh', left: '72vw'}}></img>                  
+                  <Button className="hakkimizda-btn" type="text" style={{color:'#fff',position:'absolute', textAlign:'center', left:'25vw', top:'4.5vh',fontSize:'26px'}} >Hakkımızda</Button>
+                  <Button type="text" style={{color:'#fff',position:'absolute', textAlign:'center', left:'40vw', top:'4.5vh',fontSize:'26px'}}>İletişim</Button>
+                  <Button type="text" style={{color:'#fff',position:'absolute', textAlign:'center', left:'52vw', top:'4.5vh',fontSize:'26px'}}>Metamask Nedir?</Button>
+                  <Button className='kayit' type="primary" style={{position:'absolute',color:"white", backgroundColor:"purple", borderRadius:5,left:'54vw',top:'57vh',borderColor:'purple',width:'300px',verticalAlign:'top' }} >Metamask İle Kayıt Ol →</Button>
+                  <Button className='giris' type="primary" style={{position:'absolute',color:"white", backgroundColor:"black", borderRadius:5,left:'54vw',top:'64vh',borderColor:'black',width:'300px' }} >Metamask İle Giriş Yap →</Button>
+                  <h2 style={{position:'absolute',top:'35vh',left:'51vw',fontSize:'40px',color:'#fff',textAlign:'center'}}>Kripto Varlık Mirasının<br /> En Kolay Yolu</h2>
+                  <img src={logo} style={{position:'absolute',top:'1vh',left:'-0.5vw'}}></img>
+                  <h2 style={{position:'absolute',top:'20.9vh',left:'1.14vw',fontSize:'36px'}}>BLOXIFY</h2>
+                </div>
+              </Content>
+            </Layout>
+          </Content>
+        </Layout>
+      </div>
   );
 };
 export default HomePage;

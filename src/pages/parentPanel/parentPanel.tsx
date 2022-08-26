@@ -10,7 +10,7 @@ import "antd/dist/antd.css";
 import "./parentPanel.css";
 import logo from '../../assets/img/logo.png';
 import ethLogo from '../../assets/img/eth_logo.png';
-import backgroundImg from '../../assets/img/background-image.jpg';
+import backgroundImg from '../../assets/img/mf.png';
 import { addSyntheticLeadingComment } from 'typescript';
 import ProfilePage from '../profile/profile';
 
