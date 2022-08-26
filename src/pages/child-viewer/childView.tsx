@@ -3,7 +3,7 @@ import './style.css';
 import { Button, DatePicker, Form, Input, Layout, Menu, MenuProps, Avatar, Card } from 'antd';
 import backgroundImg from '../../assets/img/lol.png';
 import logo from '../../assets/img/logo.png'
-import { TeamOutlined , UserOutlined, SolutionOutlined, SendOutlined, DownOutlined } from '@ant-design/icons';
+import { TeamOutlined , UserOutlined, SolutionOutlined, DeleteFilled, EditFilled } from '@ant-design/icons';
 import { PATENT_ADDRESS, PATENT_ABI } from "../../constants/MyProject";
 import { ethers } from 'ethers';
 import { useNavigate } from "react-router-dom";
@@ -124,6 +124,8 @@ const ChildViewerPage: React.FC = () => {
       avatarArray.push(
         <Card style={{textAlign:"center", backgroundColor:"transparent", borderColor:"transparent"}}
         onClick={()=>AvatarCardOnClickHandler(childArr)}>
+          <EditFilled style={{color:"rgb(178, 208, 209)", fontSize:"20px"}}></EditFilled>
+          <br/>
           <Avatar size={avatarSize} style={{marginBottom:"10%"}} icon={<UserOutlined /> } />
           <br/>
           <text style={{color:"#DADADA"}}>{childArr[0]}</text>
