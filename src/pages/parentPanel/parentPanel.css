@@ -57,4 +57,13 @@
   transform: translate(-50%, -50%);
 }
 
+[title="Çocuk Wallet ID"] {
+  color: #DADADA !important;
+}
+[title="Çocuk Adı"] {
+  color: #DADADA !important;
+}
+[title="Miktar Giriniz"] {
+  color: #DADADA !important;
+}
   

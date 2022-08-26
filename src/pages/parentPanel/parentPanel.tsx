@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { LinkOutlined, UserOutlined, TeamOutlined, SendOutlined, CloseCircleOutlined, SolutionOutlined, RollbackOutlined, DownOutlined } from '@ant-design/icons';
-import { Dropdown, MenuProps, Slider, Space } from 'antd';
+import { Dropdown, Form, Input, MenuProps, Slider, Space } from 'antd';
 import { Breadcrumb, Layout, Menu } from 'antd';
 import { Table, Card, Button } from "antd";
 import { AlignType } from 'rc-table/lib/interface';
@@ -10,7 +10,7 @@ import "antd/dist/antd.css";
 import "./parentPanel.css";
 import logo from '../../assets/img/logo.png';
 import ethLogo from '../../assets/img/eth_logo.png';
-import backgroundImg from '../../assets/img/mf.png';
+import backgroundImg from '../../assets/img/q.png';
 import { addSyntheticLeadingComment } from 'typescript';
 import ProfilePage from '../profile/profile';
 
@@ -134,14 +134,14 @@ const ParentPanel = () => {
   const columns = [
     {
       className: "table-col",
-      title: 'Gönderici',
+      title: 'Alıcı Adı',
       dataIndex: 'sender',
       key: 'sender',
       align: 'center' as AlignType
     },
     {
       className: "table-col",
-      title: 'Alıcı',
+      title: 'Alıcı Wallet ID',
       dataIndex: 'receiver',
       key: 'receiver',
       align: 'center' as AlignType
@@ -172,13 +172,6 @@ const ParentPanel = () => {
       title: 'İşlem Durumu',
       dataIndex: 'status',
       key: 'status',
-      align: 'center' as AlignType
-    },
-    {
-      className: "table-col",
-      title: 'Gönderimin Bir Kısmını Geri Çek',
-      dataIndex: 'cancelPartial',
-      key: 'cancelPartial',
       align: 'center' as AlignType
     },
     {
@@ -227,58 +220,65 @@ const handleMenuClick: MenuProps['onClick'] = e => {
   );
 
     return (
-    <Layout className='layout' style={{backgroundImage:`url(${backgroundImg})`}}>
-      <Content style={{ padding: '0 0px' }}>
-        <Layout style={{ padding: '0px 0', backgroundImage:`url(${backgroundImg})`}}>
-          <Sider style={{background:"#2A2E30", bottom:0}} width={200}>
-          <img src={logo} alt="Logo" width="100%" height="200px"></img>
-            <Menu
-              defaultSelectedKeys={['']}
-              defaultOpenKeys={['']}
-              style={{background:"#2A2E30", height:"78vh", width:"100.5%", color:"white"}}
-              items={items}>
-              </Menu>
-              
-          </Sider>
-          <Content style={{ padding: '0 0px', minHeight: 280}}>
-            <div className='send-money-container'>
-                <b className='centering' style={{}} ><i>Cüzdan Bakiyesi: 3.2 ETH</i></b>
-                  <i className='centering'>0xE086BE6D51137948c7E1F45a4994BC041a711E56</i>
-                  <br/>
-                  <div className='centering'>
-                  <b>Göndermek istediğiniz çocuğunuzu seçiniz:</b>
+      <Layout>
+        <Content>
+          <Layout>
+            <Content>
+              <div>
+                <img src={backgroundImg} style={{width:'100%', position:'relative'}}></img>
+                <h2 style={{position:'absolute',top:'19vh',left:'44vw',color:'#fff',fontSize:'36px'}}>Kripto Varlık Gönder</h2>
+                <h2 style={{position:'absolute',top:'30vh',left:'48vw',color:'#fff',fontSize:'18px'}}>Çocuk Seç</h2>
+                <Form layout='vertical' className='input-xdlmao'>
+                  <Form.Item style={{position:'absolute',top:'37vh',left:'48vw',width:'40%'}} label="Çocuk Adı">
+                    <Input className='ilk-input' placeholder="Çocuk Adı" size='middle' style={{width: '31%'}} ></Input>
+                  </Form.Item>
+                  <Form.Item style={{position:'absolute',top:'48vh',left:'48vw',width:'40%'}} label="Çocuk Wallet ID">
+                    <Input className='ilk-input' placeholder="Wallet ID Giriniz" size='middle' style={{width: '31%'}}></Input>
+                  </Form.Item>
+                  <h2 style={{position:'absolute',top:'61vh',left:'48vw',color:'#fff',fontSize:'18px'}}>
+                    Gönderilecek Tutar
+                  </h2>
+                  <Form.Item style={{position:'absolute',top:'67vh',left:'48vw',width:'40%'}}>
+                    <Input className='ilk-input' placeholder="Miktar..." size='middle' style={{width: '31%'}}></Input>
+                  </Form.Item>
+                </Form>
+                <Button type='default' shape='round' style={{borderColor:'#fff',background:'transparent',color:'#fff',position:'absolute',top:'73vh',left:'49.2vw',width:'10vw'}}>GÖNDER</Button>
+                
+                <div style={{position:'absolute',top:'30vh',left:'54vw',backgroundColor:'#fff'}}>
                   <Dropdown overlay={menu}>
-                      <Button>
-                          <Space>
-                          {childName}
-                          <DownOutlined />
-                          </Space>
-                          </Button>
+                        <Button>
+                            <Space>
+                            {childName}
+                            <DownOutlined />
+                            </Space>
+                            </Button>
                   </Dropdown>
-                  </div>
-                  <div className='send-money'>
-                  <Button type="primary" className='center-the-button' shape="circle" icon={<SendOutlined />} size="large"/>
-                    
-                  </div>
-                  
-              <br/>
-            </div>
-              
-            
-            <Table 
-            dataSource={dataSource} 
-            columns={columns} 
-            className="table" 
-            rowClassName="table-row" 
-            bordered
-            pagination={{ pageSize: 4 }}
-            style={{}}/>
-          </Content>
-
-        </Layout>
-      </Content>
-    <Footer style={{ textAlign: 'center', background:"#2A2E30", color:"white", position:"absolute", bottom:0, width:"100%"}} className="site-layout-background">AppName ©2022 Created by Team Unity</Footer>
-  </Layout>
+                </div>
+                <Sider style={{background:"#2A2E30", bottom:0,position:'absolute',top:'0vh'}} width={200}>
+                  <img src={logo} alt="Logo" width="150%" height="30%"></img>
+                  <Menu
+                    defaultSelectedKeys={['']}
+                    defaultOpenKeys={['']}
+                    style={{background:"#2A2E30", height:"119.79vh", width:"100.5%", color:"white"}}
+                    items={items}>
+                  </Menu>
+          
+                </Sider>
+                <Table 
+                  dataSource={dataSource} 
+                  columns={columns} 
+                  className="table" 
+                  rowClassName="table-row" 
+                  bordered
+                  pagination={{ pageSize: 3 }}
+                  style={{background:"#2A2E30",position:'absolute',top:'83vh',left:'31.5vw'}}/>
+                <Footer style={{ textAlign: 'center', background:"#2A2E30", color:"white", position:"absolute", bottom:0, width:"100%",top:'145vh'}} className="site-layout-background">BLOXIFY ©2022 Created by Team Unity</Footer>
+              </div>
+            </Content>
+          </Layout>
+        </Content>
+      </Layout>/*
+      */
   
     );
 };

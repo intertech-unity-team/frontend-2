@@ -46,11 +46,7 @@ function youtubeIcon() {
   window.open("https://www.youtube.com/channel/UCXC8pcaXM5cSatFeqYbzxlg/featured")
 }
 
-function getSignInPage() {
-  accountCheck();
-  createMetamaskConnection();
 
-}
 
 const Role = {
 	Admin: 0,
@@ -60,7 +56,8 @@ const Role = {
 }
 
 const getProperPage = async () => {
-  accountCheck();
+  
+
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   await provider.send("eth_requestAccounts", []);
   let walletID = window.ethereum.selectedAddress;
@@ -107,11 +104,29 @@ const HomePage = () => {
                   <Button className="hakkimizda-btn" type="text" style={{color:'#fff',position:'absolute', textAlign:'center', left:'25vw', top:'4.5vh',fontSize:'26px'}} >Hakkımızda</Button>
                   <Button type="text" style={{color:'#fff',position:'absolute', textAlign:'center', left:'40vw', top:'4.5vh',fontSize:'26px'}}>İletişim</Button>
                   <Button type="text" style={{color:'#fff',position:'absolute', textAlign:'center', left:'52vw', top:'4.5vh',fontSize:'26px'}}>Metamask Nedir?</Button>
-                  <Button className='kayit' type="primary" style={{position:'absolute',color:"white", backgroundColor:"purple", borderRadius:5,left:'54vw',top:'57vh',borderColor:'purple',width:'300px',verticalAlign:'top' }} >Metamask İle Kayıt Ol →</Button>
-                  <Button className='giris' type="primary" style={{position:'absolute',color:"white", backgroundColor:"black", borderRadius:5,left:'54vw',top:'64vh',borderColor:'black',width:'300px' }} >Metamask İle Giriş Yap →</Button>
+                  <Button className='kayit' onClick={getProperPage} type="primary" style={{position:'absolute',color:"white", backgroundColor:"purple", borderRadius:5,left:'54vw',top:'57vh',borderColor:'purple',width:'300px',verticalAlign:'top' }} >Metamask İle Kayıt Ol →</Button>
+                  <Button className='giris' onClick={getProperPage} type="primary" style={{position:'absolute',color:"white", backgroundColor:"black", borderRadius:5,left:'54vw',top:'64vh',borderColor:'black',width:'300px' }} >Metamask İle Giriş Yap →</Button>
                   <h2 style={{position:'absolute',top:'35vh',left:'51vw',fontSize:'40px',color:'#fff',textAlign:'center'}}>Kripto Varlık Mirasının<br /> En Kolay Yolu</h2>
                   <img src={logo} style={{position:'absolute',top:'1vh',left:'-0.5vw'}}></img>
                   <h2 style={{position:'absolute',top:'20.9vh',left:'1.14vw',fontSize:'36px'}}>BLOXIFY</h2>
+                  <img src={hero} style={{position:'absolute',top:'77.9vh',left:'48vw',width:'35%',height:'75%'}}></img>
+                  <h2 style={{position:'absolute',top:'30.5vh',left:'21.8vw',fontSize:'18px',color:'#fff',textAlign:'center'}}>Cüzdanını Bağla</h2>
+                  <h4 style={{position:'absolute',top:'35.8vh',left:'21vw',fontSize:'14px',color:'#fff',textAlign:'left',fontWeight:'lighter'}}>Metamask ile kayıt ol <br /> butonuna tıklayarak<br /> cüzdanını Bloxify'a bağla.</h4>
+                  <h2 style={{position:'absolute',top:'30.5vh',left:'36.6vw',fontSize:'18px',color:'#fff',textAlign:'center'}}>Çocuklarını Kaydet</h2>
+                  <h4 style={{position:'absolute',top:'35.8vh',left:'36.2vw',fontSize:'14px',color:'#fff',textAlign:'left',fontWeight:'lighter'}}>Çocuğunun bilgilerini ekle.<br /> çocuklarıma tıklayarak<br /> çocuğunun bilgilerini ekle.</h4>
+                  <h2 style={{position:'absolute',top:'55.5vh',left:'30.6vw',fontSize:'18px',color:'#fff',textAlign:'center'}}>Mirasını Aktar</h2>
+                  <h4 style={{position:'absolute',top:'60.8vh',left:'29.2vw',fontSize:'14px',color:'#fff',textAlign:'left',fontWeight:'lighter'}}>Düşük işlem ücretleri ile<br /> mirasını geri çek veya <br /> düzenle.</h4>
+                  <h2 style={{position:'absolute',top:'95.5vh',left:'21vw',fontSize:'36px',color:'#fff',textAlign:'center'}}>METAMASK NEDİR?</h2>
+                  <h4 style={{position:'absolute',top:'103.8vh',left:'21vw',fontSize:'20px',color:'#fff',textAlign:'left',fontWeight:'lighter'}}>MetaMask Ethereum blok zinciri ile etkileşim kurmak<br /> için kullanılan bir kripto para cüzdanıdır.<br /> Kullanıcıların, daha sonra merkezi olmayan uygulamalarla<br /> etkileşim kurmak için kullanılabilecek bir tarayıcı eklentisi<br /> veya mobil uygulama aracılığıyla Ethereum cüzdanlarına<br /> erişmelerine olanak tanır.</h4>
+                  <h2 style={{position:'absolute',top:'164vh',left:'44vw',fontSize:'36px',color:'#fff',textAlign:'center'}}>Hakkımızda</h2>
+                  <h4 style={{position:'absolute',top:'174vh',left:'27vw',fontSize:'20px',color:'#fff',textAlign:'left',fontWeight:'lighter'}}>Bloxify, ether kripto para birimini çocuklarınıza miras bırakmanız için güvenli bir yoldur.</h4>
+                  
+                  <LinkedinOutlined onClick={linkedinIcon} style={{position:'absolute',top:'185vh',left:'44.5vw',fontSize:'28px'}} />
+                  <InstagramOutlined onClick={instagramIcon} style={{position:'absolute',top:'185vh',left:'47.5vw',fontSize:'28px'}} />
+                  <TwitterOutlined onClick={twitterIcon} style={{position:'absolute',top:'185vh',left:'50.5vw',fontSize:'28px'}} />
+                  <YoutubeOutlined onClick={youtubeIcon} style={{position:'absolute',top:'185vh',left:'53.5vw',fontSize:'28px'}} />
+                  <h2 style={{position:'absolute',top:'192vh',left:'38.2vw',fontSize:'16px',color: '#DADADA'}}>İletişim: user140@mydevopscld.onmicrosoft.com</h2>
+                  
                 </div>
               </Content>
             </Layout>
