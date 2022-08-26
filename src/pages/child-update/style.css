@@ -1,0 +1,49 @@
+.float-container {
+    padding: 12.5vh;
+}
+
+.float-child-left {
+    width: 45%;
+    float: left;
+    padding: 45px;
+    background-color: blanchedalmond;
+    border-radius: 50px;
+}
+.float-child-right {
+    width: 45%;
+    float: left;
+    background-color: blanchedalmond;
+    border-radius: 50px;
+    margin-bottom: 100px;
+    margin-left: 2vw;
+    background: transparent;    
+}
+
+.btn-update{
+    border-radius: 30px;
+    margin-top: 2.2vh;
+    background-color: #DADADA;
+    
+}
+.btn-delete{
+    border-radius: 30px;
+
+}
+.label-style{
+    text-align: center;
+}
+
+[title="Çocuk İsmi"] {
+    color: #DADADA !important;
+}
+
+[title="Çocuk Soyadı"] {
+    color: #DADADA !important;
+}
+
+[title="Çocuğun Wallet ID'si"] {
+    color: #DADADA !important;
+}
+[title="Çocuğun Doğum Tarihi"] {
+    color: #DADADA !important;
+}

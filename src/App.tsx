@@ -20,6 +20,7 @@ import ChildProfilePage from './pages/child-profile/childProfile';
 import ParentWithdrawPage from './pages/parent-withdraw-page/parentWithdraw';
 import { PATENT_ABI, PATENT_ADDRESS } from './constants/MyProject';
 import ChildViewerPage from './pages/child-viewer/childView';
+import ChildUpdatePage from './pages/child-update/childUpdate';
 
 // Videodan alınan kod
 
@@ -51,6 +52,7 @@ const App = () => {
           <Route path='/' element={<HomePage />} />
           <Route path='/signin' element={<SignInPage />} />
           <Route path='/child' element={<ChildPage />} />
+          <Route path='/child-update' element={<ChildUpdatePage />} />
           <Route path='*' element={<ErrorPage />} />
           <Route path='/admin' element={<AdminPanel />} />
           <Route path='/parent' element={<ParentPanel />} />
