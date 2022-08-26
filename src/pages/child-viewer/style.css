@@ -19,6 +19,8 @@
 .btn {
     margin-top: 17.5vh;
     margin-left: 6.2vw;
+    background-color: #39aa1f;
+    border-color: #39aa1f;
 }
 
 .btn-update{

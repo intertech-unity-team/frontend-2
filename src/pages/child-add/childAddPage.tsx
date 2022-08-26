@@ -46,7 +46,7 @@ async function handleAddChildBtn(childName:string, childSurname:string, childWal
   
   // Hangi parenta ekleyeceksen onu seçip sonra burayı çalıştır
 
-  const addChild = await contract.addChild(childName, childSurname, childWalletID, timestamp);
+  const addChild = await contract.addChild(childName, childSurname, childWalletID, timestamp, "", 0);
   console.log(addChild);
 
   // Owner rolündeki Account1 aşağıyı çalıştırabilir
@@ -335,10 +335,10 @@ const ParentPanelChildPage: React.FC = () => {
                         <Input placeholder="Wallet ID giriniz" onChange={e => setAddChildWalletID(e.target.value)}/>
                     </Form.Item>
                     <Form.Item label="Çocuğun Doğum Tarihi">
-                      <DatePicker format={'DD/MM/YYYY'} onChange={(_, dateString) => setCreateChildBDay(dateString)}/>
+                      <DatePicker format={'DD/MM/YYYY'} onChange={(_, dateString) => setCreateChildBDay(dateString)} placeholder="Tarih Seçiniz" style={{width:"100%"}}/>
                     </Form.Item>
                     <div style={{textAlign:"center"}}>
-                      <Button type="primary"
+                      <Button type="default"
                       className='btn-update'
                       onClick={() => handleAddChildBtn(addChildNameInput, addChildSurnameInput, addChildWalletID, createChildBDay)}
                       >Çocuk Ekle

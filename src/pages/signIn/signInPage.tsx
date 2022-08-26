@@ -19,7 +19,7 @@ async function getParentPage(pName:string, pSurname:string, pWalletID: string) {
 
   // Parent hesabını seçip sonra aşağıyı çalıştırın
 
-  const addP = await contract.addParent(pName,pSurname, pWalletID);
+  const addP = await contract.addParent(pName,pSurname, pWalletID, "", 0);
   console.log(addP);
 
   // Owner rolündeyken aşağısı çalıştırılaablilir

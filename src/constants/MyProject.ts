@@ -26,6 +26,16 @@ export const PATENT_ABI = [
         "internalType": "uint256",
         "name": "releaseTime",
         "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "email",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "phoneNumber",
+        "type": "uint256"
       }
     ],
     "name": "addChild",
@@ -49,6 +59,16 @@ export const PATENT_ABI = [
         "internalType": "address payable",
         "name": "parentAddress",
         "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "email",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "phoneNumber",
+        "type": "uint256"
       }
     ],
     "name": "addParent",
@@ -154,6 +174,16 @@ export const PATENT_ABI = [
             "internalType": "uint256",
             "name": "amount",
             "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "email",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "phoneNumber",
+            "type": "uint256"
           }
         ],
         "internalType": "struct MyProject.Child",
@@ -197,6 +227,16 @@ export const PATENT_ABI = [
             "internalType": "address payable",
             "name": "parentAddress",
             "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "email",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "phoneNumber",
+            "type": "uint256"
           },
           {
             "internalType": "address[]",
@@ -261,6 +301,16 @@ export const PATENT_ABI = [
             "internalType": "uint256",
             "name": "amount",
             "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "email",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "phoneNumber",
+            "type": "uint256"
           }
         ],
         "internalType": "struct MyProject.Child[]",
@@ -291,6 +341,16 @@ export const PATENT_ABI = [
             "internalType": "address payable",
             "name": "parentAddress",
             "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "email",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "phoneNumber",
+            "type": "uint256"
           },
           {
             "internalType": "address[]",
@@ -354,6 +414,16 @@ export const PATENT_ABI = [
           {
             "internalType": "uint256",
             "name": "amount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "email",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "phoneNumber",
             "type": "uint256"
           }
         ],
@@ -422,6 +492,16 @@ export const PATENT_ABI = [
       {
         "internalType": "uint256",
         "name": "new_releaseTime",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "new_email",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "new_phoneNumber",
         "type": "uint256"
       }
     ],
