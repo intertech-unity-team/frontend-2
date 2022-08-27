@@ -2,26 +2,18 @@
     padding: 12.5vh;
 }
 
-.float-child-left {
-    width: 45%;
-    float: left;
-    padding: 45px;
-    background-color: blanchedalmond;
-    border-radius: 50px;
-}
+
 .float-child-right {
     width: 45%;
     float: left;
-    background-color: blanchedalmond;
     border-radius: 50px;
-    margin-bottom: 100px;
-    margin-left: 2vw;
+    margin-left: 0vw;
     background: transparent;    
 }
 
 .btn-update{
     border-radius: 30px;
-    margin-top: 2.2vh;
+    margin-top: 1.2vh;
     background-color: #DADADA;
     
 }

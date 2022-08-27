@@ -138,7 +138,7 @@ const ProfilePage: React.FC = () => {
           </Sider>
 
           <Content style={{ padding: '0 0px', minHeight: 280}}>
-              <h2 className='text'>Profilim Hos Geldiniz XXX</h2>
+              <h2 className='text'>Hesap Detaylarınız</h2>
               <div className='form-container'>
               <Descriptions
                 style={{padding:"1vh", width:"31vw"}}

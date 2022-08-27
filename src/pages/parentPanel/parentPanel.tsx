@@ -11,8 +11,7 @@ import "./parentPanel.css";
 import logo from '../../assets/img/logo.png';
 import ethLogo from '../../assets/img/eth_logo.png';
 import backgroundImg from '../../assets/img/q.png';
-import { addSyntheticLeadingComment } from 'typescript';
-import ProfilePage from '../profile/profile';
+
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -75,7 +74,7 @@ const ParentPanel = () => {
     {
       key: '1',
       sender: 'Mike',
-      coin: <img src={ethLogo} alt="Logo" width="30px" height="30px"></img>,
+      coin: <img src={ethLogo} alt="Logo" width="30px" height="30px" style={{borderRadius:"20px"}}></img>,
       receiver: '0xABCDEF',
       amount: '2.1',
       date:'12.08.2022',
@@ -86,7 +85,7 @@ const ParentPanel = () => {
     {
       key: '2',
       sender: 'John',
-      coin: <img src={ethLogo} alt="Logo" width="30px" height="30px"></img>,
+      coin: <img src={ethLogo} alt="Logo" width="30px" height="30px" style={{borderRadius:"20px"}}></img>,
       receiver: '0xABCDEF',
       amount: '2.1',
       date:'12.08.2022',
@@ -97,7 +96,7 @@ const ParentPanel = () => {
     {
       key: '3',
       sender: 'Kevin',
-      coin: <img src={ethLogo} alt="Logo" width="30px" height="30px"></img>,
+      coin: <img src={ethLogo} alt="Logo" width="30px" height="30px" style={{borderRadius:"20px"}}></img>,
       receiver: '0xABCDEF',
       amount: '2.1',
       date:'12.08.2022',
@@ -108,7 +107,7 @@ const ParentPanel = () => {
     {
       key: '4',
       sender: 'Atilla',
-      coin: <img src={ethLogo} alt="Logo" width="30px" height="30px"></img>,
+      coin: <img src={ethLogo} alt="Logo" width="30px" height="30px" style={{borderRadius:"20px"}}></img>,
       receiver: '0xABCDEF',
       amount: '2.1',
       date:'12.08.2022',
@@ -119,7 +118,7 @@ const ParentPanel = () => {
     {
       key: '4',
       sender: 'Osayi',
-      coin: <img src={ethLogo} alt="Logo" width="30px" height="30px"></img>,
+      coin: <img src={ethLogo} alt="Logo" width="30px" height="30px" style={{borderRadius:"20px"}}></img>,
       receiver: '0xABCDEF',
       amount: '2.1',
       date:'15.08.2022',
@@ -264,21 +263,20 @@ const handleMenuClick: MenuProps['onClick'] = e => {
                   </Menu>
           
                 </Sider>
-                <Table 
+                <Table
+                  rowClassName={'table-row-light'}
                   dataSource={dataSource} 
                   columns={columns} 
-                  className="table" 
-                  rowClassName="table-row" 
                   bordered
                   pagination={{ pageSize: 3 }}
-                  style={{background:"#2A2E30",position:'absolute',top:'83vh',left:'31.5vw'}}/>
+                  style={{position:'absolute',top:'83vh',left:'31.5vw'}}/>
                 <Footer style={{ textAlign: 'center', background:"#2A2E30", color:"white", position:"absolute", bottom:0, width:"100%",top:'145vh'}} className="site-layout-background">BLOXIFY ©2022 Created by Team Unity</Footer>
               </div>
             </Content>
           </Layout>
         </Content>
-      </Layout>/*
-      */
+      </Layout>
+      
   
     );
 };

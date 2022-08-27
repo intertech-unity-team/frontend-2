@@ -25,24 +25,26 @@
 }
 
 .table-col{
-  background: rgba(255, 235, 183, 0.8);
+  background: rgba(52, 49, 42, 0.8);
 }
 
-.table-row{
-  
+.table-row-light {
+  background-color: #ffffff !important;
 }
+.table-row-dark {
+  background-color: #fbfbfb;
+}
+
+.ant-table .ant-table-container .ant-table-content table thead.ant-table-thead .ant-table-cell {
+   background-color: rgb(154, 177, 154); 
+  }
+
 
 .send-money-container{
   padding-left: 50%;
   padding-right: 10%;
 }
 
-.send-money{
-  background: rgba(255, 235, 183, 0.8);
-  margin-top: -12vh;
-  height: 20vh;
-  border-radius: 40px;
-}
 
 .centering{
   display: flex;

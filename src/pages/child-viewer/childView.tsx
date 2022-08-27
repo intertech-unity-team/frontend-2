@@ -3,7 +3,7 @@ import './style.css';
 import { Button, DatePicker, Form, Input, Layout, Menu, MenuProps, Avatar, Card } from 'antd';
 import backgroundImg from '../../assets/img/lol.png';
 import logo from '../../assets/img/logo.png'
-import { TeamOutlined , UserOutlined, SolutionOutlined, WarningFilled, EditFilled } from '@ant-design/icons';
+import { TeamOutlined , UserOutlined, SolutionOutlined, WarningFilled, EditFilled, EditOutlined, EditTwoTone } from '@ant-design/icons';
 import { PATENT_ADDRESS, PATENT_ABI } from "../../constants/MyProject";
 import { ethers } from 'ethers';
 import { useNavigate } from "react-router-dom";
@@ -125,7 +125,7 @@ const ChildViewerPage: React.FC = () => {
       avatarArray.push(
         <Card style={{textAlign:"center", backgroundColor:"transparent", borderColor:"transparent"}}
         onClick={()=>AvatarCardOnClickHandler(childArr)}>
-          <EditFilled style={{color:"rgb(178, 208, 209)", fontSize:"20px"}}></EditFilled>
+          <EditOutlined style={{color:"rgb(178, 208, 209)", fontSize:"20px", marginLeft:"75%"}} />
           <br/>
           <Avatar size={avatarSize} style={{marginBottom:"10%"}} icon={<UserOutlined /> } />
           <br/>
@@ -168,7 +168,7 @@ const ChildViewerPage: React.FC = () => {
             </Menu>
         </Sider>
 
-        <Content style={{ padding: '0 50px 0', minHeight: 280, overflow: 'hidden'}}>
+        <Content style={{ minHeight: 280, overflow: 'hidden'}}>
                       
           <div className="float-container">
 
@@ -176,7 +176,6 @@ const ChildViewerPage: React.FC = () => {
                   <h1 style={{textAlign:"center", fontSize:"28px", overflow: 'hidden' , color:'#DADADA'}}>Çocuklarım</h1>
                   
               </div>
-
               <Button className="btn" onClick={getChildAddPage} shape="round">Cocuk Ekle +</Button>
           </div>
           <div className="mid-container" style={{display:"flex",justifyContent:"space-around", width:"50%"}}>
