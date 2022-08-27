@@ -1,21 +1,25 @@
 import React from 'react';
-import { UserOutlined, MenuFoldOutlined } from '@ant-design/icons';
-import type { MenuProps } from 'antd';
-import { Layout, Menu } from 'antd';
-import { Button, Input, InputNumber } from "antd";
-
+import { MenuFoldOutlined, UserOutlined, TeamOutlined, SendOutlined, CloseCircleOutlined, SolutionOutlined } from '@ant-design/icons';
+import { Form, MenuProps } from 'antd';
+import { Breadcrumb, Layout, Menu } from 'antd';
+import { Button } from "antd";
+import { AlignType } from 'rc-table/lib/interface';
+import { Input, InputNumber } from 'antd/lib';
 
 // !!!
 import "antd/dist/antd.css";
 import "./child.css";
+import metamaskGif from '../../assets/images/metamask.gif';
 import logo from '../../assets/img/logo.png';
-import backgroundImg from '../../assets/img/mf.png';
-
-
+import ethLogo from '../../assets/img/eth_logo.png';
+import backgroundImg from '../../assets/img/mny.png';
+import { addSyntheticLeadingComment } from 'typescript';
+import ProfilePage from '../profile/profile';
+import FormItem from 'antd/es/form/FormItem';
 
 const { Header, Content, Footer, Sider } = Layout;
 
-
+let screenWidth = window.screen.width;
 type MenuItem = Required<MenuProps>['items'][number];
 
 
@@ -43,64 +47,59 @@ const items: MenuItem[] = [
       Profil
     </a>
     , '1', <UserOutlined />), 
+    
+  
 ];
 
 
-const ChildPage = () => {
+const ParentWithdrawPage = () => {
+
 
     return (
-    <Layout className='layout' style={{backgroundImage:`url(${backgroundImg})`}}>
-      <Content style={{ padding: '0 0px' }}>
-        <Layout style={{ padding: '0px 0', backgroundImage:`url(${backgroundImg})`}}>
-          <Sider style={{background:"#2A2E30"}} width={200}>
-          <img src={logo} alt="Logo" width="100%" height="200px"></img>
-            <Menu
-              defaultSelectedKeys={['']}
-              defaultOpenKeys={['']}
-              style={{background:"#2A2E30", height:"71.2vh", width:"100.5%", color:"white"}}
-              items={items}>
+      <Layout className='layout' style={{backgroundImage:`url(${backgroundImg})`, backgroundPosition: 'center',backgroundSize: 'cover',backgroundRepeat: 'no-repeat',height: '100%', overflow: 'hidden', position: 'fixed'}}>
+        <Content style={{ padding: '0 0px' , overflow: 'hidden'}}>
+          <Layout className="site-layout-background" style={{ padding: '0px 0', backgroundImage:`url(${backgroundImg})` , backgroundPosition: 'center',backgroundSize: 'cover',backgroundRepeat: 'no-repeat',height: '100%', overflow: 'hidden'}}>
+            <Sider style={{background:"#2A2E30"}} width={200}>
+              <img src={logo} alt="Logo" width="150%" height="25%"></img>
+              <Menu
+                defaultSelectedKeys={['']}
+                defaultOpenKeys={['']}
+                style={{background:"#2A2E30", height:"71.2vh", width:"100.5%", color:"white"}}
+                items={items}>
               </Menu>
-          </Sider>
-          <Content style={{ padding: '0 0px', minHeight: 280}}>
-            <div className='send-money-container'>
-                  <div>
-                    <b className='centering'><i>Havuzdaki Para</i></b>
-                  </div>
-                  <div className='send-money'>
-                    <div className='toplam-para-text'>
-                      <b>TOPLAM PARA</b>
-                    </div>
-                    
-                    <div className='toplam-para-input'>
-                      <InputNumber className='toplam-para' placeholder='Toplam Para' size='middle' />
-                    </div>
+            </Sider>
 
-                    <div className='input-text'>
-                      <b>Çekmek İstenilen Miktar</b>
-                    </div>
+        <Content style={{ padding: '0 50px 0', minHeight: 280, overflow: 'hidden'}}>                      
 
-                    <div className='input'>
-                      <InputNumber className='para-girisi' placeholder="Çekmek İstenilen Miktar" size='middle'/>
-                    </div>
-                    <br/>
-                    <br/>
-                    <div className='para-cek-butonu'>
-                      <Button type="primary" className='center-the-button' shape="round" size="large">
-                        Para Çek 
-                      </Button>
-                    </div>
-                  </div>
-              <br/>
-            </div>
-              
+          <div className='text-container'>
+            <h1 style={{fontSize: '36px'}} className='text-main'>
+              Kripto Varlık Çek
+            </h1>
+          </div>
+
+          <div className='input-container'>
+            <Form layout='vertical' className='input-xdlmao'>
+              <Form.Item style={{marginTop: '5vh'}} label="Çekilebilen Tutar">
+                <InputNumber type={'number'} min={0} max={10} className='ilk-input' placeholder="Bakiye" size='middle' style={{width: '31%'}} ></InputNumber>
+              </Form.Item>
+              <Form.Item style={{marginTop: '8vh'}} label="Çekilecek Tutar">
+                <InputNumber type={'number'} min={0} max={10} className='ilk-input' placeholder="Tutar Giriniz" size='middle' style={{width: '31%'}}></InputNumber>
+              </Form.Item>
+            </Form>
+          </div>
+          <div className='btn-div'>
+            <Button className='btn' type='default' shape='round'>Para Çek</Button>
+          </div>
+        </Content>
+
+      </Layout>
           </Content>
 
-        </Layout>
-      </Content>
-    <Footer style={{ textAlign: 'center', background:"#2A2E30", color:"white", position:"absolute", bottom:0, width:"100%"}} className="site-layout-background">AppName ©2022 Created by Team Unity</Footer>
-  </Layout>
+          <Footer style={{ textAlign: 'center', background:"#2A2E30", color:"white", position:"absolute", bottom:0, width:"100%"}} className="site-layout-background">BLOXIFY ©2022 Created by Team Unity</Footer>
+
+      </Layout>
   
     );
 };
 
-export default ChildPage;
+export default ParentWithdrawPage;
