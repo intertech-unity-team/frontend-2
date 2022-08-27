@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { LinkOutlined, UserOutlined, TeamOutlined, SendOutlined, CloseCircleOutlined, SolutionOutlined, RollbackOutlined, DownOutlined } from '@ant-design/icons';
-import { Dropdown, Form, Input, MenuProps, Slider, Space } from 'antd';
+import { Dropdown, Form, Input, InputNumber, MenuProps, Slider, Space } from 'antd';
 import { Breadcrumb, Layout, Menu } from 'antd';
 import { Table, Card, Button } from "antd";
 import { AlignType } from 'rc-table/lib/interface';
@@ -11,9 +11,13 @@ import "./parentPanel.css";
 import logo from '../../assets/img/logo.png';
 import ethLogo from '../../assets/img/eth_logo.png';
 import backgroundImg from '../../assets/img/q.png';
+import { PATENT_ABI, PATENT_ADDRESS } from '../../constants/MyProject';
+
+import { ethers } from 'ethers'; 
+import { ItemType } from 'antd/lib/menu/hooks/useItems';
 
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Footer, Sider } = Layout;
 
 
 type MenuItem = Required<MenuProps>['items'][number];
@@ -66,9 +70,42 @@ const items: MenuItem[] = [
 ];
 
 
-const ParentPanel = () => {
+async function getParentInfo() {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const signer = provider.getSigner();
+  const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
+
+  // Parent hesabını seçip sonra aşağıyı çalıştırın
+
+  const getP = await contract.getParent();
+  return getP;
+}
+
+async function sendButtonHandler (updateChildWalletID:string, sendMoneyAmount:number) {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const signer = provider.getSigner();
+  const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
+
+  const sendMoney = await contract.deposit_to_Child(updateChildWalletID , { value: ethers.utils.parseEther(sendMoneyAmount.toString())});
+  console.log(updateChildWalletID);
+  console.log(sendMoney);
 
   
+
+};
+
+const ParentPanel = () => {
+
+  const [updateChildNameInput, setUpdateChildNameInput] = useState("");
+  const [updateChildSurnameInput, setUpdateChildSurnameInput] = useState("");
+  const [updateChildWalletID, setUpdateChildWalletID] = useState("");
+
+  const [childrenObjectsArray, setChildrenObjectsArray] = useState([]);
+  const [childrenNamesArray, setChildrenNamesArray] = useState<string[]>([]);
+
+  const [sendMoneyAmount, setSendAmount] = useState(0);
+
+
 
   const dataSource = [
     {
@@ -191,33 +228,77 @@ let childrenArray = ["Çocuk 1 Ali", "Çocuk 2 Mahmut", "Çocuk 3 Hüseyin"];
 // Dropdown menü ayarları
 const handleMenuClick: MenuProps['onClick'] = e => {
     childKey = parseInt(e.key);
-    setChildName(childrenArray[childKey]);
+    setChildName(childrenNamesArray[childKey]);
+
+    setUpdateChildNameInput(childrenObjectsArray[childKey][0]);
+    setUpdateChildSurnameInput(childrenObjectsArray[childKey][1]);
+    setUpdateChildWalletID(childrenObjectsArray[childKey][2]);
   };
+
+  function itemCreator(){
+    let itemsArray: Array<ItemType>;
+    itemsArray = [];
+    let counter = 0;
+    childrenNamesArray.forEach(element => {
+
+      itemsArray.push(
+        {
+          label: element,
+          key: counter.toString(),
+          icon: <UserOutlined />,
+        }
+      );
+      counter++;
+    });
+    return itemsArray;
+  }
 
   // Dropdown menü itemleri
   const menu = (
-    <Menu
-      onClick={handleMenuClick}
-      items={[
-        {
-          label: childrenArray[0],
-          key: '0',
-          icon: <UserOutlined />,
-        },
-        {
-          label: childrenArray[1],
-          key: '1',
-          icon: <UserOutlined />,
-        },
-        {
-          label: childrenArray[2],
-          key: '2',
-          icon: <UserOutlined />,
-        },
-      ]}
-    />
-  );
+      <Menu
+        onClick={handleMenuClick}
+        items={itemCreator()}
+      />
+    );
 
+  // OnHover, childrenları çek
+  async function childMenuUpdater(){
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
+
+
+  let parentInfoPromise = getParentInfo().then(
+    async function(result){
+      console.log(result);
+
+      const getChildren = await contract.get_Children_Of_Parent(result[2]);
+      // getChild is an array which includes the children of the current parent
+      console.log(getChildren);
+
+      let childrenArray: string[] = [];
+
+      // add all children to array and display it
+      getChildren.forEach((childArr: never[]) => {
+        let childName = childArr[0] + " " + childArr[1];
+
+        childrenArray.push(childName);
+      });
+      console.log(childrenArray);
+      setChildrenNamesArray(childrenArray);
+      setChildrenObjectsArray(getChildren);
+      
+    }
+  );
+}
+
+
+    const handleSendMoneyInput = (value: number) => {
+      console.log('changed', value);
+      setSendAmount(value);
+    };
+
+    
     return (
       <Layout>
         <Content>
@@ -229,23 +310,25 @@ const handleMenuClick: MenuProps['onClick'] = e => {
                 <h2 style={{position:'absolute',top:'30vh',left:'48vw',color:'#fff',fontSize:'18px'}}>Çocuk Seç</h2>
                 <Form layout='vertical' className='input-xdlmao'>
                   <Form.Item style={{position:'absolute',top:'37vh',left:'48vw',width:'40%'}} label="Çocuk Adı">
-                    <Input className='ilk-input' placeholder="Çocuk Adı" size='middle' style={{width: '31%'}} ></Input>
+                    <Input className='ilk-input' placeholder="Çocuk Adı" size='middle' style={{width: '31%'}} value={updateChildNameInput + " " + updateChildSurnameInput} disabled ></Input>
                   </Form.Item>
                   <Form.Item style={{position:'absolute',top:'48vh',left:'48vw',width:'40%'}} label="Çocuk Wallet ID">
-                    <Input className='ilk-input' placeholder="Wallet ID Giriniz" size='middle' style={{width: '31%'}}></Input>
+                    <Input className='ilk-input' size='middle' style={{width: '31%'}}  value={updateChildWalletID} disabled></Input>
                   </Form.Item>
                   <h2 style={{position:'absolute',top:'61vh',left:'48vw',color:'#fff',fontSize:'18px'}}>
                     Gönderilecek Tutar
                   </h2>
                   <Form.Item style={{position:'absolute',top:'67vh',left:'48vw',width:'40%'}}>
-                    <Input className='ilk-input' placeholder="Miktar..." size='middle' style={{width: '31%'}}></Input>
+                  <InputNumber className='ilk-input' size='middle' placeholder="Miktar..." min={0} defaultValue={0} onChange={handleSendMoneyInput} style={{width: '31%'}} />;
                   </Form.Item>
                 </Form>
-                <Button type='default' shape='round' style={{borderColor:'#fff',background:'transparent',color:'#fff',position:'absolute',top:'73vh',left:'49.2vw',width:'10vw'}}>GÖNDER</Button>
+                <Button type='default' shape='round' onClick={() => sendButtonHandler(updateChildWalletID, sendMoneyAmount)} style={{borderColor:'#fff',background:'transparent',color:'#fff',position:'absolute',top:'73vh',left:'49.2vw',width:'10vw'}}>GÖNDER</Button>
                 
                 <div style={{position:'absolute',top:'30vh',left:'54vw',backgroundColor:'#fff'}}>
                   <Dropdown overlay={menu}>
-                        <Button>
+                        <Button
+                        onMouseOver={childMenuUpdater}
+                        >
                             <Space>
                             {childName}
                             <DownOutlined />

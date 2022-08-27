@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { UserOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Layout, Menu } from 'antd';
@@ -10,8 +10,9 @@ import "antd/dist/antd.css";
 import "./child.css";
 import logo from '../../assets/img/logo.png';
 import backgroundImg from '../../assets/img/mf.png';
+import { PATENT_ABI, PATENT_ADDRESS } from '../../constants/MyProject';
 
-
+import { ethers } from 'ethers';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -46,7 +47,65 @@ const items: MenuItem[] = [
 ];
 
 
+async function getChildInfo() {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const signer = provider.getSigner();
+  const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
+
+  // Parent hesabını seçip sonra aşağıyı çalıştırın
+
+  const getC = await contract.getChild();
+  return getC;
+}
+
+async function withdrawMoneyHandler(formAmount:number){
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const signer = provider.getSigner();
+  const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
+
+  const getC = await contract.getChild();
+
+  let walletID = getC[2];
+  let releaseTime = parseInt(getC[3]);
+  let walletBalance = parseInt(getC[4]);
+
+  
+  console.log(walletID, releaseTime, walletBalance);
+  console.log(formAmount);
+
+  const childWithdraw = await contract.child_Withdraws_Money(walletID, formAmount, releaseTime)
+  console.log(childWithdraw);
+
+  console.log(getC[4]);
+
+}
+
 const ChildPage = () => {
+
+  const [cName, setCName] = useState('');
+  const [cSurname, setCSurname] = useState('');
+  const [cWalletID, setCWalletID] = useState('');
+  const [cWalletAmount, setCWalletAmount] = useState('');
+
+  const [cWithdrawAmount, setWithdrawAmount] = useState(0);
+
+  let childInfoPromise = getChildInfo().then(
+    function(result){
+      setCName(result[0]);
+      setCSurname(result[1]);
+      setCWalletID(result[2]);
+      
+      let intVersion = 0;
+      intVersion = parseInt(result[4]);
+      intVersion /= 10**18;
+      setCWalletAmount(intVersion.toString());
+    }
+  );
+
+  const handleWithdrawMoneyInput = (value: number) => {
+    console.log('changed', value);
+    setWithdrawAmount(value);
+  };
 
     return (
     <Layout className='layout' style={{backgroundImage:`url(${backgroundImg})`}}>
@@ -72,7 +131,7 @@ const ChildPage = () => {
                     </div>
                     
                     <div className='toplam-para-input'>
-                      <InputNumber className='toplam-para' placeholder='Toplam Para' size='middle' />
+                      <InputNumber className='toplam-para' placeholder='Toplam Para' size='middle' disabled value={cWalletAmount} />
                     </div>
 
                     <div className='input-text'>
@@ -80,12 +139,12 @@ const ChildPage = () => {
                     </div>
 
                     <div className='input'>
-                      <InputNumber className='para-girisi' placeholder="Çekmek İstenilen Miktar" size='middle'/>
+                      <InputNumber className='para-girisi' placeholder="Çekmek İstenilen Miktar" size='middle' min={0} defaultValue={0} onChange={handleWithdrawMoneyInput}/>
                     </div>
                     <br/>
                     <br/>
                     <div className='para-cek-butonu'>
-                      <Button type="primary" className='center-the-button' shape="round" size="large">
+                      <Button type="primary" className='center-the-button' shape="round" size="large" onClick={() => withdrawMoneyHandler(cWithdrawAmount)}>
                         Para Çek 
                       </Button>
                     </div>
