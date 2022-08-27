@@ -1,81 +1,47 @@
-#components-layout-demo-top-side-2 .logo {
-  float: left;
-  width: 120px;
-  height: 31px;
-  margin: 16px 24px 16px 0;
-  background: rgba(255, 255, 255, 0);
-}
-
-.ant-row-rtl #components-layout-demo-top-side-2 .logo {
-float: right;
-margin: 16px 0 16px 24px;
-}
-
-.site-layout-background {
-background:rgba(214, 214, 210, 1);
-}
-
-.layout {
-height:100vh;
-width: 100vw;
-}
-
-
-
-.send-money-container{
-padding-left: 50%;
-padding-right: 10%;
-padding-top: 10%;
-}
-
-.send-money{
-background: rgba(255, 235, 183, 0.8);
-}
-
-.centering{
-  font-size: 18px;
-  display: flex;
+.text-container {
+  margin: auto;
+  text-align: center;
   align-items: center;
-  justify-content: center
-}
-
-
-
-.center-the-button {
+  margin-top: 8.2vh;
+  margin-left: 3.8vw;
   
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
 }
-
-.toplam-para-text {
+/*
+.input-container {
   text-align: center;
-  padding-top: 3vh;
-
+  align-items: center;
+  margin: auto;
+  margin-top: 12vh;
+  margin-left: 3.8vw;
+}
+*/
+.input-xdlmao {
+  width: 75%;
+  margin-top: 16vh;
+  margin-left: 33vw;
 }
 
-.input-text {
+
+.btn-div {
   text-align: center;
-  padding-top: 3vh;
+  margin-right: 3.7vw;
+  margin-top: -12vh;
 }
 
-
-.input {
-  padding-top: 3vh;
-  text-align: center;
+.btn {
+  background: transparent;
+  border-color: #fff;
+  color: #fff;
 }
 
-.para-girisi {
-  
-  width: 350px;
+.text-main {
+  color: #fff;
 }
 
-.toplam-para-input {
-  text-align: center;
-  padding-top: 3vh;
+[title="Çekilebilen Tutar"] {
+  color: #DADADA !important;
 }
 
-.toplam-para {
-  width: 350px;
+[title="Çekilecek Tutar"] {
+  color: #DADADA !important;
 }
