@@ -90,7 +90,7 @@ async function sendButtonHandler (updateChildWalletID:string, sendMoneyAmount:nu
   console.log(updateChildWalletID);
   console.log(sendMoney);
 
-  
+
 
 };
 
@@ -221,9 +221,7 @@ const ParentPanel = () => {
   ];
 
 let childKey = 0;
-const [childName, setChildName] = useState("");
-// Çocuk isimleri burada
-let childrenArray = ["Çocuk 1 Ali", "Çocuk 2 Mahmut", "Çocuk 3 Hüseyin"];
+const [childName, setChildName] = useState("");;
 
 // Dropdown menü ayarları
 const handleMenuClick: MenuProps['onClick'] = e => {
@@ -240,14 +238,17 @@ const handleMenuClick: MenuProps['onClick'] = e => {
     itemsArray = [];
     let counter = 0;
     childrenNamesArray.forEach(element => {
+      if(childrenObjectsArray[counter][2] != "0x0000000000000000000000000000000000000000"){
+        itemsArray.push(
+          {
+            label: element,
+            key: counter.toString(),
+            icon: <UserOutlined />,
+          }
+        );
+      }
 
-      itemsArray.push(
-        {
-          label: element,
-          key: counter.toString(),
-          icon: <UserOutlined />,
-        }
-      );
+      
       counter++;
     });
     return itemsArray;
