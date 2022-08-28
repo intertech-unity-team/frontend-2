@@ -221,7 +221,7 @@ const ParentPanel = () => {
   ];
 
 let childKey = 0;
-const [childName, setChildName] = useState("");;
+const [childName, setChildName] = useState("");
 
 // Dropdown menü ayarları
 const handleMenuClick: MenuProps['onClick'] = e => {
@@ -272,6 +272,8 @@ const handleMenuClick: MenuProps['onClick'] = e => {
   let parentInfoPromise = getParentInfo().then(
     async function(result){
       console.log(result);
+      
+
 
       const getChildren = await contract.get_Children_Of_Parent(result[2]);
       // getChild is an array which includes the children of the current parent

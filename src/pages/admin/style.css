@@ -1,20 +1,19 @@
 
-.header {
-    display: flex;
-}
-
-
-
-
-
-.arayuz {
-    padding-top: 100px;
-}
-
-
-.header-text{
-    margin-top: 7px;
-    margin: auto;
+.main-text {
+    font-size: 42px;
+    color: #fff;
+    padding-top: 2vh;
+    padding-left: 1vw;
     text-align: center;
 }
 
+.arayuz-div {
+    text-align: center;
+    padding-left: 16vw;
+    padding-top: 10vh;
+}
+
+.arayuz {
+    
+    width: 80%;
+}

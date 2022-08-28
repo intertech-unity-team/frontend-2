@@ -98,7 +98,7 @@ const ParentWithdrawPage = () => {
           <div className='input-container'>
             <Form layout='vertical' className='input-xdlmao'>
               <Form.Item style={{marginTop: '5vh'}} label="Çekilebilen Tutar">
-                <InputNumber type={'number'} min={0} max={10} className='ilk-input' placeholder="Bakiye" size='middle' style={{width: '31%'}} ></InputNumber>
+                <InputNumber disabled type={'number'} min={0} max={10} className='ilk-input' placeholder="Bakiye" size='middle' style={{width: '31%'}} ></InputNumber>
               </Form.Item>
               <Form.Item style={{marginTop: '8vh'}} label="Çekilecek Tutar">
                 <InputNumber type={'number'} min={0} max={10} className='ilk-input' placeholder="Tutar Giriniz" size='middle' style={{width: '31%'}}></InputNumber>
