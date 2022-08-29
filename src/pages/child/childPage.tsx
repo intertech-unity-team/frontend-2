@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { UserOutlined, MenuFoldOutlined, CheckOutlined, WarningOutlined  } from '@ant-design/icons';
+import { UserOutlined, MenuFoldOutlined, CheckOutlined, WarningOutlined, HomeOutlined } from '@ant-design/icons';
 import { Form, MenuProps, notification, Space } from 'antd';
 import { Layout, Menu } from 'antd';
 import { Button, Input, InputNumber } from "antd";
@@ -39,6 +39,10 @@ function getItem(
 
 const items: MenuItem[] = [
   getItem(
+    <a href="/" rel="noopener noreferrer" style={{color:"white"}}>
+    Anasayfa
+    </a>, '0', <HomeOutlined />),
+  getItem(
     <a href="/child" rel="noopener noreferrer" style={{color:"white"}}>
     İşlemler
     </a>, '2', <MenuFoldOutlined />),
@@ -62,6 +66,10 @@ async function getChildInfo() {
 }
 
 async function withdrawMoneyHandler(formAmount:number){
+  if(formAmount <= 0){
+    return false;
+  }
+
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
   const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
@@ -178,7 +186,9 @@ const ChildPage = () => {
                         </Form.Item>
                         <br />
                         <br />
-                        <Form.Item label="Çekmek İstenilen Miktar">
+                        <Form.Item label="Çekmek İstenilen Miktar"
+                        name="amount"
+                        rules={[{ required: true, message: 'Lütfen Çekmek İstediğiniz Miktarı Giriniz!' }]}>
                             <InputNumber min={0} defaultValue={0} max={parseFloat(cWalletAmount)} step={0.1} onChange={handleWithdrawMoneyInput} style={{width:'140%'}} placeholder="Miktar Giriniz" 
                                   />
                         </Form.Item>
@@ -187,7 +197,8 @@ const ChildPage = () => {
                         <Context.Provider value={{ name: 'Ant Design' }}>
                           {contextHolder}
                           <Space>
-                            <Button shape='round' style={{marginTop:'2vh',borderColor:'#fff',marginLeft:'5vw', background:'transparent', color:'#fff'}}  onClick={
+                            <Button 
+                            shape='round' style={{marginTop:'2vh',borderColor:'#fff',marginLeft:'5vw', background:'transparent', color:'#fff'}}  onClick={
                               async () => {if(!await withdrawMoneyHandler(cWithdrawAmount)){
                                 openNotification('topRight', false);
                               }
@@ -195,7 +206,9 @@ const ChildPage = () => {
                                 openNotification('topRight', true);
                               }
                             }
-                            }>Çek
+                            }
+                            htmlType='submit'
+                            >Çek
                             </Button>
                         </Space>
                       </Context.Provider>

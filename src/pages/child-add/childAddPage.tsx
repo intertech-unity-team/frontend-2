@@ -1,5 +1,5 @@
 import React from 'react';
-import { TeamOutlined , UserOutlined, SolutionOutlined, WarningOutlined, CheckOutlined } from '@ant-design/icons';
+import { TeamOutlined , UserOutlined, SolutionOutlined, WarningOutlined, CheckOutlined, HomeOutlined } from '@ant-design/icons';
 import { DatePicker, MenuProps } from 'antd';
 import {  Layout, Menu } from 'antd';
 import { Form, Input, Button, Dropdown, Space } from "antd";
@@ -22,9 +22,6 @@ const { Content, Footer, Sider } = Layout;
 
 type MenuItem = Required<MenuProps>['items'][number];
 
-// Çocuk isimleri burada
-
-
 
 async function handleAddChildBtn(childName:string, childSurname:string, childWalletID:string, childBDay:string){
   // Find timestamp
@@ -36,8 +33,6 @@ async function handleAddChildBtn(childName:string, childSurname:string, childWal
   const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
 
   
-  // Hangi parenta ekleyeceksen onu seçip sonra burayı çalıştır
-
   try{
     const addChild = await contract.addChild(childName, childSurname, childWalletID, timestamp, "", 0);
     console.log(addChild);
@@ -68,6 +63,11 @@ function getItem(
 
 const items: MenuItem[] = [
   getItem(
+    <a href="/" rel="noopener noreferrer" style={{color:"white"}}>
+      Anasayfa
+    </a>
+    , '0', <HomeOutlined />),
+  getItem(
     <a href="/profile" rel="noopener noreferrer" style={{color:"white"}}>
       Profil
     </a>
@@ -85,10 +85,6 @@ const items: MenuItem[] = [
       <a href="/parent" rel="noopener noreferrer">
       Kripto Varlık Gönder
       </a>, '3'),
-    getItem(
-      <a href="/parent" rel="noopener noreferrer">
-      Gönderim İptali
-      </a>, '4'),
     getItem(
       <a href="/parent-withdraw" rel="noopener noreferrer">
       Para Çek
@@ -140,7 +136,6 @@ const ParentPanelChildPage: React.FC = () => {
     }
       
 
-
     return (
     <Layout className='layout' style={{backgroundImage:`url(${backgroundImg})`, backgroundPosition: 'center',
     backgroundSize: 'cover',
@@ -148,9 +143,9 @@ const ParentPanelChildPage: React.FC = () => {
     height: '100%', overflow: 'hidden', position: 'fixed'}}>
       <Content style={{ padding: '0 0px' , overflow: 'hidden'}}>
         <Layout className="site-layout-background" style={{ padding: '0px 0', backgroundImage:`url(${backgroundImg})` , backgroundPosition: 'center',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    height: '100%', overflow: 'hidden'}}>
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        height: '100%', overflow: 'hidden'}}>
           <Sider style={{background:"#2A2E30"}} width={200}>
           <img src={logo} alt="Logo" width="150%" height="25%"></img>
             <Menu
@@ -168,23 +163,33 @@ const ParentPanelChildPage: React.FC = () => {
               <div className='float-child-right' style={{minWidth: screenWidth / 7, overflow: 'hidden'}}>
                 <h1 style={{textAlign:"center", fontSize:"28px", overflow: 'hidden', paddingBottom: '7vh', color:'#DADADA'}}>Yeni Çocuk Ekle</h1>
                   <Form layout='vertical' >
-                  <Form.Item label="Çocuk İsmi">
+                  <Form.Item label="Çocuk İsmi"
+                  name="username"
+                  rules={[{ required: true, message: 'Lütfen Çocuğun İsmini Giriniz!' }]}>
                       <Input placeholder="İsim giriniz" onChange={e => setAddChildNameInput(e.target.value)}/>
                       </Form.Item>
-                      <Form.Item label="Çocuk Soyadı" >
+                      <Form.Item label="Çocuk Soyadı" 
+                      name="surname"
+                      rules={[{ required: true, message: 'Lütfen Çocuğun Soyadını Giriniz!' }]}>
                       <Input placeholder="Soyad giriniz" onChange={e => setAddChildSurnameInput(e.target.value)}/>
                     </Form.Item>
-                      <Form.Item label="Çocuğun Wallet ID'si">
-                          <Input placeholder="Wallet ID giriniz" onChange={e => setAddChildWalletID(e.target.value)}/>
+                      <Form.Item label="Çocuğun Metamask Cüzdan Adresi"
+                      name="address"
+                      rules={[{ required: true, message: 'Lütfen Çocuğun Metamask Cüzdan Adresini Giriniz!' }]}
+                      >
+                          <Input placeholder="Cüzdan Adresi giriniz" onChange={e => setAddChildWalletID(e.target.value)}/>
                       </Form.Item>
-                      <Form.Item label="Çocuğun Doğum Tarihi">
-                        <DatePicker format={'DD/MM/YYYY'} onChange={(_, dateString) => setCreateChildBDay(dateString)} placeholder="Tarih Seçiniz" style={{width:"100%"}}/>
+                      <Form.Item label="Çocuğun Doğum Tarihi"
+                      name="bDay"
+                      rules={[{ required: true, message: 'Lütfen Çocuğun Doğum Tarihini Seçiniz!' }]}>
+                        <DatePicker format={'DD/MM/YYYY'} onChange={(_, dateString) => setCreateChildBDay(dateString)} placeholder="Tarih Seçiniz" style={{width:"50%"}}/>
                       </Form.Item>
                       <div style={{textAlign:"center"}}>
                       <Context.Provider value={{ name: 'Ant Design' }}>
                         {contextHolder}
                         <Space>
                         <Button type="default"
+                        htmlType='submit'
                         className='btn-update'
                         onClick={async () => {if(!await handleAddChildBtn(addChildNameInput, addChildSurnameInput, addChildWalletID, createChildBDay)){
                                                 openNotification('topRight', false);

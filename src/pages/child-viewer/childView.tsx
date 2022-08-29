@@ -3,7 +3,7 @@ import './style.css';
 import { Button, DatePicker, Form, Input, Layout, Menu, MenuProps, Avatar, Card } from 'antd';
 import backgroundImg from '../../assets/img/lol.png';
 import logo from '../../assets/img/logo.png'
-import { TeamOutlined , UserOutlined, SolutionOutlined, WarningFilled, EditFilled, EditOutlined, EditTwoTone } from '@ant-design/icons';
+import { TeamOutlined , UserOutlined, SolutionOutlined, WarningFilled, HomeOutlined, EditOutlined } from '@ant-design/icons';
 import { PATENT_ADDRESS, PATENT_ABI } from "../../constants/MyProject";
 import { ethers } from 'ethers';
 import { useNavigate } from "react-router-dom";
@@ -33,6 +33,11 @@ function getItem(
 
 const items: MenuItem[] = [
     getItem(
+    <a href="/" rel="noopener noreferrer" style={{color:"white"}}>
+      Anasayfa
+    </a>
+    , '0', <HomeOutlined />),
+    getItem(
       <a href="/profile" rel="noopener noreferrer" style={{color:"white"}}>
         Profil
       </a>
@@ -50,10 +55,6 @@ const items: MenuItem[] = [
         <a href="/parent" rel="noopener noreferrer">
         Kripto Varlık Gönder
         </a>, '3'),
-      getItem(
-        <a href="/parent" rel="noopener noreferrer">
-        Gönderim İptali
-        </a>, '4'),
       getItem(
         <a href="/parent-withdraw" rel="noopener noreferrer">
         Para Çek

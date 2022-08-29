@@ -1,5 +1,3 @@
-import React from 'react';
-import { useState } from 'react';
 import { ethers } from "ethers";
 import './App.css';
 import {
@@ -22,26 +20,11 @@ import { PATENT_ABI, PATENT_ADDRESS } from './constants/MyProject';
 import ChildViewerPage from './pages/child-viewer/childView';
 import ChildUpdatePage from './pages/child-update/childUpdate';
 
-// Videodan alınan kod
+
 
 
 
 const App = () => {
-
-  const createApplication = async () => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    await provider.send("eth_requestAccounts", []);
-  
-    const signer = provider.getSigner();
-    const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
-    
-    const deneme = await contract.addChild("ayşe","öztürk", "0xE086BE6D51137948c7E1F45a4994BC041a711E56", 10000);
-  
-    console.log(deneme);
-  
-  }
-
-  //createApplication();
 
   return (
     
@@ -61,7 +44,6 @@ const App = () => {
           <Route path='/child-profile' element={<ChildProfilePage />} />
           <Route path='/parent-withdraw' element={<ParentWithdrawPage />} />
           <Route path='/child-view' element={<ChildViewerPage />} />
-
         </Routes>
       </BrowserRouter>
 

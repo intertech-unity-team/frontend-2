@@ -1,5 +1,5 @@
 import React from 'react';
-import { TeamOutlined , UserOutlined, SolutionOutlined, CheckOutlined, WarningOutlined } from '@ant-design/icons';
+import { TeamOutlined , UserOutlined, SolutionOutlined, CheckOutlined, WarningOutlined, HomeOutlined } from '@ant-design/icons';
 import { DatePicker, MenuProps, notification } from 'antd';
 import { Breadcrumb, Layout, Menu, Descriptions } from 'antd';
 import { Form, Input, Button, Dropdown, Space } from "antd";
@@ -30,6 +30,10 @@ type MenuItem = Required<MenuProps>['items'][number];
 
 
 async function handleUpdateChildBtn(newName:string, newSurname:string, childWalletID: string, newBDay:string){
+  if(newName.trim() == "" || newSurname.trim() == ""){
+    return false;
+  }
+
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
   const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
@@ -39,7 +43,7 @@ async function handleUpdateChildBtn(newName:string, newSurname:string, childWall
   console.log(timestamp);
 
   try{
-    const updateChild = await contract.update_Child_with_ID(newName, newSurname, childWalletID, timestamp, "", 0);
+    const updateChild = await contract.update_Child_with_ID(newName.trim(), newSurname.trim(), childWalletID, timestamp, "", 0);
     console.log(updateChild);
     return true;
   }
@@ -90,6 +94,11 @@ function getItem(
 
 const items: MenuItem[] = [
   getItem(
+    <a href="/" rel="noopener noreferrer" style={{color:"white"}}>
+      Anasayfa
+    </a>
+    , '0', <HomeOutlined />),
+  getItem(
     <a href="/profile" rel="noopener noreferrer" style={{color:"white"}}>
       Profil
     </a>
@@ -107,10 +116,6 @@ const items: MenuItem[] = [
       <a href="/parent" rel="noopener noreferrer">
       Kripto Varlık Gönder
       </a>, '3'),
-    getItem(
-      <a href="/parent" rel="noopener noreferrer">
-      Gönderim İptali
-      </a>, '4'),
     getItem(
       <a href="/parent-withdraw" rel="noopener noreferrer">
       Para Çek
@@ -218,13 +223,17 @@ const ChildUpdatePage: React.FC = () => {
                 <h1 style={{textAlign:"center", fontSize:"28px", overflow: 'hidden' , color:'#DADADA'}}>Çocuk Bilgilerini Güncelle</h1>
                 <br/>
                 <Form layout='vertical'>
-                  <Form.Item label="Çocuk Adı">
+                  <Form.Item label="Çocuk Adı"
+                  name="name"
+                  rules={[{ required: true, message: 'Lütfen Çocuğun Adını Giriniz!' }]}>
                     <Input placeholder={name} onChange={e => setUpdateChildNameInput(e.target.value)}  disabled={false}/>
                   </Form.Item>
-                  <Form.Item label="Çocuk Soyadı">
+                  <Form.Item label="Çocuk Soyadı"
+                  name="surname"
+                  rules={[{ required: true, message: 'Lüften Çocuğun Soyadını Giriniz!' }]}>
                     <Input placeholder={surname} onChange={e => setUpdateChildSurnameInput(e.target.value)}  disabled={false}/>
                   </Form.Item>
-                  <Form.Item label="Çocuğun Wallet ID'si">
+                  <Form.Item label="Çocuğun Metamask Cüzdan Adresi">
                     <Input value={walletID} disabled/>
                   </Form.Item>
                   <Form.Item label="Çocuğun Doğum Tarihi">
@@ -236,7 +245,7 @@ const ChildUpdatePage: React.FC = () => {
                         {contextHolder}
                         
                         <Space>
-                      <Button type="primary" className='btn-update'
+                      <Button type="primary" className='btn-update' htmlType='submit'
                       onClick={
                         async () => {if(!await handleUpdateChildBtn(updateChildNameInput, updateChildSurnameInput, walletID, bDayToDate)){
                           openNotification('topRight', false, "Güncellenemedi");

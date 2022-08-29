@@ -4,6 +4,10 @@
     margin-top: 1vh;
 }
 
+[title="Metamask Cüzdan Adresiniz"] {
+    color: #DADADA !important;
+}
+
 [title="Adınız"] {
     color: #DADADA !important;
 }
@@ -12,9 +16,7 @@
     color: #DADADA !important;
 }
 
-[title="Wallet ID"] {
-    color: #DADADA !important;
-}
+
 [title="E-posta Adresi"] {
     color: #DADADA !important;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { LinkOutlined, UserOutlined, TeamOutlined, SendOutlined, CloseCircleOutlined, SolutionOutlined } from '@ant-design/icons';
+import { HomeOutlined, UserOutlined, TeamOutlined, SendOutlined, CloseCircleOutlined, SolutionOutlined } from '@ant-design/icons';
 import { Form, MenuProps } from 'antd';
 import { Breadcrumb, Layout, Menu } from 'antd';
 import { Button } from "antd";
@@ -39,6 +39,11 @@ function getItem(
 
 const items: MenuItem[] = [
   getItem(
+    <a href="/" rel="noopener noreferrer" style={{color:"white"}}>
+      Anasayfa
+    </a>
+    , '0', <HomeOutlined />),
+  getItem(
     <a href="/profile" rel="noopener noreferrer" style={{color:"white"}}>
       Profil
     </a>
@@ -57,10 +62,6 @@ const items: MenuItem[] = [
       Kripto Varlık Gönder
       </a>, '3'),
     
-    getItem(
-      <a href="/parent" rel="noopener noreferrer">
-      Gönderim İptali
-      </a>, '4'),
     getItem(
       <a href="/parent-withdraw" rel="noopener noreferrer">
       Para Çek

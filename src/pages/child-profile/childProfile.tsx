@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import type { MenuProps } from 'antd';
 import { Layout, Menu, Descriptions } from 'antd';
 import { Form } from "antd";
-import { AlignType } from 'rc-table/lib/interface';
-import {  UserOutlined, MenuFoldOutlined } from '@ant-design/icons';
+import {  UserOutlined, MenuFoldOutlined, HomeOutlined } from '@ant-design/icons';
 import { ethers } from 'ethers';
 
 // !!!
@@ -12,6 +11,7 @@ import "./style.css";
 import backgroundImg from '../../assets/img/another-background.png';
 import logo from '../../assets/img/logo.png'
 import { PATENT_ABI, PATENT_ADDRESS } from '../../constants/MyProject';
+import dayjs from 'dayjs';
 
 const { Header, Content, Footer, Sider } = Layout;
 type LayoutType = Parameters<typeof Form>[0]['layout'];
@@ -34,6 +34,10 @@ function getItem(
 }
 
 const items: MenuItem[] = [
+  getItem(
+    <a href="/" rel="noopener noreferrer" style={{color:"white"}}>
+    Anasayfa
+    </a>, '0', <HomeOutlined />),
     getItem(
         <a href="/child" rel="noopener noreferrer" style={{color:"white"}}>
         İşlemler
@@ -63,6 +67,7 @@ const ChildProfilePage = () => {
   const [cName, setCName] = useState('');
   const [cSurname, setCSurname] = useState('');
   const [cWalletID, setCWalletID] = useState('');
+  const [cBDay, setCBDay] = useState('');
   
 
   let parentInfoPromise = getChildInfo().then(
@@ -71,7 +76,10 @@ const ChildProfilePage = () => {
       setCName(result[0]);
       setCSurname(result[1]);
       setCWalletID(result[2]);
-    
+      let x = dayjs.unix(result[3]-568024668).toISOString().slice(0,10);
+      let y = x.split("-");
+      x = y[2] + "/" + y[1] + "/" + y[0];
+      setCBDay(x);
       
     }
   );
@@ -107,7 +115,9 @@ const ChildProfilePage = () => {
               >
                 <Descriptions.Item label="Ad" contentStyle={{color:'#DADADA'}}>{cName}</Descriptions.Item>
                 <Descriptions.Item label="Soyad" contentStyle={{color:'#DADADA'}}>{cSurname}</Descriptions.Item>
-                <Descriptions.Item label="Wallet ID" contentStyle={{color:'#DADADA'}}>{cWalletID}</Descriptions.Item>
+                <Descriptions.Item label="Metamask Cüzdan Adresi" contentStyle={{color:'#DADADA'}}>{cWalletID}</Descriptions.Item>
+                <Descriptions.Item label="Doğum Tarihi" contentStyle={{color:'#DADADA'}}>{cBDay}</Descriptions.Item>
+
               </Descriptions>
               </div>
           </Content>

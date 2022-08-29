@@ -91,51 +91,62 @@ const SignInPage: React.FC = () => {
           
               
               <Form layout='vertical' style={{paddingTop:'6.8vh',width:"20%", marginLeft:"auto", marginRight:"auto"}}>
-                  <Form.Item label="Adınız">
-                      <Input placeholder="Adınızı giriniz"
-                              onChange={e => setParentName(e.target.value)} />
-                      </Form.Item>
-                      <Form.Item label="Soyadınız">
-                          <Input placeholder="Soyadınızı giriniz" 
-                                onChange={e => setParentSurname(e.target.value)}/>
-                      </Form.Item>
-                      <Form.Item label="Wallet ID">
-                          <Input disabled
-                                 value={window.ethereum.selectedAddress}/>
-                      </Form.Item>
-                      <Form.Item label="E-posta Adresi">
-                      <Input placeholder="E-posta Adresinizi Giriniz"
-                              onChange={e => setEmail(e.target.value)} />
-                      </Form.Item>
-                      <Form.Item label="Telefon Numarası">
-                      <Input placeholder="Telefon Numaranızı Giriniz"
-                              onChange={e => setPhoneNumber(e.target.value)} />
-                      </Form.Item>
-                      <div style={{textAlign:"center"}}>
+                <Form.Item label="Metamask Cüzdan Adresiniz">
+                    <Input disabled
+                            value={window.ethereum.selectedAddress}/>
+                </Form.Item>
+                <Form.Item label="Adınız"
+                name="Adiniz"
+                rules={[{ required: true, message: 'Lütfen Adınızı Giriniz!' }]}>
+                    <Input placeholder="Adınızı giriniz"
+                            onChange={e => setParentName(e.target.value)} />
+                </Form.Item>
+                <Form.Item label="Soyadınız"
+                name="Soyadiniz"
+                  rules={[{ required: true, message: 'Lütfen Soyadınızı Giriniz!' }]}>
+                    <Input placeholder="Soyadınızı giriniz" 
+                          onChange={e => setParentSurname(e.target.value)}/>
+                </Form.Item>
+                <Form.Item label="E-posta Adresi"
+                name="e-mail"
+                  rules={[{ required: true, message: 'Lütfen E-posta Adresinizi Giriniz!' }]}>
+                <Input placeholder="E-posta Adresinizi Giriniz"
+                        onChange={e => setEmail(e.target.value)} />
+                </Form.Item>
+                <Form.Item
+                name="Telno"
+                label="Telefon Numarası"
+                rules={[{ required: true, message: 'Lütfen Telefonunuzu Giriniz!' }]}
+                >
+                <Input placeholder="Telefon Numaranızı Giriniz"
+                        onChange={e => setPhoneNumber(e.target.value)} />
+                </Form.Item>
+                      
 
+                      <Form.Item style={{textAlign:"center"}}>
+                        <Context.Provider value={{ name: 'Ant Design' }}>
+                            {contextHolder}
+                            <Space>
+                              <Button
+                              htmlType="submit"
+                              onClick={
+                                async () => {
+                                  if(!await getParentPage(parentName, parentSurname, window.ethereum.selectedAddress,parentEmail,parentPhoneNumber)){
+                                    openNotification('topRight', false);
 
-                      <Context.Provider value={{ name: 'Ant Design' }}>
-                          {contextHolder}
-                          <Space>
-                            <Button
-                          
-                            onClick={
-                              async () => {
-                                if(!await getParentPage(parentName, parentSurname, window.ethereum.selectedAddress,parentEmail,parentPhoneNumber)){
-                                  openNotification('bottomRight', false);
-
+                                }
+                                else{
+                                  openNotification('topRight', true);
+                                  
+                                  delay(5000).then(() =>window.location.href="http://localhost:3000/profile");
+                                }
                               }
-                              else{
-                                openNotification('bottomRight', true);
-                                
-                                delay(5000).then(() =>window.location.href="http://localhost:3000/parent");
-                              }
-                            }
-                            } type="primary" className='btn-login' size='large' shape="round" style={{borderColor:'rgba(60, 60, 60, 1)',backgroundColor:"rgba(60, 60, 60, 1)"}}>Kaydol
-                            </Button>
-                            </Space>
-                      </Context.Provider>
-                      </div>
+                              } type="primary" className='btn-login' size='large' shape="round" style={{borderColor:'rgba(60, 60, 60, 1)',backgroundColor:"rgba(60, 60, 60, 1)"}}>Kaydol
+                              </Button>
+                              </Space>
+                        </Context.Provider>
+                        </Form.Item>
+
                   </Form>
                 
         </div>
