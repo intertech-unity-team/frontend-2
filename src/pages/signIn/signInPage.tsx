@@ -1,12 +1,12 @@
 import './signInPage.css';
-import { Layout, Menu, Form, Input, Button, InputNumber } from 'antd';
+import { Layout, Menu, Form, Input, Button, InputNumber, notification, Space } from 'antd';
 import React, { useState } from 'react';
 import backgroundImg from '../../assets/img/kayit-ekran-background.png';
-import metamaskLogo from '../../assets/img/metamask_logo.png';
-import teamLogo from '../../assets/img/logo.png';
 import { PATENT_ABI, PATENT_ADDRESS } from '../../constants/MyProject';
 import { ethers } from 'ethers';
-
+import { CheckOutlined, WarningOutlined } from '@ant-design/icons';
+import type { NotificationPlacement } from 'antd/es/notification';
+import SkeletonInput from 'antd/lib/skeleton/Input';
 
 
 const { Header, Content } = Layout;
@@ -19,20 +19,21 @@ async function getParentPage(pName:string, pSurname:string, pWalletID: string,pE
 
   // Parent hesabını seçip sonra aşağıyı çalıştırın
 
-  let result = parseInt(pPhoneNum);
-  const addP = await contract.addParent(pName,pSurname, pWalletID, pEmail, result);
-  console.log(addP);
-
-  // Owner rolündeyken aşağısı çalıştırılaablilir
-
-  // const getAllP = await contract.get_All_Parents();
-  // console.log(getAllP);
-
-  window.location.href="http://localhost:3000/parent";
+  try{
+    let result = parseInt(pPhoneNum);
+    const addP = await contract.addParent(pName,pSurname, pWalletID, pEmail, result);
+    console.log(addP);
+    return true;
+  }
+  catch{
+    console.log("catched");
+    return false;
+  }
+  
   
 }
 
-
+const Context = React.createContext({ name: 'Default' });
 
 const SignInPage: React.FC = () => {
 
@@ -41,6 +42,41 @@ const SignInPage: React.FC = () => {
   const [parentWalletID, setWalletID] = useState("");
   const [parentEmail, setEmail] = useState("");
   const [parentPhoneNumber, setPhoneNumber] = useState("");
+  const [api, contextHolder] = notification.useNotification();
+
+  const openNotification = (placement: NotificationPlacement, isitOK: boolean) => {
+    if (isitOK){
+      api.info({
+        message: `İşlem Başarılı`,
+        description: "Kayıt işlemi başarıyla tamamlandı. Az sonra profilinize yönlendirileceksiniz.",
+        placement,
+        style: {  color: 'rgba(0, 0, 0, 0.65)',
+                  border: '1px solid #b7eb8f',
+                  backgroundColor: '#f6ffed',
+                  borderRadius: '30px'
+                },
+        icon: <CheckOutlined style={{color:"green"}}/>
+      });
+    }
+    else{
+      api.info({
+        message: `İşlem Başarısız Oldu`,
+        description: "Kayıt işlemi başarısız oldu. Lütfen halihazırda seçili olan Metamask hesabınızı ve girdiğiniz bilgileri kontrol edin ve yeniden deneyin.",
+        placement,
+        style: {  color: 'rgba(0, 0, 0, 0.65)',
+                  border: '1px solid #ffa39e',
+                  backgroundColor: '#fff1f0',
+                  borderRadius: '30px'
+                },
+        icon: <WarningOutlined style={{color: "red"}}/>
+      });
+    }
+
+  }
+
+  function delay(time:number) {
+    return new Promise(resolve => setTimeout(resolve, time));
+  }
 
   return(
     <Layout className="layout">
@@ -76,10 +112,29 @@ const SignInPage: React.FC = () => {
                               onChange={e => setPhoneNumber(e.target.value)} />
                       </Form.Item>
                       <div style={{textAlign:"center"}}>
-                      <Button
-                        
-                       onClick={() => getParentPage(parentName, parentSurname, window.ethereum.selectedAddress,parentEmail,parentPhoneNumber)} type="primary" className='btn-login' size='large' shape="round" style={{borderColor:'rgba(60, 60, 60, 1)',backgroundColor:"rgba(60, 60, 60, 1)"}}>Kaydol
-                       </Button>
+
+
+                      <Context.Provider value={{ name: 'Ant Design' }}>
+                          {contextHolder}
+                          <Space>
+                            <Button
+                          
+                            onClick={
+                              async () => {
+                                if(!await getParentPage(parentName, parentSurname, window.ethereum.selectedAddress,parentEmail,parentPhoneNumber)){
+                                  openNotification('bottomRight', false);
+
+                              }
+                              else{
+                                openNotification('bottomRight', true);
+                                
+                                delay(5000).then(() =>window.location.href="http://localhost:3000/parent");
+                              }
+                            }
+                            } type="primary" className='btn-login' size='large' shape="round" style={{borderColor:'rgba(60, 60, 60, 1)',backgroundColor:"rgba(60, 60, 60, 1)"}}>Kaydol
+                            </Button>
+                            </Space>
+                      </Context.Provider>
                       </div>
                   </Form>
                 
