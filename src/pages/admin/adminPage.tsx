@@ -47,7 +47,10 @@ async function getAllOfParents() {
 }
 
 
-let allParents : string[] = [];
+let allParentsName : string[] = [];
+let allParentsSurname : string[] = [];
+let allParentsEmail : string[] = [];
+let allParentsPhoneNum : string[] = [];
     
 
 //getAllOfParents();
@@ -58,7 +61,6 @@ let allParents : string[] = [];
 interface DataType {
     key: string;
     name: string;
-    loginDate: string;
 }
 
 const columns: ColumnsType<DataType> = [
@@ -67,11 +69,6 @@ const columns: ColumnsType<DataType> = [
       dataIndex: 'name',
       key: 'name',
       render: text => <a>{text}</a>,
-    },
-    {
-      title: 'Kayıt Tarihi',
-      key: 'loginDate',
-      dataIndex: 'loginDate',
     },
     {
         title: 'Cocuklar',
@@ -94,43 +91,35 @@ const columns: ColumnsType<DataType> = [
 const data: DataType[] = [
     {
       key: '1',
-      name: allParents[0],
-      loginDate: '01/01/0001',
+      name: allParentsName[0],
     },
     {
       key: '2',
-      name: allParents[0],
-      loginDate: '01/01/0001',
+      name: allParentsName[0],
     },
     { 
       key: '3',
-      name: allParents[0],
-      loginDate: '01/01/0001',
+      name: allParentsName[0],
     },
     {
       key: '4',
-      name: allParents[0],
-      loginDate: '01/01/0001',
+      name: allParentsName[0],
     },
     {
       key: '5',
-      name: allParents[0],
-      loginDate: '01/01/0001',
+      name: allParentsName[0],
     },
     {
       key: '5',
-      name: allParents[0],
-      loginDate: '01/01/0001',
+      name: allParentsName[0],
     },
     {
       key: '5',
-      name: allParents[0],
-      loginDate: '01/01/0001',
+      name: allParentsName[0],
     },
     {
       key: '5',
-      name: allParents[0],
-      loginDate: '01/01/0001',
+      name: allParentsName[0],
     },
 ];
 
@@ -147,15 +136,21 @@ const AdminPanel = () => {
 
     const getAllP = await contract.get_All_Parents();
     // isim icin
-    getAllP.forEach((allParentsArr: never[]) => {
-      let parentName = allParentsArr[0];
+    getAllP.forEach((allParentsNameArr: never[]) => {
+      let parentName = allParentsNameArr[0];
 
-      allParents.push(parentName);
+      allParentsName.push(parentName);
+    });
+    // soyisim icin
+    getAllP.forEach((allParentsSurnameArr: never[]) => {
+      let parentSurname = allParentsSurnameArr[0];
+
+      allParentsSurname.push(parentSurname);
     });
     
   }
   get_all_of_parents();
-  console.log(allParents);
+  console.log(allParentsName);
 
   
   
@@ -168,7 +163,7 @@ const AdminPanel = () => {
 
           <h2 className="main-text">Admin Panel</h2>
           <div className="arayuz-div">
-          <Table className="arayuz" columns={columns} dataSource={data} pagination={{ pageSize: 5 }}/>
+          <Table className="arayuz" columns={columns} dataSource={data} pagination={{ pageSize: 5 }} tableLayout='auto' />
           </div>
           
         </Content>

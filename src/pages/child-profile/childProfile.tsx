@@ -36,7 +36,7 @@ function getItem(
 const items: MenuItem[] = [
     getItem(
         <a href="/child" rel="noopener noreferrer" style={{color:"white"}}>
-        Ana Sayfa
+        İşlemler
         </a>, '2', <MenuFoldOutlined/>),
     getItem(
       <a href="/child-profile" rel="noopener noreferrer" style={{color:"white"}}>
@@ -63,6 +63,7 @@ const ChildProfilePage = () => {
   const [cName, setCName] = useState('');
   const [cSurname, setCSurname] = useState('');
   const [cWalletID, setCWalletID] = useState('');
+  
 
   let parentInfoPromise = getChildInfo().then(
     function(result){
@@ -70,6 +71,8 @@ const ChildProfilePage = () => {
       setCName(result[0]);
       setCSurname(result[1]);
       setCWalletID(result[2]);
+    
+      
     }
   );
 
@@ -81,7 +84,7 @@ const ChildProfilePage = () => {
     backgroundRepeat: 'no-repeat',
     height: '100%',}}>
           <Sider style={{background:"#2A2E30"}} width={200}>
-          <img src={logo} alt="Logo" width="100%" height="200px"></img>
+          <img src={logo} alt="Logo" width="150%" height="200px"></img>
             <Menu
               defaultSelectedKeys={['']}
               defaultOpenKeys={['']}
@@ -92,14 +95,15 @@ const ChildProfilePage = () => {
           </Sider>
 
           <Content style={{ padding: '0 0px', minHeight: 280}}>
-              <h2 className='text'>Profilim Hos Geldiniz XXX</h2>
+              <h2 className='text'>Profil Sayfası</h2>
               <div className='form-container'>
               <Descriptions
                 style={{padding:"1vh", width:"31vw"}}
                 size='middle'
                 bordered
                 column={1}
-                layout= 'vertical'
+                layout='vertical'
+
               >
                 <Descriptions.Item label="Ad" contentStyle={{color:'#DADADA'}}>{cName}</Descriptions.Item>
                 <Descriptions.Item label="Soyad" contentStyle={{color:'#DADADA'}}>{cSurname}</Descriptions.Item>
