@@ -1,47 +1,7 @@
-.text-container {
-  margin: auto;
-  text-align: center;
-  align-items: center;
-  margin-top: 8.2vh;
-  margin-left: 3.8vw;
-  
-}
-/*
-.input-container {
-  text-align: center;
-  align-items: center;
-  margin: auto;
-  margin-top: 12vh;
-  margin-left: 3.8vw;
-}
-*/
-.input-xdlmao {
-  width: 75%;
-  margin-top: 16vh;
-  margin-left: 33vw;
+[title="Kullanılabilir Bakiye"] {
+    color: #DADADA !important;
 }
 
-
-.btn-div {
-  text-align: center;
-  margin-right: 3.7vw;
-  margin-top: -12vh;
-}
-
-.btn {
-  background: transparent;
-  border-color: #fff;
-  color: #fff;
-}
-
-.text-main {
-  color: #fff;
-}
-
-[title="Çekilebilen Tutar"] {
-  color: #DADADA !important;
-}
-
-[title="Çekilecek Tutar"] {
-  color: #DADADA !important;
+[title="Çekmek İstenilen Miktar"] {
+    color: #DADADA !important;
 }
