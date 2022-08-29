@@ -1,6 +1,6 @@
 import React from 'react';
-import { TeamOutlined , UserOutlined, SolutionOutlined, SendOutlined, DownOutlined } from '@ant-design/icons';
-import { DatePicker, MenuProps } from 'antd';
+import { TeamOutlined , UserOutlined, SolutionOutlined, CheckOutlined, WarningOutlined } from '@ant-design/icons';
+import { DatePicker, MenuProps, notification } from 'antd';
 import { Breadcrumb, Layout, Menu, Descriptions } from 'antd';
 import { Form, Input, Button, Dropdown, Space } from "antd";
 import { AlignType } from 'rc-table/lib/interface';
@@ -12,15 +12,15 @@ import { findTimeStampBtwTwoDates, findTimeStampBtwTwoDatesv2 } from '../../serv
 // !!!
 import "antd/dist/antd.css";
 import './style.css';
-import metamaskGif from '../../assets/images/metamask.gif';
 import backgroundImg from '../../assets/img/lol.png';
 import logo from '../../assets/img/logo.png'
 import { addSyntheticLeadingComment, JsxElement } from 'typescript';
 import moment from 'moment';
 import dayjs from 'dayjs';
-import { ItemType } from 'antd/lib/menu/hooks/useItems';
 import { useLocation } from 'react-router-dom';
-
+import type { NotificationPlacement } from 'antd/es/notification';
+import { strict } from 'assert';
+import { stringify } from 'querystring';
 
 
 const { Content, Footer, Sider } = Layout;
@@ -70,9 +70,16 @@ async function handleUpdateChildBtn(newName:string, newSurname:string, childWall
   const timestamp = findTimeStampBtwTwoDatesv2(newBDay, "01-01-1970");
   console.log(timestamp);
 
-  const updateChild = await contract.update_Child_with_ID(newName, newSurname, childWalletID, timestamp, "", 0);
-
-  console.log(updateChild);
+  try{
+    const updateChild = await contract.update_Child_with_ID(newName, newSurname, childWalletID, timestamp, "", 0);
+    console.log(updateChild);
+    return true;
+  }
+  catch{
+    console.log("catched");
+    return false;
+  }
+  
   
 
 }
@@ -82,9 +89,18 @@ async function handleDeleteChildBtn(childWalletID: string){
   const signer = provider.getSigner();
   const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
 
-  const deleteChild = await contract.delete_Child_With_ID(childWalletID);
 
-  console.log(deleteChild);
+  try{
+    const deleteChild = await contract.delete_Child_With_ID(childWalletID);
+    console.log(deleteChild);
+    return true;
+  }
+
+  catch{
+    console.log("catched");
+    return false;
+  }
+  
 
 
 }
@@ -144,6 +160,8 @@ interface CustomizedState {
     timestamp: number
   }
 
+const Context = React.createContext({ name: 'Default' });
+
 const ChildUpdatePage: React.FC = () => {
     // State hooks for update child
     const [childName, setChildName] = useState("");
@@ -156,6 +174,39 @@ const ChildUpdatePage: React.FC = () => {
 
 
     const [childrenObjectsArray, setChildrenObjectsArray] = useState([]);
+
+    const [api, contextHolder] = notification.useNotification();
+    const openNotification = (placement: NotificationPlacement, isitOK: boolean, msg:string) => {
+      if (isitOK){
+        api.info({
+          message: `İşlem Başarılı`,
+          description: "Çocuk Başarıyla Eklendi",
+          placement,
+          style: {  color: 'rgba(0, 0, 0, 0.65)',
+                    border: '1px solid #b7eb8f',
+                    backgroundColor: '#f6ffed',
+                    borderRadius: '30px'
+                  },
+          icon: <CheckOutlined style={{color:"green"}}/>
+        });
+      }
+      else{
+        api.info({
+          message: `İşlem Başarısız Oldu`,
+          description: "Çocuk "+msg+ ". Lütfen doğru metamask hesabını seçtiğinizden veya girilen cüzdan adresine sahip bir çocuğu daha önce eklemediğinizden emin olun.",
+          placement,
+          style: {  color: 'rgba(0, 0, 0, 0.65)',
+                    border: '1px solid #ffa39e',
+                    backgroundColor: '#fff1f0',
+                    borderRadius: '30px'
+                  },
+          icon: <WarningOutlined style={{color: "red"}}/>
+        });
+      }
+
+    }
+
+
 
     const location = useLocation();
     const state = location.state as CustomizedState; // Type Casting, then you can get the params passed via router
@@ -173,40 +224,8 @@ const ChildUpdatePage: React.FC = () => {
     dayjs(bDayToDate).format('DD/MM/YYYY');
 
 
-    const [form] = Form.useForm();
-    const [formLayout, setFormLayout] = useState<LayoutType>('horizontal');
-
-    const onFormLayoutChange = ({ layout }: { layout: LayoutType }) => {
-        setFormLayout(layout);
-    };
-    
     
 
-
-    // Dropdown menü ayarları
-    const handleMenuClick: MenuProps['onClick'] = e => {
-        
-
-        /*
-        childKey = parseInt(e.key);
-        setChildName(childrenNamesArray[childKey]);
-
-        setUpdateChildNameInput(childrenObjectsArray[childKey][0]);
-        setUpdateChildSurnameInput(childrenObjectsArray[childKey][1]);
-        setUpdateChildWalletID(childrenObjectsArray[childKey][2]);
-
-        let bDate = dayjs.unix(childrenObjectsArray[childKey][3]).toDate();
-        console.log(bDate.getDate());
-
-        let birthYear = bDate.getFullYear() - 18;
-        let bDayToDate = bDate.getDate() + "-" + (bDate.getMonth()+1) + "-" + birthYear;
-        console.log(bDayToDate);
-        dayjs(bDayToDate).format('DD/MM/YYYY');
-
-        setUpdateChildBDay(bDayToDate.toString());
-        */
-
-      };
 
 
     return (
@@ -250,12 +269,43 @@ const ChildUpdatePage: React.FC = () => {
                   <Input value={bDayToDate} disabled/>
                   </Form.Item>
                     <div style={{textAlign:"center"}}>
+
+                    <Context.Provider value={{ name: 'Ant Design' }}>
+                        {contextHolder}
+                        <Space>
                       <Button type="primary" className='btn-update'
-                      onClick={() => handleUpdateChildBtn(updateChildNameInput, updateChildSurnameInput, walletID, bDayToDate)}
+                      onClick={
+                        async () => {if(!await handleUpdateChildBtn(updateChildNameInput, updateChildSurnameInput, walletID, bDayToDate)){
+                          openNotification('topRight', false, "Güncellenemedi");
+                        }
+                        else{
+                          openNotification('topRight', true, "Güncellenemedi");
+                        }
+                      }
+                    
+                      }
                       >Çocuk Bilgilerini Güncelle</Button>
+
+                    </Space>
+                    
+
+                    
+                        <Space>
+
                       <Button
-                      onClick={() => handleDeleteChildBtn(walletID)}
+                      onClick={
+                        async () => {if(!await handleDeleteChildBtn(walletID)){
+                          openNotification('topRight', false, "Sistemden Silinemedi");
+                        }
+                        else{
+                          openNotification('topRight', true, "Sistemden Silinemedi");
+                        }
+                      }
+                      }
                        type="primary" danger className='btn-delete'>Çocuğu Sil</Button>
+                       </Space>
+                    </Context.Provider>
+
                     </div>
                 </Form>
               </div> 

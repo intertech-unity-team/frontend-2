@@ -1,9 +1,8 @@
 import React from 'react';
-import { TeamOutlined , UserOutlined, SolutionOutlined, SendOutlined, DownOutlined } from '@ant-design/icons';
+import { TeamOutlined , UserOutlined, SolutionOutlined, WarningOutlined, CheckOutlined } from '@ant-design/icons';
 import { DatePicker, MenuProps } from 'antd';
-import { Breadcrumb, Layout, Menu, Descriptions } from 'antd';
+import {  Layout, Menu } from 'antd';
 import { Form, Input, Button, Dropdown, Space } from "antd";
-import { AlignType } from 'rc-table/lib/interface';
 import { useState } from 'react';
 import { ethers } from 'ethers';
 import { PATENT_ABI, PATENT_ADDRESS } from '../../constants/MyProject';
@@ -14,21 +13,17 @@ import "antd/dist/antd.css";
 import './parentPanelChild.css';
 import backgroundImg from '../../assets/img/lol.png';
 import logo from '../../assets/img/logo.png'
-import { addSyntheticLeadingComment, JsxElement } from 'typescript';
-import moment from 'moment';
-import dayjs from 'dayjs';
-import { ItemType } from 'antd/lib/menu/hooks/useItems';
+
+import notification from 'antd/lib/notification';
+import type { NotificationPlacement } from 'antd/es/notification';
 
 const { Content, Footer, Sider } = Layout;
-const walletID = "0x1c80881894B2d90e163d844b91f82322B628a8Db";
 
-type LayoutType = Parameters<typeof Form>[0]['layout'];
-
-let childKey = 0;
 
 type MenuItem = Required<MenuProps>['items'][number];
 
 // Çocuk isimleri burada
+
 
 
 async function handleAddChildBtn(childName:string, childSurname:string, childWalletID:string, childBDay:string){
@@ -40,61 +35,21 @@ async function handleAddChildBtn(childName:string, childSurname:string, childWal
   const signer = provider.getSigner();
   const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
 
-  //const getAllParents = await contract.get_All_Parents();
-  //console.log(getAllParents);
   
   // Hangi parenta ekleyeceksen onu seçip sonra burayı çalıştır
 
-  const addChild = await contract.addChild(childName, childSurname, childWalletID, timestamp, "", 0);
-  console.log(addChild);
-
-  // Owner rolündeki Account1 aşağıyı çalıştırabilir
-
-  //const getAllC = await contract.get_All_Children();
-  //console.log(getAllC);
+  try{
+    const addChild = await contract.addChild(childName, childSurname, childWalletID, timestamp, "", 0);
+    console.log(addChild);
+    return true;
+  }
+    
+  catch{
+    console.log("catched");
+    return false;
+  }
+    
   
-
-  
-}
-
-
-async function handleUpdateChildBtn(newName:string, newSurname:string, childWalletID: string, newBDay:string){
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
-  const signer = provider.getSigner();
-  const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
-
-  // Find timestamp
-  const timestamp = findTimeStampBtwTwoDatesv2(newBDay, "01-01-1970");
-  console.log(timestamp);
-
-  const updateChild = await contract.update_Child_with_ID(newName, newSurname, childWalletID, timestamp);
-
-  console.log(updateChild);
-  
-
-}
-
-async function handleDeleteChildBtn(childWalletID: string){
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
-  const signer = provider.getSigner();
-  const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
-
-  const deleteChild = await contract.delete_Child_With_ID(childWalletID);
-
-  console.log(deleteChild);
-
-
-}
-
-async function getParentInfo() {
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
-  const signer = provider.getSigner();
-  const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
-
-  // Parent hesabını seçip sonra aşağıyı çalıştırın
-
-  const getP = await contract.getParent();
-  return getP;
 }
 
 function getItem(
@@ -143,114 +98,47 @@ const items: MenuItem[] = [
 
 let screenWidth = window.screen.width;
 
+const Context = React.createContext({ name: 'Default' });
+
 const ParentPanelChildPage: React.FC = () => {
-    // State hooks for update child
-    const [childName, setChildName] = useState("");
-    const [childrenNamesArray, setChildrenNamesArray] = useState([]);
-
-    const [updateChildNameInput, setUpdateChildNameInput] = useState("");
-    const [updateChildSurnameInput, setUpdateChildSurnameInput] = useState("");
-    const [updateChildWalletID, setUpdateChildWalletID] = useState("");
-    const [updateChildBDay, setUpdateChildBDay] = useState("");
-
     // State hooks for add child
     const [addChildNameInput, setAddChildNameInput] = useState("");
     const [addChildSurnameInput, setAddChildSurnameInput] = useState("");
     const [addChildWalletID, setAddChildWalletID] = useState("");
     const [createChildBDay, setCreateChildBDay] = useState("");
 
-    const [childrenObjectsArray, setChildrenObjectsArray] = useState([]);
 
+    const [api, contextHolder] = notification.useNotification();
+    const openNotification = (placement: NotificationPlacement, isitOK: boolean) => {
+      if (isitOK){
+        api.info({
+          message: `İşlem Başarılı`,
+          description: "Çocuk Başarıyla Eklendi",
+          placement,
+          style: {  color: 'rgba(0, 0, 0, 0.65)',
+                    border: '1px solid #b7eb8f',
+                    backgroundColor: '#f6ffed',
+                    borderRadius: '30px'
+                  },
+          icon: <CheckOutlined style={{color:"green"}}/>
+        });
+      }
+      else{
+        api.info({
+          message: `İşlem Başarısız Oldu`,
+          description: "Çocuk Eklenemedi. Lütfen doğru metamask hesabını seçtiğinizden veya girilen cüzdan adresine sahip bir çocuğu daha önce eklemediğinizden emin olun.",
+          placement,
+          style: {  color: 'rgba(0, 0, 0, 0.65)',
+                    border: '1px solid #ffa39e',
+                    backgroundColor: '#fff1f0',
+                    borderRadius: '30px'
+                  },
+          icon: <WarningOutlined style={{color: "red"}}/>
+        });
+      }
 
-    const [form] = Form.useForm();
-    const [formLayout, setFormLayout] = useState<LayoutType>('horizontal');
-
-    const onFormLayoutChange = ({ layout }: { layout: LayoutType }) => {
-        setFormLayout(layout);
-    };
-
-    
-
-    // Dropdown menü ayarları
-    const handleMenuClick: MenuProps['onClick'] = e => {
-
-        childKey = parseInt(e.key);
-        setChildName(childrenNamesArray[childKey]);
-
-        setUpdateChildNameInput(childrenObjectsArray[childKey][0]);
-        setUpdateChildSurnameInput(childrenObjectsArray[childKey][1]);
-        setUpdateChildWalletID(childrenObjectsArray[childKey][2]);
-
-        let bDate = dayjs.unix(childrenObjectsArray[childKey][3]).toDate();
-        console.log(bDate.getDate());
-
-        let birthYear = bDate.getFullYear() - 18;
-        let bDayToDate = bDate.getDate() + "-" + (bDate.getMonth()+1) + "-" + birthYear;
-        console.log(bDayToDate);
-        dayjs(bDayToDate).format('DD/MM/YYYY');
-
-        setUpdateChildBDay(bDayToDate.toString());
-
-      };
-
-
-    // OnHover, childrenları çek
-    async function childMenuUpdater(){
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
-        const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
-
-
-    
-      let parentInfoPromise = getParentInfo().then(
-        async function(result){
-          console.log(result);
-
-          const getChildren = await contract.get_Children_Of_Parent(result[2]);
-          // getChild is an array which includes the children of the current parent
-          console.log(getChildren);
-
-          let childrenArray: never[] = [];
-
-          // add all children to array and display it
-          getChildren.forEach((childArr: never[]) => {
-            let childName = childArr[0];
-
-            childrenArray.push(childName);
-          });
-          console.log(childrenArray);
-          setChildrenNamesArray(childrenArray);
-          setChildrenObjectsArray(getChildren);
-          
-        }
-      );
     }
-
-    function itemCreator(){
-      let itemsArray: Array<ItemType>;
-      itemsArray = [];
-      let counter = 0;
-      childrenNamesArray.forEach(element => {
-
-        itemsArray.push(
-          {
-            label: element,
-            key: counter.toString(),
-            icon: <UserOutlined />,
-          }
-        );
-        counter++;
-      });
-      return itemsArray;
-    }
-
-    // Dropdown menü itemleri
-    const menu = (
-        <Menu
-          onClick={handleMenuClick}
-          items={itemCreator()}
-        />
-      );
+      
 
 
     return (
@@ -276,47 +164,6 @@ const ParentPanelChildPage: React.FC = () => {
           <Content style={{ padding: '0 50px 0', minHeight: 280, overflow: 'hidden'}}>
                         
             <div className="float-container">
-              {/* 
-              <div className='float-child-left' style={{minWidth: screenWidth / 7}}>
-                <h1 style={{textAlign:"center", fontSize:"28px"}}>Çocuk Bilgilerini Güncelle</h1>
-                <br/>
-                <p>Çocuk Seç</p>
-                <Dropdown
-                  overlay={menu}>
-                    <Button
-                      onMouseOver={childMenuUpdater}
-                      >
-                        <Space>
-                        {childName}
-                        <DownOutlined />
-                        </Space>
-                        </Button>
-                </Dropdown>
-                <br/>
-                <br/>
-                <Form layout='vertical'>
-                  <Form.Item label="Çocuk Adı">
-                    <Input placeholder="İsim giriniz" onChange={e => setUpdateChildNameInput(e.target.value)} value={updateChildNameInput} disabled={false}/>
-                  </Form.Item>
-                  <Form.Item label="Çocuk Soyadı">
-                    <Input placeholder="Soyad giriniz" onChange={e => setUpdateChildSurnameInput(e.target.value)} value={updateChildSurnameInput} disabled={false}/>
-                  </Form.Item>
-                  <Form.Item label="Çocuğun Wallet ID'si">
-                    <Input value={updateChildWalletID} disabled/>
-                  </Form.Item>
-                  <Form.Item label="Çocuğun Doğum Tarihi">
-                  <Input value={updateChildBDay} disabled/>
-                  </Form.Item>
-                    <div style={{textAlign:"center"}}>
-                      <Button type="primary" className='btn-update'
-                      onClick={() => handleUpdateChildBtn(updateChildNameInput, updateChildSurnameInput, updateChildWalletID, updateChildBDay)}
-                      >Çocuk Bilgilerini Güncelle</Button>
-                      <Button
-                      onClick={() => handleDeleteChildBtn(updateChildWalletID)}
-                       type="primary" danger className='btn-delete'>Çocuğu Sil</Button>
-                    </div>
-                </Form>
-              </div> */}
 
               <div className='float-child-right' style={{minWidth: screenWidth / 7, overflow: 'hidden'}}>
                 <h1 style={{textAlign:"center", fontSize:"28px", overflow: 'hidden', paddingBottom: '7vh', color:'#DADADA'}}>Yeni Çocuk Ekle</h1>
@@ -334,11 +181,24 @@ const ParentPanelChildPage: React.FC = () => {
                         <DatePicker format={'DD/MM/YYYY'} onChange={(_, dateString) => setCreateChildBDay(dateString)} placeholder="Tarih Seçiniz" style={{width:"100%"}}/>
                       </Form.Item>
                       <div style={{textAlign:"center"}}>
+                      <Context.Provider value={{ name: 'Ant Design' }}>
+                        {contextHolder}
+                        <Space>
                         <Button type="default"
                         className='btn-update'
-                        onClick={() => handleAddChildBtn(addChildNameInput, addChildSurnameInput, addChildWalletID, createChildBDay)}
+                        onClick={async () => {if(!await handleAddChildBtn(addChildNameInput, addChildSurnameInput, addChildWalletID, createChildBDay)){
+                                                openNotification('topRight', false);
+                                              }
+                                              else{
+                                                openNotification('topRight', true);
+                                              }
+                                            }
+                                          }
                         >Çocuk Ekle
                         </Button>
+
+                      </Space>
+                    </Context.Provider>
                     </div>
                 
                     </Form>
