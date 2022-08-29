@@ -3,7 +3,6 @@ import { TeamOutlined , UserOutlined, SolutionOutlined, CheckOutlined, WarningOu
 import { DatePicker, MenuProps, notification } from 'antd';
 import { Breadcrumb, Layout, Menu, Descriptions } from 'antd';
 import { Form, Input, Button, Dropdown, Space } from "antd";
-import { AlignType } from 'rc-table/lib/interface';
 import { useState } from 'react';
 import { ethers } from 'ethers';
 import { PATENT_ABI, PATENT_ADDRESS } from '../../constants/MyProject';
@@ -14,19 +13,13 @@ import "antd/dist/antd.css";
 import './style.css';
 import backgroundImg from '../../assets/img/lol.png';
 import logo from '../../assets/img/logo.png'
-import { addSyntheticLeadingComment, JsxElement } from 'typescript';
 import moment from 'moment';
 import dayjs from 'dayjs';
 import { useLocation } from 'react-router-dom';
 import type { NotificationPlacement } from 'antd/es/notification';
-import { strict } from 'assert';
-import { stringify } from 'querystring';
 
 
 const { Content, Footer, Sider } = Layout;
-const walletID = "0x1c80881894B2d90e163d844b91f82322B628a8Db";
-
-type LayoutType = Parameters<typeof Form>[0]['layout'];
 
 
 type MenuItem = Required<MenuProps>['items'][number];
@@ -34,31 +27,6 @@ type MenuItem = Required<MenuProps>['items'][number];
 // Çocuk isimleri burada
 
 
-async function handleAddChildBtn(childName:string, childSurname:string, childWalletID:string, childBDay:string){
-  // Find timestamp
-  const timestamp = findTimeStampBtwTwoDates(childBDay, "01-01-1970");
-  console.log(timestamp);
-
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
-  const signer = provider.getSigner();
-  const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
-
-  //const getAllParents = await contract.get_All_Parents();
-  //console.log(getAllParents);
-  
-  // Hangi parenta ekleyeceksen onu seçip sonra burayı çalıştır
-
-  const addChild = await contract.addChild(childName, childSurname, childWalletID, timestamp, "", 0);
-  console.log(addChild);
-
-  // Owner rolündeki Account1 aşağıyı çalıştırabilir
-
-  //const getAllC = await contract.get_All_Children();
-  //console.log(getAllC);
-  
-
-  
-}
 
 
 async function handleUpdateChildBtn(newName:string, newSurname:string, childWalletID: string, newBDay:string){
@@ -101,7 +69,6 @@ async function handleDeleteChildBtn(childWalletID: string){
     return false;
   }
   
-
 
 }
 
@@ -180,7 +147,7 @@ const ChildUpdatePage: React.FC = () => {
       if (isitOK){
         api.info({
           message: `İşlem Başarılı`,
-          description: "Çocuk Başarıyla Eklendi",
+          description: "Çocuk Başarıyla "+msg+"",
           placement,
           style: {  color: 'rgba(0, 0, 0, 0.65)',
                     border: '1px solid #b7eb8f',
@@ -223,11 +190,6 @@ const ChildUpdatePage: React.FC = () => {
     console.log(bDayToDate);
     dayjs(bDayToDate).format('DD/MM/YYYY');
 
-
-    
-
-
-
     return (
     <Layout className='layout' style={{backgroundImage:`url(${backgroundImg})`, backgroundPosition: 'center',
     backgroundSize: 'cover',
@@ -235,9 +197,9 @@ const ChildUpdatePage: React.FC = () => {
     height: '100%', overflow: 'hidden', position: 'fixed'}}>
       <Content style={{ padding: '0 0px' , overflow: 'hidden'}}>
         <Layout className="site-layout-background" style={{ padding: '0px 0', backgroundImage:`url(${backgroundImg})` , backgroundPosition: 'center',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    height: '100%', overflow: 'hidden'}}>
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          height: '100%', overflow: 'hidden'}}>
           <Sider style={{background:"#2A2E30"}} width={200}>
           <img src={logo} alt="Logo" width="150%" height="25%"></img>
             <Menu
@@ -272,6 +234,7 @@ const ChildUpdatePage: React.FC = () => {
 
                     <Context.Provider value={{ name: 'Ant Design' }}>
                         {contextHolder}
+                        
                         <Space>
                       <Button type="primary" className='btn-update'
                       onClick={
@@ -279,7 +242,7 @@ const ChildUpdatePage: React.FC = () => {
                           openNotification('topRight', false, "Güncellenemedi");
                         }
                         else{
-                          openNotification('topRight', true, "Güncellenemedi");
+                          openNotification('topRight', true, "Güncellendi");
                         }
                       }
                     
@@ -287,8 +250,6 @@ const ChildUpdatePage: React.FC = () => {
                       >Çocuk Bilgilerini Güncelle</Button>
 
                     </Space>
-                    
-
                     
                         <Space>
 
@@ -298,7 +259,7 @@ const ChildUpdatePage: React.FC = () => {
                           openNotification('topRight', false, "Sistemden Silinemedi");
                         }
                         else{
-                          openNotification('topRight', true, "Sistemden Silinemedi");
+                          openNotification('topRight', true, "Silindi");
                         }
                       }
                       }
@@ -308,16 +269,13 @@ const ChildUpdatePage: React.FC = () => {
 
                     </div>
                 </Form>
-              </div> 
-
-              
-              
+              </div>    
               </div>
           </Content>
 
         </Layout>
       </Content>
-    <Footer style={{ textAlign: 'center', background:"#2A2E30", color:"white", position:"absolute", bottom:0, width:"100%"}} className="site-layout-background">AppName ©2022 Created by Team Unity</Footer>
+    <Footer style={{ textAlign: 'center', background:"#2A2E30", color:"white", position:"absolute", bottom:0, width:"100%"}} className="site-layout-background">BLOXIFY ©2022 Created by Team Unity</Footer>
   </Layout>
     );
 };

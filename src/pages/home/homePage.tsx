@@ -79,7 +79,7 @@ const getProperPage = async () => {
       window.location.href="http://localhost:3000/profile";
       break;
     case Role.Child:
-      window.location.href="http://localhost:3000/child";
+      window.location.href="http://localhost:3000/child-profile";
       break;
     case Role.Unregistered:
       window.location.href="http://localhost:3000/signin";

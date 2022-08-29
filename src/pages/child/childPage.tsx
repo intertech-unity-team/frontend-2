@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { UserOutlined, MenuFoldOutlined } from '@ant-design/icons';
-import { Form, MenuProps } from 'antd';
+import { UserOutlined, MenuFoldOutlined, CheckOutlined, WarningOutlined  } from '@ant-design/icons';
+import { Form, MenuProps, notification, Space } from 'antd';
 import { Layout, Menu } from 'antd';
 import { Button, Input, InputNumber } from "antd";
 
@@ -11,6 +11,9 @@ import "./child.css";
 import logo from '../../assets/img/logo.png';
 import backgroundImg from '../../assets/img/kekw.png';
 import { PATENT_ABI, PATENT_ADDRESS } from '../../constants/MyProject';
+import type { NotificationPlacement } from 'antd/es/notification';
+
+
 
 import { ethers } from 'ethers';
 
@@ -73,11 +76,19 @@ async function withdrawMoneyHandler(formAmount:number){
   console.log(walletID, releaseTime, walletBalance);
   console.log(formAmount.toString());
 
-  const childWithdraw = await contract.child_Withdraws_Money(walletID, ethers.utils.parseEther(formAmount.toString()), releaseTime);
-  console.log(childWithdraw);
+  try{
+    const childWithdraw = await contract.child_Withdraws_Money(walletID, ethers.utils.parseEther(formAmount.toString()), releaseTime);
+    console.log(childWithdraw);
+    return true;
+  }
+  catch{
+    console.log("catched");
+    return false;
+  }
 
-  console.log(getC[4]);
 }
+
+const Context = React.createContext({ name: 'Default' });
 
 const ChildPage = () => {
 
@@ -87,19 +98,56 @@ const ChildPage = () => {
   const [cWalletAmount, setCWalletAmount] = useState('');
 
   const [cWithdrawAmount, setWithdrawAmount] = useState(0);
+  const [api, contextHolder] = notification.useNotification();
 
-  let childInfoPromise = getChildInfo().then(
-    function(result){
-      setCName(result[0]);
-      setCSurname(result[1]);
-      setCWalletID(result[2]);
-      
-      let intVersion = 0;
-      intVersion = parseInt(result[4]);
-      intVersion /= 10**18;
-      setCWalletAmount(intVersion.toString());
+  const openNotification = (placement: NotificationPlacement, isitOK: boolean) => {
+    if (isitOK){
+      api.info({
+        message: `İşlem Başarılı`,
+        description: "Para çekme işleminiz başarıyla tamamlandı.",
+        placement,
+        style: {  color: 'rgba(0, 0, 0, 0.65)',
+                  border: '1px solid #b7eb8f',
+                  backgroundColor: '#f6ffed',
+                  borderRadius: '30px'
+                },
+        icon: <CheckOutlined style={{color:"green"}}/>
+      });
     }
-  );
+    else{
+      api.info({
+        message: `İşlem Başarısız Oldu`,
+        description: "Para çekme işlemi başarısız oldu. Lütfen halihazırda seçili olan Metamask hesabınızı kontrol edin ve yeniden deneyin.",
+        placement,
+        style: {  color: 'rgba(0, 0, 0, 0.65)',
+                  border: '1px solid #ffa39e',
+                  backgroundColor: '#fff1f0',
+                  borderRadius: '30px'
+                },
+        icon: <WarningOutlined style={{color: "red"}}/>
+      });
+    }
+
+  }
+
+
+  try{
+    let childInfoPromise = getChildInfo().then(
+      function(result){
+        setCName(result[0]);
+        setCSurname(result[1]);
+        setCWalletID(result[2]);
+        
+        let intVersion = 0;
+        intVersion = parseInt(result[4]);
+        intVersion /= 10**18;
+        setCWalletAmount(intVersion.toString());
+      }
+    );
+  }
+  catch{
+    openNotification('topRight', false);
+  }
 
   const handleWithdrawMoneyInput = (value: number) => {
     console.log('changed', value);
@@ -107,45 +155,60 @@ const ChildPage = () => {
   };
 
     return (
-    <Layout>
-      <Content >
-        <Layout >
-          <Sider style={{background:"#2A2E30"}} width={200}>
-          <img src={logo} alt="Logo" width="150%" height="200px"></img>
-            <Menu
-              defaultSelectedKeys={['']}
-              defaultOpenKeys={['']}
-              style={{background:"#2A2E30", height:"71.2vh", width:"100.5%", color:"white"}}
-              items={items}>
-            </Menu>
-          </Sider>
-          <Content>
-            <img src={backgroundImg} style={{width:'100%', position:'relative'}}></img>
-            <h2 className='main-text' style={{position:'absolute',top:'11.5vh',left:'47vw',fontSize:'36px'}}>Kripto Varlık Çek</h2>
-            <div style={{position:'absolute',top:'25vh',left:'48.5vw',fontSize:'36px'}}>
-              <Form layout='vertical' style={{paddingTop:'6.8vh', marginLeft:"auto", marginRight:"auto"}}>
-                  <Form.Item label="Kullanılabilir Bakiye">
-                      <InputNumber style={{width:'140%'}} disabled value={cWalletAmount} placeholder="Bakiye"
-                              />
-                      </Form.Item>
-                      <br />
-                      <br />
-                      <Form.Item label="Çekmek İstenilen Miktar">
-                          <InputNumber min={0} defaultValue={0} max={parseFloat(cWalletAmount)} step={0.1} onChange={handleWithdrawMoneyInput} style={{width:'140%'}} placeholder="Miktar Giriniz" 
+      <Layout>
+        <Content >
+          <Layout >
+            <Sider style={{background:"#2A2E30"}} width={200}>
+            <img src={logo} alt="Logo" width="150%" height="200px"></img>
+              <Menu
+                defaultSelectedKeys={['']}
+                defaultOpenKeys={['']}
+                style={{background:"#2A2E30", height:"71.2vh", width:"100.5%", color:"white"}}
+                items={items}>
+              </Menu>
+            </Sider>
+            <Content>
+              <img src={backgroundImg} style={{width:'100%', position:'relative'}}></img>
+              <h2 className='main-text' style={{position:'absolute',top:'11.5vh',left:'47vw',fontSize:'36px'}}>Kripto Varlık Çek</h2>
+              <div style={{position:'absolute',top:'25vh',left:'48.5vw',fontSize:'36px'}}>
+                <Form layout='vertical' style={{paddingTop:'6.8vh', marginLeft:"auto", marginRight:"auto"}}>
+                    <Form.Item label="Kullanılabilir Bakiye">
+                        <InputNumber style={{width:'140%'}} disabled value={cWalletAmount} placeholder="Bakiye"
                                 />
-                      </Form.Item>
-                      <div style={{textAlign:"center"}}>
-                      <Button shape='round' style={{marginTop:'2vh',borderColor:'#fff',marginLeft:'5vw', background:'transparent', color:'#fff'}}  onClick={() => withdrawMoneyHandler(cWithdrawAmount)}>Çek
-                       </Button>
-                      </div>
-                </Form>
-              </div>
-          </Content>
+                        </Form.Item>
+                        <br />
+                        <br />
+                        <Form.Item label="Çekmek İstenilen Miktar">
+                            <InputNumber min={0} defaultValue={0} max={parseFloat(cWalletAmount)} step={0.1} onChange={handleWithdrawMoneyInput} style={{width:'140%'}} placeholder="Miktar Giriniz" 
+                                  />
+                        </Form.Item>
+                        <div style={{textAlign:"center"}}>
 
-        </Layout>
-      </Content>
-    <Footer style={{ textAlign: 'center', background:"#2A2E30", color:"white", position:"absolute", bottom:0, width:"100%"}} className="site-layout-background">BLOXIFY ©2022 Created by Team Unity</Footer>
-  </Layout>
+                        <Context.Provider value={{ name: 'Ant Design' }}>
+                          {contextHolder}
+                          <Space>
+                            <Button shape='round' style={{marginTop:'2vh',borderColor:'#fff',marginLeft:'5vw', background:'transparent', color:'#fff'}}  onClick={
+                              async () => {if(!await withdrawMoneyHandler(cWithdrawAmount)){
+                                openNotification('topRight', false);
+                              }
+                              else{
+                                openNotification('topRight', true);
+                              }
+                            }
+                            }>Çek
+                            </Button>
+                        </Space>
+                      </Context.Provider>
+
+                        </div>
+                  </Form>
+                </div>
+            </Content>
+
+          </Layout>
+        </Content>
+      <Footer style={{ textAlign: 'center', background:"#2A2E30", color:"white", position:"absolute", bottom:0, width:"100%"}} className="site-layout-background">BLOXIFY ©2022 Created by Team Unity</Footer>
+    </Layout>
   
     );
 };
