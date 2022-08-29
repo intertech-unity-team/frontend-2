@@ -120,27 +120,38 @@ const ChildPage = () => {
               items={items}>
             </Menu>
           </Sider>
-          <Content>
-            <img src={backgroundImg} style={{width:'100%', position:'relative'}}></img>
-            <h2 className='main-text' style={{position:'absolute',top:'11.5vh',left:'47vw',fontSize:'36px'}}>Kripto Varlık Çek</h2>
-            <div style={{position:'absolute',top:'25vh',left:'48.5vw',fontSize:'36px'}}>
-            <Form layout='vertical' style={{paddingTop:'6.8vh', marginLeft:"auto", marginRight:"auto"}}>
-                  <Form.Item label="Kullanılabilir Bakiye">
-                      <InputNumber style={{width:'140%'}} disabled value={cWalletAmount} placeholder="Bakiye"
-                              />
-                      </Form.Item>
-                      <br />
-                      <br />
-                      <Form.Item label="Çekmek İstenilen Miktar">
-                          <InputNumber min={0} defaultValue={0} max={parseFloat(cWalletAmount)} step={0.1} onChange={handleWithdrawMoneyInput} style={{width:'140%'}} placeholder="Miktar Giriniz" 
-                                />
-                      </Form.Item>
-                      <div style={{textAlign:"center"}}>
-                      <Button shape='round' style={{marginTop:'2vh',borderColor:'#fff',marginLeft:'5vw', background:'transparent', color:'#fff'}}  onClick={() => withdrawMoneyHandler(cWithdrawAmount)}>Çek
-                       </Button>
-                      </div>
-                  </Form>
+          <Content style={{ padding: '0 0px', minHeight: 280}}>
+            <div className='send-money-container'>
+                  <div>
+                    <b className='centering'><i>Havuzdaki Para</i></b>
                   </div>
+                  <div className='send-money'>
+                    <div className='toplam-para-text'>
+                      <b>TOPLAM PARA</b>
+                    </div>
+                    
+                    <div className='toplam-para-input'>
+                      <InputNumber className='toplam-para' placeholder='Toplam Para' size='middle' disabled value={cWalletAmount} />
+                    </div>
+
+                    <div className='input-text'>
+                      <b>Çekmek İstenilen Miktar</b>
+                    </div>
+
+                    <div className='input'>
+                      <InputNumber className='para-girisi' placeholder="Çekmek İstenilen Miktar" size='middle' min={0} defaultValue={0} onChange={handleWithdrawMoneyInput}/>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div className='para-cek-butonu'>
+                      <Button type="primary" className='center-the-button' shape="round" size="large" onClick={() => withdrawMoneyHandler(cWithdrawAmount)}>
+                        Para Çek 
+                      </Button>
+                    </div>
+                  </div>
+              <br/>
+            </div>
+              
           </Content>
 
         </Layout>
