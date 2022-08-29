@@ -71,9 +71,13 @@ async function withdrawMoneyHandler(formAmount:number){
 
   
   console.log(walletID, releaseTime, walletBalance);
-  console.log(formAmount);
+  console.log(formAmount.toString());
 
-  const childWithdraw = await contract.child_Withdraws_Money(walletID, formAmount, releaseTime)
+
+  let x = ethers.utils.parseEther(formAmount.toString())
+  debugger;
+
+  const childWithdraw = await contract.child_Withdraws_Money(walletID, ethers.utils.parseEther(formAmount.toString()), releaseTime);
   console.log(childWithdraw);
 
   console.log(getC[4]);
@@ -139,7 +143,7 @@ const ChildPage = () => {
                     </div>
 
                     <div className='input'>
-                      <InputNumber className='para-girisi' placeholder="Çekmek İstenilen Miktar" size='middle' min={0} defaultValue={0} onChange={handleWithdrawMoneyInput}/>
+                      <InputNumber className='para-girisi' placeholder="Çekmek İstenilen Miktar" size='middle' min={0} defaultValue={0} max={parseFloat(cWalletAmount)} step={0.1} onChange={handleWithdrawMoneyInput}/>
                     </div>
                     <br/>
                     <br/>
