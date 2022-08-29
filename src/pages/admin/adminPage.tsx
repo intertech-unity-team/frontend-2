@@ -1,6 +1,6 @@
 import { Content, Footer, Header } from "antd/lib/layout/layout";
 import './style.css';
-import { Space, Table, Tag, Button, Layout } from 'antd';
+import { Space, Table, Tag, Button, Layout, MenuProps } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { ethers } from "ethers";
 import { PATENT_ADDRESS, PATENT_ABI } from "../../constants/MyProject";
@@ -10,6 +10,7 @@ import { DownOutlined, SmileOutlined } from '@ant-design/icons';
 import { Dropdown, Menu } from 'antd';
 import Sider from "antd/lib/layout/Sider";
 import { useState } from "react";
+import { ItemType } from "antd/lib/menu/hooks/useItems";
 const menu = (
   <Menu
     items={[
@@ -33,125 +34,210 @@ const menu = (
 
 
 
-
-
-
-async function getAllOfParents() {
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
-  const signer = provider.getSigner();
-  const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
-  const allP = await contract.get_All_Parents();
-  console.log(allP[0][2]);
-  
-  
-}
-
-
 let allParentsName : string[] = [];
 let allParentsSurname : string[] = [];
 let allParentsEmail : string[] = [];
 let allParentsPhoneNum : string[] = [];
+let allParentsWalletID : string[] = [];
     
 
-//getAllOfParents();
-
-
-
-
 interface DataType {
-    key: string;
-    name: string;
+  key: string;
+  name: string;
+  mail: string;
 }
 
 const columns: ColumnsType<DataType> = [
-    {
-      title: 'İsim',
-      dataIndex: 'name',
-      key: 'name',
-      render: text => <a>{text}</a>,
-    },
-    {
-        title: 'Cocuklar',
-        key: 'action',
-          render: (_, record) => (
-            <Space size="middle">
-              <Dropdown overlay={menu}>
-                <a onClick={e => e.preventDefault()}>
-                  <Space>
-                    Cocuk Listesi
-                    <DownOutlined />
-                  </Space>
-                </a>
-              </Dropdown>
-            </Space>
-          ),
-      },
-];
-
-const data: DataType[] = [
-    {
-      key: '1',
-      name: allParentsName[0],
-    },
-    {
-      key: '2',
-      name: allParentsName[0],
-    },
-    { 
-      key: '3',
-      name: allParentsName[0],
-    },
-    {
-      key: '4',
-      name: allParentsName[0],
-    },
-    {
-      key: '5',
-      name: allParentsName[0],
-    },
-    {
-      key: '5',
-      name: allParentsName[0],
-    },
-    {
-      key: '5',
-      name: allParentsName[0],
-    },
-    {
-      key: '5',
-      name: allParentsName[0],
+  {
+    title: 'İsim Soyisim',
+    dataIndex: 'name',
+    key: 'name',
+  },
+  {
+    title: 'E-posta',
+    dataIndex: 'mail',
+    key: 'mail',
+  },
+  
+  {
+      title: 'Cocuklar',
+      key: 'action',
+        render: (_, record) => (
+          <Space size="middle">
+            <Dropdown overlay={menu}>
+              <a onClick={e => e.preventDefault()}>
+                <Space>
+                  Cocuk Listesi
+                  <DownOutlined />
+                </Space>
+              </a>
+            </Dropdown>
+          </Space>
+        ),
     },
 ];
 
+
+
+
+async function get_all_of_parents() {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const signer = provider.getSigner();
+  const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
+
+  const getAllP = await contract.get_All_Parents();
+  return getAllP;
+  /*
+  // isim icin
+  getAllP.forEach((allParentsNameArr: never[]) => {
+    let parentName = allParentsNameArr[0];
+    
+    allParentsName.push(parentName);
+  });
+  // soyisim icin
+  getAllP.forEach((allParentsSurnameArr: never[]) => {
+    let parentSurname = allParentsSurnameArr[0];
+
+    allParentsSurname.push(parentSurname);
+  });
+  */
+}
+
+
+async function getParentInfo() {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const signer = provider.getSigner();
+  const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
+
+  // Parent hesabını seçip sonra aşağıyı çalıştırın
+
+  const getP = await contract.getParent();
+  return getP;
+}
 
 
 
 const AdminPanel = () => {
-  
-  
-  async function get_all_of_parents() {
+  const [updateChildNameInput, setUpdateChildNameInput] = useState("");
+  const [updateChildSurnameInput, setUpdateChildSurnameInput] = useState("");
+  const [updateChildWalletID, setUpdateChildWalletID] = useState("");
+
+  const [childrenObjectsArray, setChildrenObjectsArray] = useState([]);
+  const [childrenNamesArray, setChildrenNamesArray] = useState<string[]>([]);
+
+  const [sendMoneyAmount, setSendAmount] = useState(0);
+
+  const [pName , setPName] = useState('');
+  const [pSurname , setPSurname] = useState('');
+  const [pMail , setPMail] = useState('');
+  const [pPhoneNum , setPhoneNum] = useState('');
+  const [pWalletID , setWalletID] = useState('');
+
+  let childKey = 0;
+const [childName, setChildName] = useState("");
+
+// Dropdown menü ayarları
+const handleMenuClick: MenuProps['onClick'] = e => {
+    childKey = parseInt(e.key);
+    setChildName(childrenNamesArray[childKey]);
+
+    setUpdateChildNameInput(childrenObjectsArray[childKey][0]);
+    setUpdateChildSurnameInput(childrenObjectsArray[childKey][1]);
+    setUpdateChildWalletID(childrenObjectsArray[childKey][2]);
+  };
+
+  function itemCreator(){
+    let itemsArray: Array<ItemType>;
+    itemsArray = [];
+    let counter = 0;
+    childrenNamesArray.forEach(element => {
+      if(childrenObjectsArray[counter][2] != "0x0000000000000000000000000000000000000000"){
+        itemsArray.push(
+          {
+            label: element,
+            key: counter.toString(),
+          }
+        );
+      }
+
+      
+      counter++;
+    });
+    return itemsArray;
+  }
+
+  // Dropdown menü itemleri
+  const menu = (
+      <Menu
+        onClick={handleMenuClick}
+        items={itemCreator()}
+      />
+    );
+
+  // OnHover, childrenları çek
+  async function childMenuUpdater(){
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(PATENT_ADDRESS, PATENT_ABI, signer);
 
-    const getAllP = await contract.get_All_Parents();
-    // isim icin
-    getAllP.forEach((allParentsNameArr: never[]) => {
-      let parentName = allParentsNameArr[0];
 
-      allParentsName.push(parentName);
-    });
-    // soyisim icin
-    getAllP.forEach((allParentsSurnameArr: never[]) => {
-      let parentSurname = allParentsSurnameArr[0];
+  let parentInfoPromise = getParentInfo().then(
+    async function(result){
+      console.log(result);
+      
 
-      allParentsSurname.push(parentSurname);
-    });
+
+      const getChildren = await contract.get_Children_Of_Parent(result[2]);
+      // getChild is an array which includes the children of the current parent
+      console.log(getChildren);
+
+      let childrenArray: string[] = [];
+
+      // add all children to array and display it
+      getChildren.forEach((childArr: never[]) => {
+        let childName = childArr[0] + " " + childArr[1];
+
+        childrenArray.push(childName);
+      });
+      console.log(childrenArray);
+      setChildrenNamesArray(childrenArray);
+      setChildrenObjectsArray(getChildren);
+      
+    }
+  );
+}
+
+  
+  let parentInfoPromise = get_all_of_parents().then(
+    function(result){
+      
+      allParentsName.push(result[0][0]);
+      console.log(allParentsName);
+      setPName(allParentsName[0]);
+
+      allParentsEmail.push(result[0][3]);
+      setPMail(allParentsEmail[0]);
+
+      allParentsPhoneNum.push(result[0][4]);
+      setPhoneNum(allParentsPhoneNum[0]);
+
+      allParentsWalletID.push(result[0][2]);
+      setWalletID(allParentsWalletID[0]);
+      
+    }
+  );
+
+  
+
+  
+  const data: DataType[] = [
+    {
+      key: '1',
+      name: pName,
+      mail: pMail,
+    },
     
-  }
-  get_all_of_parents();
-  console.log(allParentsName);
-
+  ];
   
   
     return (
