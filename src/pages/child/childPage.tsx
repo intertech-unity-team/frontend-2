@@ -73,7 +73,6 @@ async function withdrawMoneyHandler(formAmount:number){
   console.log(walletID, releaseTime, walletBalance);
   console.log(formAmount.toString());
 
-
   const childWithdraw = await contract.child_Withdraws_Money(walletID, ethers.utils.parseEther(formAmount.toString()), releaseTime);
   console.log(childWithdraw);
 
