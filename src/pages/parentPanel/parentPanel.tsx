@@ -238,7 +238,7 @@ const handleMenuClick: MenuProps['onClick'] = e => {
             <Content>
               <div>
                 <img src={backgroundImg} style={{width:'100%', position:'relative'}}></img>
-                <h2 style={{position:'absolute',top:'19vh',left:'44vw',color:'#fff',fontSize:'36px'}}>Kripto Varlık Gönder</h2>
+                <h2 style={{position:'absolute',top:'19vh',left:'44vw',color:'#fff',fontSize:'36px'}}>KRİPTO VARLIK GÖNDER</h2>
                 <h2 style={{position:'absolute',top:'30vh',left:'48vw',color:'#fff',fontSize:'18px'}}>Çocuk Seç</h2>
                 <Form layout='vertical' className='input-xdlmao'>
 
@@ -256,7 +256,7 @@ const handleMenuClick: MenuProps['onClick'] = e => {
                   <Form.Item style={{position:'absolute',top:'67vh',left:'48vw',width:'40%'}}
                   name="amount"
                   rules={[{ required: true, message: 'Lütfen Gönderilecek Turarı girinz!' }]}>
-                  <InputNumber className='ilk-input' size='middle' placeholder="Miktar..." min={0} defaultValue={0} onChange={handleSendMoneyInput} style={{width: '31%'}} />;
+                  <InputNumber className='ilk-input' size='middle' placeholder="Miktar..." min={0} defaultValue={0} step={0.1} onChange={handleSendMoneyInput} style={{width: '31%'}} />;
                   </Form.Item>
                 </Form>
                 <Context.Provider value={{ name: 'Ant Design' }}>
@@ -289,7 +289,7 @@ const handleMenuClick: MenuProps['onClick'] = e => {
                   </Dropdown>
                 </div>
                 <Sider style={{background:"#2A2E30", bottom:0,position:'absolute',top:'0vh'}} width={200}>
-                  <img src={logo} alt="Logo" width="150%" height="30%"></img>
+                  <img src={logo} alt="Logo" width="150%" height="20%"></img>
                   <Menu
                     defaultSelectedKeys={['']}
                     defaultOpenKeys={['']}

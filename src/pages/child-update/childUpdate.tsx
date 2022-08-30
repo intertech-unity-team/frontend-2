@@ -245,7 +245,7 @@ const ChildUpdatePage: React.FC = () => {
                         {contextHolder}
                         
                         <Space>
-                      <Button type="primary" className='btn-update' htmlType='submit'
+                      <Button type="primary" className='btn-update' htmlType='submit' style={{backgroundColor:"green", borderColor:"green"}}
                       onClick={
                         async () => {if(!await handleUpdateChildBtn(updateChildNameInput, updateChildSurnameInput, walletID, bDayToDate)){
                           openNotification('topRight', false, "Güncellenemedi");

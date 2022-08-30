@@ -79,7 +79,7 @@ const ParentWithdrawPage = () => {
         <Content style={{ padding: '0 0px' , overflow: 'hidden'}}>
           <Layout className="site-layout-background" style={{ padding: '0px 0', backgroundImage:`url(${backgroundImg})` , backgroundPosition: 'center',backgroundSize: 'cover',backgroundRepeat: 'no-repeat',height: '100%', overflow: 'hidden'}}>
             <Sider style={{background:"#2A2E30"}} width={200}>
-              <img src={logo} alt="Logo" width="150%" height="25%"></img>
+              <img src={logo} alt="Logo" width="150%" height="20%"></img>
               <Menu
                 defaultSelectedKeys={['']}
                 defaultOpenKeys={['']}
@@ -92,7 +92,7 @@ const ParentWithdrawPage = () => {
 
           <div className='text-container'>
             <h1 style={{fontSize: '36px'}} className='text-main'>
-              Kripto Varlık Çek
+              KRİPTO VARLIK ÇEK
             </h1>
           </div>
 

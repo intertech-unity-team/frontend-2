@@ -103,7 +103,7 @@ const ChildProfilePage = () => {
           </Sider>
 
           <Content style={{ padding: '0 0px', minHeight: 280}}>
-              <h2 className='text'>Profil Sayfası</h2>
+              <h2 className='text'>PROFİLİM</h2>
               <div className='form-container'>
               <Descriptions
                 style={{padding:"1vh", width:"31vw"}}

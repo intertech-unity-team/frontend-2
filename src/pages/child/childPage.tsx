@@ -177,7 +177,7 @@ const ChildPage = () => {
             </Sider>
             <Content>
               <img src={backgroundImg} style={{width:'100%', position:'relative'}}></img>
-              <h2 className='main-text' style={{position:'absolute',top:'11.5vh',left:'47vw',fontSize:'36px'}}>Kripto Varlık Çek</h2>
+              <h2 className='main-text' style={{position:'absolute',top:'11.5vh',left:'47vw',fontSize:'36px'}}>KRİPTO VARLIK ÇEK</h2>
               <div style={{position:'absolute',top:'25vh',left:'48.5vw',fontSize:'36px'}}>
                 <Form layout='vertical' style={{paddingTop:'6.8vh', marginLeft:"auto", marginRight:"auto"}}>
                     <Form.Item label="Kullanılabilir Bakiye">

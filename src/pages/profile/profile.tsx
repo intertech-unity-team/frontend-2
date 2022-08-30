@@ -128,7 +128,7 @@ const ProfilePage: React.FC = () => {
     backgroundRepeat: 'no-repeat',
     height: '100%',}}>
           <Sider style={{background:"#2A2E30"}} width={200}>
-          <img src={logo} alt="Logo" width="150%" height="20%" style={{marginTop:'8vh'}}></img>
+          <img src={logo} alt="Logo" width="150%" height="20%" style={{marginTop:'0vh'}}></img>
             <Menu
               defaultSelectedKeys={['']}
               defaultOpenKeys={['']}
@@ -139,7 +139,7 @@ const ProfilePage: React.FC = () => {
           </Sider>
 
           <Content style={{ padding: '0 0px', minHeight: 280}}>
-              <h2 className='text'>Hesap Detaylarınız</h2>
+              <h2 className='text'>HESAP DETAYLARINIZ</h2>
               <div className='form-container'>
               <Descriptions
                 style={{padding:"1vh", width:"31vw"}}

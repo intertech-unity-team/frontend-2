@@ -147,7 +147,7 @@ const ParentPanelChildPage: React.FC = () => {
         backgroundRepeat: 'no-repeat',
         height: '100%', overflow: 'hidden'}}>
           <Sider style={{background:"#2A2E30"}} width={200}>
-          <img src={logo} alt="Logo" width="150%" height="25%"></img>
+          <img src={logo} alt="Logo" width="150%" height="20%"></img>
             <Menu
               defaultSelectedKeys={['']}
               defaultOpenKeys={['']}
@@ -191,6 +191,7 @@ const ParentPanelChildPage: React.FC = () => {
                         <Button type="default"
                         htmlType='submit'
                         className='btn-update'
+                        style={{backgroundColor:"green", borderColor:"green", color:"snow"}}
                         onClick={async () => {if(!await handleAddChildBtn(addChildNameInput, addChildSurnameInput, addChildWalletID, createChildBDay)){
                                                 openNotification('topRight', false);
                                               }
