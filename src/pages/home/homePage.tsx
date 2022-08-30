@@ -140,7 +140,7 @@ const HomePage = () => {
                   
                   <Button className="hakkimizda-btn" type="text" style={{color:'#fff',position:'absolute', textAlign:'center', left:'25vw', top:'4.5vh',fontSize:'26px'}} onClick={getHakkimizda}>Hakkımızda</Button>
                   <Button type="text" style={{color:'rgb(219, 99, 205)',position:'absolute', textAlign:'center', left:'40vw', top:'4.5vh',fontSize:'26px'}} onClick={getIletisim}>İletişim</Button>
-                  <Button type="text" style={{color:'#fff',position:'absolute', textAlign:'center', left:'52vw', top:'4.5vh',fontSize:'26px'}} onClick={() => smoothScroll(document.getElementById('metamask-text'))}>Metamask Nedir?</Button>
+                  <Button type="text" style={{color:'#FF8C04',position:'absolute', textAlign:'center', left:'52vw', top:'4.5vh',fontSize:'26px'}} onClick={() => smoothScroll(document.getElementById('metamask-text'))}>Metamask Nedir?</Button>
                   <Button className='kayit' onClick={getProperPage} type="primary" style={{position:'absolute',color:"white", backgroundColor:"rgb(219, 99, 205)", borderRadius:5,left:'54vw',top:'57vh',borderColor:'purple',width:'300px',verticalAlign:'top' }} >Metamask İle Kayıt Ol →</Button>
                   <Button className='giris' onClick={getProperPage} type="primary" style={{position:'absolute',color:"white", backgroundColor:"black", borderRadius:5,left:'54vw',top:'64vh',borderColor:'black',width:'300px' }} >Metamask İle Giriş Yap →</Button>
                   
