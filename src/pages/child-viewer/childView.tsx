@@ -141,7 +141,7 @@ const ChildViewerPage: React.FC = () => {
   if (avatarArray.length == 0){
     childrenNotFound = <div style={{textAlign:"center"}}>
       <WarningFilled style={{fontSize:"100px", marginBottom:"10vh", color:"rgb(237, 17, 35)"}}/>
-      <h1 style={{color:"snow"}}>Çocuk bulunamadı. Sağ üstteki çocuk ekle butonunu kullarak çocuklarınızı sisteme ekleyebilirsiniz.</h1>
+      <h1 style={{color:"snow"}}>Çocuk bulunamadı. Sağ üstteki "Çocuk Ekle" butonunu kullarak çocuklarınızı sisteme ekleyebilirsiniz.</h1>
 
     </div>;
   }
@@ -160,7 +160,7 @@ const ChildViewerPage: React.FC = () => {
             backgroundRepeat: 'no-repeat',
             height: '100%', overflow: 'hidden'}}>
                   <Sider style={{background:"#2A2E30"}} width={200}>
-        <img src={logo} alt="Logo" width="150%" height="25%"></img>
+        <img src={logo} alt="Logo" width="150%" height="20%"></img>
           <Menu
             defaultSelectedKeys={['']}
             defaultOpenKeys={['']}
@@ -174,10 +174,10 @@ const ChildViewerPage: React.FC = () => {
           <div className="float-container">
 
               <div className='float-child-right' style={{minWidth: screenWidth / 7, overflow: 'hidden'}}>
-                  <h1 style={{textAlign:"center", fontSize:"28px", overflow: 'hidden' , color:'#DADADA'}}>Çocuklarım</h1>
+                  <h1 style={{textAlign:"center", fontSize:"28px", overflow: 'hidden' , color:'#DADADA'}}>ÇOCUKLARIM</h1>
                   
               </div>
-              <Button className="btn" onClick={getChildAddPage} shape="round">Cocuk Ekle +</Button>
+              <Button className="btn" onClick={getChildAddPage} shape="round">ÇOCUK EKLE +</Button>
           </div>
           <div className="mid-container" style={{display:"flex",justifyContent:"space-around", width:"50%"}}>
             {childrenNotFound}

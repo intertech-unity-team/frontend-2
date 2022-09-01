@@ -91,10 +91,39 @@ async function withdrawMoneyHandler(formAmount:number){
   }
   catch{
     console.log("catched");
+    
     return false;
   }
 
 }
+
+const openNotification = (isitOK:boolean) => {
+  if(isitOK){
+    notification.open({
+      message: `İşlem Başarılı`,
+      description: "Para çekme işleminiz başarıyla tamamlandı.",
+      style: {  color: 'rgba(0, 0, 0, 0.65)',
+                  border: '1px solid #b7eb8f',
+                  backgroundColor: '#f6ffed',
+                  borderRadius: '30px'
+                },
+      icon: <CheckOutlined style={{color:"green"}}/>
+    });
+  }
+  else{
+    notification.open({
+      message: `İşlem Başarısız Oldu`,
+      description: "Para çekme işlemi başarısız oldu. Lütfen halihazırda seçili olan Metamask hesabınızı kontrol edin ve yeniden deneyin.",
+      style: {  color: 'rgba(0, 0, 0, 0.65)',
+      border: '1px solid #ffa39e',
+      backgroundColor: '#fff1f0',
+      borderRadius: '30px'
+    },
+      icon: <WarningOutlined style={{color: "red"}}/> 
+    });
+  }
+  
+};
 
 const Context = React.createContext({ name: 'Default' });
 
@@ -108,6 +137,7 @@ const ChildPage = () => {
   const [cWithdrawAmount, setWithdrawAmount] = useState(0);
   const [api, contextHolder] = notification.useNotification();
 
+  /*
   const openNotification = (placement: NotificationPlacement, isitOK: boolean) => {
     if (isitOK){
       api.info({
@@ -135,8 +165,10 @@ const ChildPage = () => {
         icon: <WarningOutlined style={{color: "red"}}/>
       });
     }
+    
 
   }
+  */
 
 
   try{
@@ -154,7 +186,7 @@ const ChildPage = () => {
     );
   }
   catch{
-    openNotification('topRight', false);
+    openNotification(false);
   }
 
   const handleWithdrawMoneyInput = (value: number) => {
@@ -177,7 +209,7 @@ const ChildPage = () => {
             </Sider>
             <Content>
               <img src={backgroundImg} style={{width:'100%', position:'relative'}}></img>
-              <h2 className='main-text' style={{position:'absolute',top:'11.5vh',left:'47vw',fontSize:'36px'}}>Kripto Varlık Çek</h2>
+              <h2 className='main-text' style={{position:'absolute',top:'11.5vh',left:'47vw',fontSize:'36px'}}>KRİPTO VARLIK ÇEK</h2>
               <div style={{position:'absolute',top:'25vh',left:'48.5vw',fontSize:'36px'}}>
                 <Form layout='vertical' style={{paddingTop:'6.8vh', marginLeft:"auto", marginRight:"auto"}}>
                     <Form.Item label="Kullanılabilir Bakiye">
@@ -200,10 +232,10 @@ const ChildPage = () => {
                             <Button 
                             shape='round' style={{marginTop:'2vh',borderColor:'#fff',marginLeft:'5vw', background:'transparent', color:'#fff'}}  onClick={
                               async () => {if(!await withdrawMoneyHandler(cWithdrawAmount)){
-                                openNotification('topRight', false);
+                                openNotification(false);
                               }
                               else{
-                                openNotification('topRight', true);
+                                openNotification(true);
                               }
                             }
                             }
