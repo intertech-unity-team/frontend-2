@@ -137,40 +137,6 @@ const ChildPage = () => {
   const [cWithdrawAmount, setWithdrawAmount] = useState(0);
   const [api, contextHolder] = notification.useNotification();
 
-  /*
-  const openNotification = (placement: NotificationPlacement, isitOK: boolean) => {
-    if (isitOK){
-      api.info({
-        message: `İşlem Başarılı`,
-        description: "Para çekme işleminiz başarıyla tamamlandı.",
-        placement,
-        style: {  color: 'rgba(0, 0, 0, 0.65)',
-                  border: '1px solid #b7eb8f',
-                  backgroundColor: '#f6ffed',
-                  borderRadius: '30px'
-                },
-        icon: <CheckOutlined style={{color:"green"}}/>
-      });
-    }
-    else{
-      api.info({
-        message: `İşlem Başarısız Oldu`,
-        description: "Para çekme işlemi başarısız oldu. Lütfen halihazırda seçili olan Metamask hesabınızı kontrol edin ve yeniden deneyin.",
-        placement,
-        style: {  color: 'rgba(0, 0, 0, 0.65)',
-                  border: '1px solid #ffa39e',
-                  backgroundColor: '#fff1f0',
-                  borderRadius: '30px'
-                },
-        icon: <WarningOutlined style={{color: "red"}}/>
-      });
-    }
-    
-
-  }
-  */
-
-
   try{
     let childInfoPromise = getChildInfo().then(
       function(result){
