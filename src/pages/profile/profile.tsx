@@ -1,6 +1,6 @@
 import React from 'react';
 import { TeamOutlined , UserOutlined, SolutionOutlined, HomeOutlined, CloseCircleOutlined } from '@ant-design/icons';
-import type { MenuProps } from 'antd';
+import { Card, MenuProps } from 'antd';
 import { Breadcrumb, Layout, Menu, Descriptions } from 'antd';
 import { Form, Input, Button } from "antd";
 import { AlignType } from 'rc-table/lib/interface';
@@ -121,29 +121,26 @@ const ProfilePage: React.FC = () => {
 
 
     return (
-    <Layout className='layout' style={{backgroundImage:`url(${backgroundImg})`}}>
-      <Content style={{ padding: '0 0px' }}>
-        <Layout className="site-layout-background" style={{ padding: '0px 0', backgroundImage:`url(${backgroundImg})` , backgroundPosition: 'center',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    height: '100%',}}>
-          <Sider style={{background:"#2A2E30"}} width={200}>
-          <img src={logo} alt="Logo" width="150%" height="20%" style={{marginTop:'0vh'}}></img>
+    <Layout className='layout'>
+      <Content>
+        <Layout className="site-layout-background">
+          <Sider style={{background:"#2A2E30", height:'200%'}} width={200}>
+          <img src={logo} alt="Logo" width="150%" height="20%"></img>
             <Menu
               defaultSelectedKeys={['']}
               defaultOpenKeys={['']}
-              style={{background:"#2A2E30", height:"71.2vh", width:"100.5%", color:"white"}}
+              style={{background:"#2A2E30", width:"100.5%", color:"white",minHeight: "80vh"}}
               items={items}>
               </Menu>
               
           </Sider>
 
-          <Content style={{ padding: '0 0px', minHeight: 280}}>
-              <h2 className='text'>HESAP DETAYLARINIZ</h2>
-              <div className='form-container'>
+          <Content>
+            <Card className='profile-card'>
+              <h2 className='header'>HESAP DETAYLARINIZ</h2>
               <Descriptions
-                style={{padding:"1vh", width:"31vw"}}
-                size='middle'
+                style={{width:"80%",position:'absolute', marginRight:'2%', marginLeft:'8%'}}
+                size='small'
                 bordered
                 column={1}
                 layout= 'vertical'
@@ -151,8 +148,11 @@ const ProfilePage: React.FC = () => {
                 <Descriptions.Item label="Ad" contentStyle={{color:'#DADADA'}}>{pName}</Descriptions.Item>
                 <Descriptions.Item label="Soyad" contentStyle={{color:'#DADADA'}}>{pSurname}</Descriptions.Item>
                 <Descriptions.Item label="Wallet ID" contentStyle={{color:'#DADADA'}}>{pWalletID}</Descriptions.Item>
+                <Descriptions.Item label="E-Posta" contentStyle={{color:'#DADADA'}}>x@gmail.com</Descriptions.Item>
+                <Descriptions.Item label="Telefon Numarası" contentStyle={{color:'#DADADA'}}>5050523535</Descriptions.Item>
               </Descriptions>
-              </div>
+              
+            </Card>
           </Content>
 
         </Layout>

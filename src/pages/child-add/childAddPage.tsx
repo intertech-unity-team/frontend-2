@@ -1,6 +1,6 @@
 import React from 'react';
 import { TeamOutlined , UserOutlined, SolutionOutlined, WarningOutlined, CheckOutlined, HomeOutlined } from '@ant-design/icons';
-import { DatePicker, MenuProps } from 'antd';
+import { Card, DatePicker, MenuProps } from 'antd';
 import {  Layout, Menu } from 'antd';
 import { Form, Input, Button, Dropdown, Space } from "antd";
 import { useState } from 'react';
@@ -137,16 +137,10 @@ const ParentPanelChildPage: React.FC = () => {
       
 
     return (
-    <Layout className='layout' style={{backgroundImage:`url(${backgroundImg})`, backgroundPosition: 'center',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    height: '100%', overflow: 'hidden', position: 'fixed'}}>
-      <Content style={{ padding: '0 0px' , overflow: 'hidden'}}>
-        <Layout className="site-layout-background" style={{ padding: '0px 0', backgroundImage:`url(${backgroundImg})` , backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        height: '100%', overflow: 'hidden'}}>
-          <Sider style={{background:"#2A2E30"}} width={200}>
+    <Layout className='layout'>
+      <Content style={{overflow: 'hidden'}}>
+        <Layout className="site-layout-background" >
+          <Sider style={{background:"#2A2E30",minHeight: "100vh"}} width={200}>
           <img src={logo} alt="Logo" width="150%" height="20%"></img>
             <Menu
               defaultSelectedKeys={['']}
@@ -157,11 +151,9 @@ const ParentPanelChildPage: React.FC = () => {
           </Sider>
 
           <Content style={{ padding: '0 50px 0', minHeight: 280, overflow: 'hidden'}}>
-                        
-            <div className="float-container">
 
-              <div className='float-child-right' style={{minWidth: screenWidth / 7, overflow: 'hidden'}}>
-                <h1 style={{textAlign:"center", fontSize:"28px", overflow: 'hidden', paddingBottom: '7vh', color:'#DADADA'}}>Yeni Çocuk Ekle</h1>
+            <Card className='form-card'>
+                <h1 className='header'>YENİ ÇOCUK EKLE</h1>
                   <Form layout='vertical' >
                   <Form.Item label="Çocuk İsmi"
                   name="username"
@@ -173,7 +165,7 @@ const ParentPanelChildPage: React.FC = () => {
                       rules={[{ required: true, message: 'Lütfen Çocuğun Soyadını Giriniz!' }]}>
                       <Input placeholder="Soyad giriniz" onChange={e => setAddChildSurnameInput(e.target.value)}/>
                     </Form.Item>
-                      <Form.Item label="Çocuğun Metamask Cüzdan Adresi"
+                      <Form.Item label="Çocuğun Cüzdan Adresi"
                       name="address"
                       rules={[{ required: true, message: 'Lütfen Çocuğun Metamask Cüzdan Adresini Giriniz!' }]}
                       >
@@ -190,6 +182,7 @@ const ParentPanelChildPage: React.FC = () => {
                         <Space>
                         <Button type="default"
                         htmlType='submit'
+                        size='large'
                         className='btn-update'
                         style={{backgroundColor:"green", borderColor:"green", color:"snow"}}
                         onClick={async () => {if(!await handleAddChildBtn(addChildNameInput, addChildSurnameInput, addChildWalletID, createChildBDay)){
@@ -208,8 +201,7 @@ const ParentPanelChildPage: React.FC = () => {
                     </div>
                 
                     </Form>
-                </div>
-              </div>
+                </Card>     
           </Content>
 
         </Layout>

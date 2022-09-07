@@ -4,79 +4,93 @@
     height: 31px;
     margin: 16px 24px 16px 0;
     background: rgba(255, 255, 255, 0);
-  }
+}
+
+.ant-row-rtl #components-layout-demo-top-side-2 .logo {
+  float: right;
+  margin: 16px 0 16px 24px;
+}
+
+.site-layout-background {
+  background:rgba(214, 214, 210, 1);
+  min-height: "100vh";
+}
+
+.layout {
+  height:100vh;
+  width: 100vw;
+  background:rgba(214, 214, 210, 1);
+}
+
+.table{
+  padding-top: 3vh;
+}
+
+.table-col{
+  background: rgba(255, 235, 183, 0.8);
+}
+
+
+.send-money-container{
+  padding-left: 50%;
+  padding-right: 10%;
+  padding-top: 10%;
   
-  .ant-row-rtl #components-layout-demo-top-side-2 .logo {
-    float: right;
-    margin: 16px 0 16px 24px;
-  }
+}
+
+
+.send-money{
+  background: rgba(255, 235, 183, 0.8);
+}
+
+.centering{
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+.center-the-button {
+  margin-top:2cm;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background-color: rgba(42, 46, 48, 1);
+  border: 0;
+  border-radius: 20px;
   
-  .site-layout-background {
-    background:rgba(214, 214, 210, 1);
-  }
+}
 
-  .layout {
-    height:100vh;
-    width: 100vw;
-    background:rgba(214, 214, 210, 1);
-  }
+.header{
+  color:#DADADA;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  text-align: center;
+  font-size: 2vw;
+}
 
-  .table{
-    padding-top: 3vh;
-  }
+.profile-card{
+  background-color: rgb(87, 95, 99);
+  border-radius: 50px;
+  border-color: rgb(146, 156, 161);
+  box-shadow: 8px 16px 16px 8px rgba(0,0,0,0.2);
+  transition: 0.3s;
+  padding-bottom: 50vh;
+  position:relative;
+  max-height: 70vh;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(100px);
+  min-width: 300px;
+  min-height: 550px;
+  width: 50vw;
+  margin-top: 10vh;
+  margin-left: 18vw;
+  margin-right: 20vw;
+}
 
-  .table-col{
-    background: rgba(255, 235, 183, 0.8);
-  }
-
-  .table-row{
-    
-  }
-
-  .send-money-container{
-    padding-left: 50%;
-    padding-right: 10%;
-    padding-top: 10%;
-    
-  }
-
-  .form-container{
-    
-
-    margin-top: 2.2%;
-    padding-left: 12.75%;
-    
-  }
-
-  .send-money{
-    background: rgba(255, 235, 183, 0.8);
-  }
-
-  .centering{
-    display: flex;
-    align-items: center;
-    justify-content: center
-  }
-
-  .center-the-button {
-    margin-top:2cm;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    background-color: rgba(42, 46, 48, 1);
-    border: 0;
-    border-radius: 20px;
-    
-  }
-
-  .text {
-    color:#DADADA;
-    text-align: center;
-    margin-top: 12.4vh;
-    margin-right: 32vw;
-    
-  }
+.profile-card:hover{
+  box-shadow: 12px 24px 24px 12px rgba(0,0,0,0.4);
+}
   
 [title="Ad"] {
     color: #DADADA !important;

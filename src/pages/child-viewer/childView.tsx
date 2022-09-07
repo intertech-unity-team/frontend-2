@@ -141,7 +141,7 @@ const ChildViewerPage: React.FC = () => {
   if (avatarArray.length == 0){
     contentToRender = 
     <Card className="warning-card">
-      <h1 style={{textAlign:"center", fontSize:"28px" , color:'rgb(226, 232, 223)', marginBottom:"15%"}}>ÇOCUKLARIM</h1>
+      <h1 className="warning-card-text">ÇOCUKLARIM</h1>
       <WarningFilled className="warning-icon"/>
       <h1 style={{color:"rgb(204, 192, 192)"}}>Çocuk bulunamadı! Aşağıdaki "Çocuk Ekle" butonunu kullarak çocuklarınızı sisteme ekleyebilirsiniz.</h1>
       <br/>
@@ -155,7 +155,7 @@ const ChildViewerPage: React.FC = () => {
     contentToRender = 
     <Card
     className="children-card">
-      <h1 style={{fontSize:"28px" , color:'rgb(226, 232, 223)'}}>ÇOCUKLARIM</h1>
+      <h1 className="children-card-text">ÇOCUKLARIM</h1>
         <Button className="btn" onClick={getChildAddPage} shape="round" style={{left:"75%", right:"5%", marginTop:"2.5%", position:"absolute"}}>
           <UserAddOutlined/>
           ÇOCUK EKLE</Button>

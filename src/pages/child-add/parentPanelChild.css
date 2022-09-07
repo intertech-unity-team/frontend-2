@@ -15,6 +15,7 @@
     border-radius: 30px;
     margin-top: 1.2vh;
     background-color: #11cb24;
+    font-size: large;
     
 }
 .btn-delete{
@@ -23,7 +24,44 @@
 }
 .label-style{
     text-align: center;
+    color:#DADADA;
 }
+
+.header{
+    text-align:"center";
+    font-size:"32px";
+    overflow: 'hidden';
+    padding-bottom: '7vh';
+    padding-top:"5vh";
+    color:'#DADADA';
+}
+
+.form-card{
+    background-color: rgb(87, 95, 99);
+    border-radius: 50px;
+    border-color: rgb(146, 156, 161);
+    box-shadow: 8px 16px 16px 8px rgba(0,0,0,0.2);
+    transition: 0.3s;
+    padding-bottom: 50vh;
+    position:relative;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(100px);
+    min-width: 300px;
+    min-height: 600px;
+    max-height: 70vh;
+    width: 30vw;
+    margin-top: 10vh;
+    margin-left: 25vw;
+    margin-right: 25vw;
+  }
+
+.form-card:hover{
+    box-shadow: 12px 24px 24px 12px rgba(0,0,0,0.4);
+}
+
+.ant-form-item-label>label { 
+    font-size:16px;
+ }
 
 [title="Çocuk İsmi"] {
     color: #DADADA !important;
@@ -33,7 +71,7 @@
     color: #DADADA !important;
 }
 
-[title="Çocuğun Metamask Cüzdan Adresi"] {
+[title="Çocuğun Cüzdan Adresi"] {
     color: #DADADA !important;
 }
 [title="Çocuğun Doğum Tarihi"] {

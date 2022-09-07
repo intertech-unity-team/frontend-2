@@ -1,35 +1,54 @@
-.float-container {
-    padding: 12.5vh;
-}
-
-.float-child-left {
-    width: 45%;
-    float: left;
-    padding: 45px;
-    background-color: blanchedalmond;
-    border-radius: 50px;
-}
-.float-child-right {
-    width: 45%;
-    background-color: blanchedalmond;
-    border-radius: 50px;
-    margin-bottom: 100px;
-    margin-left: 22%;
-    background: transparent;    
-}
-
 .btn-update{
     border-radius: 30px;
-    margin-top: 2.2vh;
-    background-color: #DADADA;
-    
+    background-color:"green";
+    border-color:"green";
+    display: flex;
+    margin-right: 5%;
 }
+
+.btn-update:hover{
+    background-color: rgb(57, 146, 13);
+}
+
+
 .btn-delete{
     border-radius: 30px;
-
+    display: flex;
+    margin-top: 10%;
+    margin-left: 5%;
 }
+
+.btn-container{
+    display: flex;
+    justify-content: center;
+    padding-top: 5%;
+}
+
 .label-style{
     text-align: center;
+}
+
+.child-update-card{
+    background-color: rgb(87, 95, 99);
+    border-radius: 50px;
+    border-color: rgb(146, 156, 161);
+    box-shadow: 8px 16px 16px 8px rgba(0,0,0,0.2);
+    transition: 0.3s;
+    padding-bottom: 50vh;
+    position:relative;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(100px);
+    min-width: 400px;
+    min-height: 600px;
+    max-height: 70vh;
+    width: 30vw;
+    margin-top: 10vh;
+    margin-left: 25vw;
+    margin-right: 25vw;
+  }
+  
+.child-update-card:hover{
+box-shadow: 12px 24px 24px 12px rgba(0,0,0,0.4);
 }
 
 [title="Çocuk İsmi"] {

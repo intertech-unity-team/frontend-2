@@ -1,6 +1,6 @@
 import React from 'react';
 import { TeamOutlined , UserOutlined, SolutionOutlined, CheckOutlined, WarningOutlined, HomeOutlined } from '@ant-design/icons';
-import { DatePicker, MenuProps, notification } from 'antd';
+import { Card, DatePicker, MenuProps, notification } from 'antd';
 import { Breadcrumb, Layout, Menu, Descriptions } from 'antd';
 import { Form, Input, Button, Dropdown, Space } from "antd";
 import { useState } from 'react';
@@ -196,42 +196,34 @@ const ChildUpdatePage: React.FC = () => {
     dayjs(bDayToDate).format('DD/MM/YYYY');
 
     return (
-    <Layout className='layout' style={{backgroundImage:`url(${backgroundImg})`, backgroundPosition: 'center',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    height: '100%', overflow: 'hidden', position: 'fixed'}}>
-      <Content style={{ padding: '0 0px' , overflow: 'hidden'}}>
-        <Layout className="site-layout-background" style={{ padding: '0px 0', backgroundImage:`url(${backgroundImg})` , backgroundPosition: 'center',
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
-          height: '100%', overflow: 'hidden'}}>
+    <Layout className='layout' >
+      
+        <Layout className="site-layout-background" style={{ overflow: 'hidden'}}>
           <Sider style={{background:"#2A2E30"}} width={200}>
-          <img src={logo} alt="Logo" width="150%" height="25%"></img>
+          <img src={logo} alt="Logo" width="145%" height="15%"></img>
             <Menu
               defaultSelectedKeys={['']}
               defaultOpenKeys={['']}
-              style={{background:"#2A2E30", height:"71.2vh", width:"100.5%", color:"white"}}
+              style={{background:"#2A2E30", height:"100vh", width:'100.5%', color:"white"}}
               items={items}>
               </Menu>
           </Sider>
 
           <Content style={{ padding: '0 50px 0', minHeight: 280, overflow: 'hidden'}}>
                         
-            <div className="float-container">
-              
-              <div className='float-child-right' style={{minWidth: screenWidth / 7}}>
-                <h1 style={{textAlign:"center", fontSize:"28px", overflow: 'hidden' , color:'#DADADA'}}>Çocuk Bilgilerini Güncelle</h1>
+              <Card className='child-update-card'>
+                <h1 style={{textAlign:"center", fontSize:"32px", overflow: 'hidden' , color:'#DADADA'}}>ÇOCUK BİLGİLERİNİ GÜNCELLE</h1>
                 <br/>
                 <Form layout='vertical'>
                   <Form.Item label="Çocuk Adı"
                   name="name"
-                  rules={[{ required: true, message: 'Lütfen Çocuğun Adını Giriniz!' }]}>
-                    <Input placeholder={name} onChange={e => setUpdateChildNameInput(e.target.value)}  disabled={false}/>
+                  rules={[{ required: true, message: 'Lütfen Çocuk İçin Yeni Ad Giriniz!' }]}>
+                    <Input defaultValue={name} onChange={e => setUpdateChildNameInput(e.target.value)}  disabled={false}/>
                   </Form.Item>
                   <Form.Item label="Çocuk Soyadı"
                   name="surname"
-                  rules={[{ required: true, message: 'Lüften Çocuğun Soyadını Giriniz!' }]}>
-                    <Input placeholder={surname} onChange={e => setUpdateChildSurnameInput(e.target.value)}  disabled={false}/>
+                  rules={[{ required: true, message: 'Lüften Çocuk İçin Yeni Soyad Giriniz!' }]}>
+                    <Input defaultValue={surname} onChange={e => setUpdateChildSurnameInput(e.target.value)}  disabled={false}/>
                   </Form.Item>
                   <Form.Item label="Çocuğun Metamask Cüzdan Adresi">
                     <Input value={walletID} disabled/>
@@ -239,51 +231,59 @@ const ChildUpdatePage: React.FC = () => {
                   <Form.Item label="Çocuğun Doğum Tarihi">
                   <Input value={bDayToDate} disabled/>
                   </Form.Item>
-                    <div style={{textAlign:"center"}}>
-
+                    
+                  <span className='btn-container'>
                     <Context.Provider value={{ name: 'Ant Design' }}>
                         {contextHolder}
                         
                         <Space>
-                      <Button type="primary" className='btn-update' htmlType='submit' style={{backgroundColor:"green", borderColor:"green"}}
-                      onClick={
-                        async () => {if(!await handleUpdateChildBtn(updateChildNameInput, updateChildSurnameInput, walletID, bDayToDate)){
-                          openNotification('topRight', false, "Güncellenemedi");
-                        }
-                        else{
-                          openNotification('topRight', true, "Güncellendi");
-                        }
-                      }
-                    
-                      }
-                      >Çocuk Bilgilerini Güncelle</Button>
 
-                    </Space>
-                    
-                        <Space>
+                      
+                        <Button type="primary" className='btn-update' htmlType='submit'
+                        size='large'
+                        onClick={
+                          async () => {if(!await handleUpdateChildBtn(updateChildNameInput, updateChildSurnameInput, walletID, bDayToDate)){
+                            openNotification('topRight', false, "Güncellenemedi");
+                          }
+                          else{
+                            openNotification('topRight', true, "Güncellendi");
+                          }
+                        }
+                      
+                        }
+                        >Çocuk Bilgilerini Güncelle</Button>
 
-                      <Button
-                      onClick={
-                        async () => {if(!await handleDeleteChildBtn(walletID)){
-                          openNotification('topRight', false, "Sistemden Silinemedi");
+                      </Space>
+                      
+                          <Space>
+
+                        <Button
+                        size='large'
+                        onClick={
+                          async () => {if(!await handleDeleteChildBtn(walletID)){
+                            openNotification('topRight', false, "Sistemden Silinemedi");
+                          }
+                          else{
+                            openNotification('topRight', true, "Silindi");
+                          }
                         }
-                        else{
-                          openNotification('topRight', true, "Silindi");
                         }
-                      }
-                      }
-                       type="primary" danger className='btn-delete'>Çocuğu Sil</Button>
-                       </Space>
+                        type="primary" danger className='btn-delete'>Çocuğu Sil
+                        </Button>
+                      
+
+                      </Space>
                     </Context.Provider>
-
-                    </div>
+                  
+                  </span>
+                    
                 </Form>
-              </div>    
-              </div>
+              </Card>
           </Content>
 
         </Layout>
-      </Content>
+        
+
     <Footer style={{ textAlign: 'center', background:"#2A2E30", color:"white", position:"absolute", bottom:0, width:"100%"}} className="site-layout-background">BLOXIFY ©2022 Created by Team Unity</Footer>
   </Layout>
     );
