@@ -1,13 +1,11 @@
-import './signInPage.css';
-import { Layout, Menu, Form, Input, Button, InputNumber, notification, Space } from 'antd';
+import { Layout, Menu, Form, Input, Button, InputNumber, notification, Space, Card } from 'antd';
 import React, { useState } from 'react';
 import backgroundImg from '../../assets/img/kayit-ekran-background.png';
 import { PATENT_ABI, PATENT_ADDRESS } from '../../constants/MyProject';
 import { ethers } from 'ethers';
 import { CheckOutlined, WarningOutlined } from '@ant-design/icons';
 import type { NotificationPlacement } from 'antd/es/notification';
-import SkeletonInput from 'antd/lib/skeleton/Input';
-
+import './signInPage.css';
 
 const { Header, Content } = Layout;
 
@@ -39,7 +37,6 @@ const SignInPage: React.FC = () => {
 
   const [parentName, setParentName] = useState("");
   const [parentSurname, setParentSurname] = useState("");
-  const [parentWalletID, setWalletID] = useState("");
   const [parentEmail, setEmail] = useState("");
   const [parentPhoneNumber, setPhoneNumber] = useState("");
   const [api, contextHolder] = notification.useNotification();
@@ -80,47 +77,41 @@ const SignInPage: React.FC = () => {
 
   return(
     <Layout className="layout">
-      
-      <Content style={{ padding: '0 50px', backgroundImage:`url(${backgroundImg})`, backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        height: '100%',
-         }}>
-        <div className="site-layout-content">
-          <h1 style={{textAlign:"center", paddingTop:"8vh", fontSize:"48px", color:'#DADADA'}}>KAYIT OL</h1>
-          
+      <Content style={{height: '100%'}}>
+        <Card className='sign-in-card'>
+          <h1 style={{textAlign:"center", fontSize:"48px", color:'#DADADA'}}>KAYIT OL</h1>
               
-              <Form layout='vertical' style={{paddingTop:'6.8vh',width:"20%", marginLeft:"auto", marginRight:"auto"}}>
-                <Form.Item label="Metamask Cüzdan Adresiniz">
-                    <Input disabled
-                            value={window.ethereum.selectedAddress}/>
-                </Form.Item>
-                <Form.Item label="Adınız"
-                name="Adiniz"
-                rules={[{ required: true, message: 'Lütfen Adınızı Giriniz!' }]}>
-                    <Input placeholder="Adınızı giriniz"
-                            onChange={e => setParentName(e.target.value)} />
-                </Form.Item>
-                <Form.Item label="Soyadınız"
-                name="Soyadiniz"
-                  rules={[{ required: true, message: 'Lütfen Soyadınızı Giriniz!' }]}>
-                    <Input placeholder="Soyadınızı giriniz" 
-                          onChange={e => setParentSurname(e.target.value)}/>
-                </Form.Item>
-                <Form.Item label="E-posta Adresi"
-                name="e-mail"
-                  rules={[{ required: true, message: 'Lütfen E-posta Adresinizi Giriniz!' }]}>
-                <Input placeholder="E-posta Adresinizi Giriniz"
-                        onChange={e => setEmail(e.target.value)} />
-                </Form.Item>
-                <Form.Item
-                name="Telno"
-                label="Telefon Numarası"
-                rules={[{ required: true, message: 'Lütfen Telefonunuzu Giriniz!' }]}
-                >
-                <Input placeholder="Telefon Numaranızı Giriniz"
-                        onChange={e => setPhoneNumber(e.target.value)} />
-                </Form.Item>
+            <Form layout='vertical' className='form'>
+              <Form.Item label="Metamask Cüzdan Adresiniz">
+                  <Input disabled
+                          value={window.ethereum.selectedAddress}/>
+              </Form.Item>
+              <Form.Item label="Adınız"
+              name="Adiniz"
+              rules={[{ required: true, message: 'Lütfen Adınızı Giriniz!' }]}>
+                  <Input placeholder="Adınızı giriniz"
+                          onChange={e => setParentName(e.target.value)} />
+              </Form.Item>
+              <Form.Item label="Soyadınız"
+              name="Soyadiniz"
+                rules={[{ required: true, message: 'Lütfen Soyadınızı Giriniz!' }]}>
+                  <Input placeholder="Soyadınızı giriniz" 
+                        onChange={e => setParentSurname(e.target.value)}/>
+              </Form.Item>
+              <Form.Item label="E-posta Adresi"
+              name="e-mail"
+                rules={[{ required: true, message: 'Lütfen E-posta Adresinizi Giriniz!' }]}>
+              <Input placeholder="E-posta Adresinizi Giriniz"
+                      onChange={e => setEmail(e.target.value)} />
+              </Form.Item>
+              <Form.Item
+              name="Telno"
+              label="Telefon Numarası"
+              rules={[{ required: true, message: 'Lütfen Telefonunuzu Giriniz!' }]}
+              >
+              <Input placeholder="Telefon Numaranızı Giriniz"
+                      onChange={e => setPhoneNumber(e.target.value)} />
+              </Form.Item>
                       
 
                       <Form.Item style={{textAlign:"center"}}>
@@ -141,7 +132,7 @@ const SignInPage: React.FC = () => {
                                   delay(5000).then(() =>window.location.href="http://localhost:3000/profile");
                                 }
                               }
-                              } type="primary" className='btn-login' size='large' shape="round" style={{borderColor:'rgba(60, 60, 60, 1)',backgroundColor:"rgba(60, 60, 60, 1)"}}>Kaydol
+                              } type="primary" className='btn-login' size='large' shape="round">Kaydol
                               </Button>
                               </Space>
                         </Context.Provider>
@@ -149,7 +140,7 @@ const SignInPage: React.FC = () => {
 
                   </Form>
                 
-        </div>
+        </Card>
       </Content>
     </Layout>
   );

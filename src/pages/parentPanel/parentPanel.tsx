@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { HomeOutlined, UserOutlined, TeamOutlined, WarningOutlined,  SolutionOutlined, CheckOutlined, DownOutlined } from '@ant-design/icons';
-import { Dropdown, Form, Input, InputNumber, MenuProps, Slider, Space } from 'antd';
+import { Dropdown, Form, Input, InputNumber, MenuProps, Row, Slider, Space } from 'antd';
 import { Layout, Menu } from 'antd';
 import { Table, Card, Button } from "antd";
 
@@ -104,6 +104,8 @@ async function sendButtonHandler (updateChildWalletID:string, sendMoneyAmount:nu
 
 };
 
+
+
 const Context = React.createContext({ name: 'Default' });
 
 const ParentPanel = () => {
@@ -116,10 +118,18 @@ const ParentPanel = () => {
   const [childrenNamesArray, setChildrenNamesArray] = useState<string[]>([]);
 
   const [sendMoneyAmount, setSendAmount] = useState(0);
-  
+  const [screenWidth, setScreenWidth] = useState(0);
+  const [screenHeight, setScreenHeight] = useState(0);
 
 let childKey = 0;
 const [childName, setChildName] = useState("");
+
+window.addEventListener("resize", myFunc);
+
+function myFunc(){
+  setScreenWidth(window.innerWidth);
+  setScreenHeight(window.innerHeight);
+}
 
 // Dropdown menü ayarları
 const handleMenuClick: MenuProps['onClick'] = e => {
@@ -230,80 +240,75 @@ const handleMenuClick: MenuProps['onClick'] = e => {
       }
 
     }
-    
+
     return (
       <Layout>
+        <Sider className='sider' width={200} hidden={(screenWidth > 700 || screenWidth <= 0) ? false:true}>
+          <img src={logo} alt="Logo" width="150%" height="20%"></img>
+          <Menu
+            defaultSelectedKeys={['']}
+            defaultOpenKeys={['']}
+            style={{background:"#2A2E30", width:"100.5%", color:"white"}}
+            items={items}>
+          </Menu>
+        </Sider>
         <Content>
-          <Layout>
-            <Content>
-              <div>
-                <img src={backgroundImg} style={{width:'100%', position:'relative'}}></img>
-                <h2 style={{position:'absolute',top:'19vh',left:'44vw',color:'#fff',fontSize:'36px'}}>KRİPTO VARLIK GÖNDER</h2>
-                <h2 style={{position:'absolute',top:'30vh',left:'48vw',color:'#fff',fontSize:'18px'}}>Çocuk Seç</h2>
-                <Form layout='vertical' className='input-xdlmao'>
-
-                  <Form.Item style={{position:'absolute',top:'37vh',left:'48vw',width:'40%'}} label="Çocuk Adı">
-                    <Input className='ilk-input' placeholder="Çocuk Adı" size='middle' style={{width: '31%'}} value={updateChildNameInput + " " + updateChildSurnameInput} disabled ></Input>
-                  </Form.Item>
-
-                  <Form.Item style={{position:'absolute',top:'48vh',left:'48vw',width:'40%'}} label="Çocuk Wallet ID">
-                    <Input className='ilk-input' size='middle' style={{width: '31%'}}  value={updateChildWalletID} disabled></Input>
-                  </Form.Item>
-                  
-                  <h2 style={{position:'absolute',top:'61vh',left:'48vw',color:'#fff',fontSize:'18px'}}>
-                    Gönderilecek Tutar
-                  </h2>
-                  <Form.Item style={{position:'absolute',top:'67vh',left:'48vw',width:'40%'}}
-                  name="amount"
-                  rules={[{ required: true, message: 'Lütfen Gönderilecek Turarı girinz!' }]}>
-                  <InputNumber className='ilk-input' size='middle' placeholder="Miktar..." min={0} defaultValue={0} step={0.1} onChange={handleSendMoneyInput} style={{width: '31%'}} />;
-                  </Form.Item>
-                </Form>
-                <Context.Provider value={{ name: 'Ant Design' }}>
-                  {contextHolder}
-                  <Space>
-                    <Button type='default' htmlType='submit' shape='round' onClick={
-                      async () => {if(!await sendButtonHandler(updateChildWalletID, sendMoneyAmount)){
-                        openNotification('topRight', false);
-                      }
-                      else{
-                        openNotification('topRight', true);
-                      }
-                    }
-                    } 
-                      
-                    style={{borderColor:'#fff',background:'transparent',color:'#fff',position:'absolute',top:'73vh',left:'49.2vw',width:'10vw'}}>GÖNDER</Button>
+          <Card
+          className='form-card'>
+            <Form layout='vertical' className='form'>
+              <h2 style={{color:"#DADADA", fontSize:"32px", marginBottom:"10%"}}>KRİPTO VARLIK GÖNDER</h2>
+              <Form.Item label="Çocuk Seç"
+              name="Select Child"
+              rules={[{ required: true, message: 'Lütfen Gönderilecek Çocuğu Seçiniz!' }]}>
+              <Dropdown className='dropdown'
+              overlay={menu}>
+                <Button
+                onMouseOver={childMenuUpdater}
+                >
+                    <Space>
+                    {childName}
+                      <DownOutlined />
                     </Space>
-                    </Context.Provider>
-                
-                <div style={{position:'absolute',top:'30vh',left:'54vw',backgroundColor:'#fff'}}>
-                  <Dropdown overlay={menu}>
-                        <Button
-                        onMouseOver={childMenuUpdater}
-                        >
-                            <Space>
-                            {childName}
-                            <DownOutlined />
-                            </Space>
-                            </Button>
-                  </Dropdown>
-                </div>
-                <Sider style={{background:"#2A2E30", bottom:0,position:'absolute',top:'0vh'}} width={200}>
-                  <img src={logo} alt="Logo" width="150%" height="20%"></img>
-                  <Menu
-                    defaultSelectedKeys={['']}
-                    defaultOpenKeys={['']}
-                    style={{background:"#2A2E30", height:"119.79vh", width:"100.5%", color:"white"}}
-                    items={items}>
-                  </Menu>
-          
-                </Sider>
-                
-                <Footer style={{ textAlign: 'center', background:"#2A2E30", color:"white", position:"absolute", bottom:0, width:"100%",top:'145vh'}} className="site-layout-background">BLOXIFY ©2022 Created by Team Unity</Footer>
-              </div>
-            </Content>
-          </Layout>
+                  </Button>
+              </Dropdown>
+              
+              </Form.Item>
+
+              <Form.Item label="Çocuk Adı">
+                <Input className='ilk-input' placeholder="Çocuk Adı" size='middle' style={{width: '31%'}} value={updateChildNameInput + " " + updateChildSurnameInput} disabled ></Input>
+              </Form.Item>
+
+              <Form.Item label="Çocuk Wallet ID">
+                <Input className='ilk-input' size='middle' style={{width: '31%'}}  value={updateChildWalletID} disabled></Input>
+              </Form.Item>
+              
+              <Form.Item
+              label='Gönderilecek Tutar'
+              name="amount"
+              rules={[{ required: true, message: 'Lütfen Gönderilecek Turarı girinz!' }]}>
+              <InputNumber className='ilk-input' size='middle' placeholder="Miktar..." min={0} defaultValue={0} step={0.1} onChange={handleSendMoneyInput} style={{width: '31%'}} />
+              </Form.Item>
+
+            <Context.Provider value={{ name: 'Ant Design' }}>
+              {contextHolder}
+              <Space>
+                <Button type='default' htmlType='submit' shape='round' className='btn' onClick={
+                  async () => {if(!await sendButtonHandler(updateChildWalletID, sendMoneyAmount)){
+                    openNotification('topRight', false);
+                  }
+                  else{
+                    openNotification('topRight', true);
+                  }
+                }
+                } 
+                  
+                >GÖNDER</Button>
+                </Space>
+                </Context.Provider>  
+            </Form>       
+          </Card>
         </Content>
+        <Footer style={{ textAlign: 'center', background:"#2A2E30", color:"white", position:"fixed", bottom:0, width:"100%"}} hidden={(screenHeight > 600 || screenHeight <= 0) ? false:true}>BLOXIFY ©2022 Created by Team Unity</Footer>
       </Layout>
       
   

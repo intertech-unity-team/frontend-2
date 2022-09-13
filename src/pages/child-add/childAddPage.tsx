@@ -171,7 +171,7 @@ const ParentPanelChildPage: React.FC = () => {
                       >
                           <Input placeholder="Cüzdan Adresi giriniz" onChange={e => setAddChildWalletID(e.target.value)}/>
                       </Form.Item>
-                      <Form.Item label="Çocuğun Doğum Tarihi"
+                      <Form.Item label="Çocuğun Doğum Tarihi" style={{textAlign:"center"}}
                       name="bDay"
                       rules={[{ required: true, message: 'Lütfen Çocuğun Doğum Tarihini Seçiniz!' }]}>
                         <DatePicker format={'DD/MM/YYYY'} onChange={(_, dateString) => setCreateChildBDay(dateString)} placeholder="Tarih Seçiniz" style={{width:"50%"}}/>

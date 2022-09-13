@@ -11,8 +11,14 @@
   margin: 16px 0 16px 24px;
 }
 
-.site-layout-background {
-  background:rgba(214, 214, 210, 1);
+.sider{
+  background:#2A2E30;
+  height:100vh;
+}
+
+.dropdown{
+  min-width: 20%;
+  position: relative;
 }
 
 .layout {
@@ -20,52 +26,53 @@
   width: 100vw;
 }
 
-.table{
-  padding-top: 3vh;
+.form{
+  width: 90%;
+  height: 100%;
+  position: absolute;
+  margin-top: 10%;
 }
 
-.table-col{
-  background: rgba(52, 49, 42, 0.8);
-}
-
-.table-row-light {
-  background-color: #ffffff !important;
-}
-.table-row-dark {
-  background-color: #fbfbfb;
-}
-
-.ant-table .ant-table-container .ant-table-content table thead.ant-table-thead .ant-table-cell {
-   background-color: rgb(154, 177, 154); 
-  }
-
-
-.send-money-container{
-  padding-left: 50%;
-  padding-right: 10%;
-}
-
-
-.centering{
-  display: flex;
+.form-card{
+  background-color: rgb(87, 95, 99);
+  border-radius: 50px;
+  border-color: rgb(146, 156, 161);
+  box-shadow: 8px 16px 16px 8px rgba(0,0,0,0.3);
+  transition: 0.3s;
+  text-align: center;
+  position:relative;
   align-items: center;
-  justify-content: center
+  max-height: 60vh;
+  -webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(100px);
+  min-width: 400px;
+  height: 90vh;
+  min-height: 600px;
+  width: 40vw;
+  margin-left: 30vw;
+  margin-right: 30vw;
 }
 
-.center-the-button {
-  margin-top:8vh;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+.btn{
+  background-color: green;
+  border-color: green;
+}
+
+[title="Çocuk Seç"] {
+  color: #DADADA !important;
+  left:8%;
 }
 
 [title="Çocuk Wallet ID"] {
   color: #DADADA !important;
+  left:10%;
 }
 [title="Çocuk Adı"] {
   color: #DADADA !important;
+  left:10%;
 }
-[title="Miktar Giriniz"] {
+[title="Gönderilecek Tutar"] {
   color: #DADADA !important;
+  left:8%;
 }
   

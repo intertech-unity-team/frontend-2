@@ -1,7 +1,41 @@
-
-
 .btn-login{
     margin-top: 1vh;
+    background-color: green;
+    border-color: green;
+}
+
+.form{
+    padding-top:4vh;
+    width:80%;
+    margin-left:4%;
+    margin-right:auto;
+    position: absolute;
+}
+
+.sign-in-card{
+    text-align: center;
+    background-color: rgb(87, 95, 99);
+    border-radius: 50px;
+    border-color: rgb(146, 156, 161);
+    box-shadow: 8px 16px 16px 8px rgba(0,0,0,0.3);
+    transition: 0.3s;
+    padding-top: 3vh;
+    position:relative;
+    display: inline-block;
+    max-height: 60vh;
+    -webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(100px);
+    min-width: 400px;
+    height: 90vh;
+    min-height: 700px;
+    width: 40vw;
+    margin-left: 30vw;
+    margin-right: 30vw;
+    margin-top: 10vh;
+}
+
+.sign-in-card:hover{
+    box-shadow: 12px 24px 24px 12px rgba(0,0,0,0.4);
 }
 
 [title="Metamask Cüzdan Adresiniz"] {

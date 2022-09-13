@@ -87,6 +87,8 @@ const ProfilePage: React.FC = () => {
     const [pName, setPName] = useState('');
     const [pSurname, setPSurname] = useState('');
     const [pWalletID, setPWalletID] = useState('');
+    const [pEMail, setPEMail] = useState('');
+    const [pPhoneNum, setPPhoneNum] = useState('');
 
     let parentInfoPromise = getParentInfo().then(
       function(result){
@@ -94,6 +96,8 @@ const ProfilePage: React.FC = () => {
         setPName(result[0]);
         setPSurname(result[1]);
         setPWalletID(result[2]);
+        setPEMail(result[3]);
+        setPPhoneNum(result[4].toString());
       }
     );
 
@@ -148,8 +152,8 @@ const ProfilePage: React.FC = () => {
                 <Descriptions.Item label="Ad" contentStyle={{color:'#DADADA'}}>{pName}</Descriptions.Item>
                 <Descriptions.Item label="Soyad" contentStyle={{color:'#DADADA'}}>{pSurname}</Descriptions.Item>
                 <Descriptions.Item label="Wallet ID" contentStyle={{color:'#DADADA'}}>{pWalletID}</Descriptions.Item>
-                <Descriptions.Item label="E-Posta" contentStyle={{color:'#DADADA'}}>x@gmail.com</Descriptions.Item>
-                <Descriptions.Item label="Telefon Numarası" contentStyle={{color:'#DADADA'}}>5050523535</Descriptions.Item>
+                <Descriptions.Item label="E-Posta" contentStyle={{color:'#DADADA'}}>{pEMail}</Descriptions.Item>
+                <Descriptions.Item label="Telefon Numarası" contentStyle={{color:'#DADADA'}}>{pPhoneNum}</Descriptions.Item>
               </Descriptions>
               
             </Card>
